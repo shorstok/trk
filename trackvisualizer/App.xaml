@@ -1,0 +1,11 @@
+﻿<Application x:Class="trackvisualizer.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:view="clr-namespace:trackvisualizer.View">
+    <Application.Resources>
+        <Thickness x:Key="ControlMargin"  Bottom="6" Left="6" Right="6" Top="6"/>
+        <view:DimensionConverter x:Key="DimensionConverter"/>
+        <SolidColorBrush x:Key="ValidationBadColor" Color="#6F1010"/>
+        <SolidColorBrush x:Key="ValidationBadColorInverse" Color="White"/>
+    </Application.Resources>
+</Application>

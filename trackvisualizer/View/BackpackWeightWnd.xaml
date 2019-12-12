@@ -1,0 +1,58 @@
+﻿<Window x:Class="trackvisualizer.View.BackpackWeightWnd"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="clr-namespace:trackvisualizer.Vm"
+        Title="Расчет веса рюкзаков" Height="Auto" Width="362"
+        FontFamily="Calibri, Verdana" FontSize="13" SizeToContent="Height" WindowStyle="ToolWindow"
+        mc:Ignorable="d"
+        d:DataContext="{d:DesignInstance vm:WeightSettings}"
+        WindowStartupLocation="CenterScreen">
+    <StackPanel Orientation="Vertical" Margin="5">
+
+        <Label Content="Настройки расчета веса рюкзаков" HorizontalAlignment="Center" FontWeight="Bold"
+               Foreground="DarkRed" />
+
+        <StackPanel Orientation="Horizontal">
+            <Label Content="Вес личного снаряжения (на человека):" Width="230" />
+            <TextBox Name="TBPersonalEqWeightKilograms" Width="40" Text="{Binding PersonalWeightKg}" FontWeight="Bold" FontSize="14"/>
+            <Label Content="кг" />
+        </StackPanel>
+        <StackPanel Orientation="Horizontal">
+            <Label Content="Норма раскладки в день (на человека):" Width="230" />
+            <TextBox Name="TBFoodPerDayGrams" Width="40" Text="{Binding FoodPerDayKg}" FontWeight="Bold" FontSize="14"/>
+            <Label Content="г" />
+        </StackPanel>
+        <StackPanel Orientation="Horizontal">
+            <Label Content="Расход топлива в день (на человека):" Width="230" />
+            <TextBox Name="TBFuelPerDayGrams" Width="40" Text="{Binding FuelPerDayKg}" FontWeight="Bold" FontSize="14"/>
+            <Label Content="г" />
+        </StackPanel>
+
+        <Label Content="Вес группового снаряжения, кг" HorizontalAlignment="Center" FontWeight="Bold"
+               Foreground="SteelBlue" />
+
+        <StackPanel Orientation="Horizontal">
+            <Label Content="На девушку:" Width="115" />
+            <TextBox Name="TBGroupWeightFemKg" Width="40" Text="{Binding GroupWeightFemaleKg}" FontWeight="Bold" FontSize="14"/>
+            <Label Content="На парня:" Width="115" />
+            <TextBox Name="TBGroupWeightMaleKg" Width="40" Text="{Binding GroupWeightMaleKg}" FontWeight="Bold" FontSize="14"/>
+        </StackPanel>
+
+        <Rectangle Height="1" Fill="SteelBlue" Margin="5" />
+        <StackPanel Orientation="Horizontal" />
+
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+            <Label Content="Запасные дни:" />
+            <TextBox Name="TBSpareDays" Width="23" Text="{Binding SpareDays}" VerticalAlignment="Center"/>
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button Content="OK" Name="BOk" Click="BOk_Click" Padding="5" />
+            <Button Content="Отмена" Name="BCancel" Click="BCancel_Click" Padding="5" />
+        </StackPanel>
+
+    </StackPanel>
+
+</Window>
