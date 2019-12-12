@@ -25,8 +25,8 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <TextBlock Text="Провайдер карты высот" Grid.Column="0" Grid.Row="0" Margin="{StaticResource ControlMargin}" VerticalAlignment="Center"/>
-        <ComboBox Grid.Column="1" Grid.Row="0" ItemsSource="{Binding HeightmapProviders}" SelectedItem="{Binding ActiveHeightmapProvider}" IsSynchronizedWithCurrentItem="True" Margin="{StaticResource ControlMargin}">
+        <TextBlock Text="Провайдер карт высот" Grid.Column="0" Grid.Row="0" Margin="{StaticResource ControlMargin}" VerticalAlignment="Center"/>
+        <ComboBox Grid.Column="1" Grid.Row="0" ItemsSource="{Binding HeightmapProviders}" SelectedItem="{Binding ActiveHeightmapProvider}" IsSynchronizedWithCurrentItem="True" Style="{StaticResource BasicComboBoxStyle}">
             <ComboBox.ItemTemplate>
                 <DataTemplate DataType="{x:Type service:IHeightmapProvider}">
                     <TextBlock Text="{Binding Description}"/>
@@ -34,8 +34,8 @@
             </ComboBox.ItemTemplate>
         </ComboBox>
 
-        <Button Grid.Column="2" Grid.Row="0" Content="Загрузить" Command="{Binding StartDownloadCommand}" Margin="{StaticResource ControlMargin}" VerticalAlignment="Center"/>
-        <Button Grid.Column="3" Grid.Row="0" Content="Отмена" Command="{Binding AbortDownloadCommand}" Margin="{StaticResource ControlMargin}" VerticalAlignment="Center"/>
+        <Button Grid.Column="2" Grid.Row="0" Content="Загрузить" Command="{Binding StartDownloadCommand}" Style="{StaticResource BasicButtonStyle}"/>
+        <Button Grid.Column="3" Grid.Row="0" Content="Отмена" Command="{Binding AbortDownloadCommand}"  Style="{StaticResource BasicButtonStyle}"/>
 
         <!-- tweakable provider-dependent settings -->
 
@@ -67,9 +67,9 @@
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
-                        <TextBlock Grid.Column="0" Text="{Binding SrtmName}" Width="130" FontWeight="Bold"/>
+                        <TextBlock Grid.Column="0" Text="{Binding SrtmName}" Width="130" FontWeight="Bold" VerticalAlignment="Center"/>
                         <ProgressBar Grid.Column="1" Minimum="0" Maximum="1" Value="{Binding Progress}"/>
-                        <TextBlock Grid.Column="1" Text="{Binding Message}"/>
+                        <TextBlock Grid.Column="1" Text="{Binding Message}" Margin="{StaticResource ControlMargin}"/>
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>

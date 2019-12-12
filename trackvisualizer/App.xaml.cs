@@ -32,7 +32,7 @@ namespace trackvisualizer
             MaybeSetTheme();
             BuildContainer();
 
-            var window = _container.Resolve<TrackView>();
+            var window = _container.Resolve<MainWindow>();
             
             MainWindow = window;
             

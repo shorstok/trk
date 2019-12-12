@@ -9,6 +9,7 @@ using Autofac.Core.Activators.Reflection;
 using trackvisualizer.Config;
 using trackvisualizer.Service;
 using trackvisualizer.Service.HeightmapProviders;
+using trackvisualizer.Service.Middleware;
 using trackvisualizer.View;
 using trackvisualizer.Vm;
 
@@ -34,16 +35,20 @@ namespace trackvisualizer.Ioc
                 return vmCtor;
             }
         }
-
-
+        
         protected override void Load(ContainerBuilder builder)
-        {                           
+        {
             //Load config
             builder.RegisterInstance(TrekplannerConfiguration.LoadOrCreate(true)).AsSelf().SingleInstance();
+
+            //Middleware
+            builder.RegisterType<KmlLoaderMiddleware>().As<IGeoLoaderMiddleware>().SingleInstance();
+            builder.RegisterType<GpxLoaderMiddleware>().As<IGeoLoaderMiddleware>().SingleInstance();
 
             //Services
             builder.RegisterType<UiService>().As<IUiService>().AsSelf().SingleInstance();
             builder.RegisterType<SrtmRepository>().AsSelf().SingleInstance();
+            builder.RegisterType<GeoLoaderService>().AsSelf().SingleInstance();
             builder.RegisterType<HeightmapManagerVm>().AsSelf().SingleInstance();
             builder.RegisterType<UiLoggingVm>().As<IUiLoggingService>().AsSelf().SingleInstance();
             
@@ -53,7 +58,7 @@ namespace trackvisualizer.Ioc
             //Windows
             
             builder.RegisterType<HeightmapDownloaderWindow>().AsSelf().InstancePerDependency();            
-            builder.RegisterType<TrackView>().AsSelf().SingleInstance();
+            builder.RegisterType<MainWindow>().AsSelf().SingleInstance();
             
             builder.RegisterType<TrackVm>().AsSelf().InstancePerDependency();
             builder.RegisterType<TrackReportVm>().AsSelf().InstancePerDependency();

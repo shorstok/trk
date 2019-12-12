@@ -29,6 +29,7 @@ namespace trackvisualizer.Vm
 
         private readonly HeightmapManagerVm _heightmapManager;
         private readonly IUiLoggingService _loggingService;
+        private readonly GeoLoaderService _geoLoader;
         private readonly SrtmRepository _srtmRepository;
         private readonly Func<TrackVm, TrackReportVm> _trackReportGenerator;
         private bool _wptTimesValid;
@@ -103,12 +104,14 @@ namespace trackvisualizer.Vm
         public TrackVm(string filename,
             HeightmapManagerVm heightmapManager,
             IUiLoggingService loggingService,
+            GeoLoaderService geoLoader,
             SrtmRepository srtmRepository,
             Func<TrackVm, TrackReportVm> trackReportGenerator)
         {
             SourceTrackFileName = filename;
             _heightmapManager = heightmapManager;
             _loggingService = loggingService;
+            _geoLoader = geoLoader;
             _srtmRepository = srtmRepository;
             _trackReportGenerator = trackReportGenerator;
         }
@@ -128,7 +131,7 @@ namespace trackvisualizer.Vm
 
             Errors.Clear();
 
-            if (!await LoadTracksFromGpx(SourceTrackFileName))
+            if (!await LoadTracksFromFile(SourceTrackFileName))
                 return false;
 
             Report = _trackReportGenerator(this);
@@ -141,9 +144,19 @@ namespace trackvisualizer.Vm
             return true;
         }
 
-        public async Task<bool> LoadTracksFromGpx(string gpxFilename)
+        public async Task<bool> LoadTracksFromFile(string trackFilename)
         {
-            SourceTracks = Gpx.LoadGpxTracks(gpxFilename);
+            var loadedTrack = await _geoLoader.LoadTrackAndSlicepointsAsync(
+                trackFilename,
+                Settings.SourceSeparateSlicepointSource ?? SourceTrackFileName);
+
+            if (loadedTrack == null)
+            {
+                RegisterError("Ошибка при загрузке файла!");
+                return false;
+            }
+
+            SourceTracks = loadedTrack.Item1;
 
             if (SourceTracks.Count == 0)
             {
@@ -170,7 +183,7 @@ namespace trackvisualizer.Vm
             ActiveSeg = SourceTracks?.FirstOrDefault()?.GetWithFusedSegments()?.Segments?.FirstOrDefault();
 
             //////////////////////////////////////////////////////////////////////////
-            if (!TryLoadSlicepoints(Settings.SourceSeparateSlicepointSource ?? SourceTrackFileName))
+            if (!ValidateSlicepoints(loadedTrack.Item2))
                 return false;
 
             var ptsKey = SourceTracks.First().GetWithFusedSegments().Segments.First().Pts;
@@ -218,6 +231,23 @@ namespace trackvisualizer.Vm
             return true;
         }
 
+        
+        public bool ValidateSlicepoints(List<Point> slicepoints)
+        {
+            SourceSlicepoints = slicepoints;
+
+            if (SourceSlicepoints.Count < 2)
+            {
+                _loggingService.Log(
+                    "В выбранном файле недостаточно точек для разбиения трека по дням! Теперь точки нужно загрузить отдельно, либо пересохранить выбранный .gpx файл уже с точками.",true);
+                return false;
+            }
+
+            _loggingService.Log("Загружено " + SourceSlicepoints.Count + " точек, ок");
+
+            return true;
+        }
+
         private void DeterminePointsReality()
         {
             var AS = ActiveSeg;
@@ -260,22 +290,6 @@ namespace trackvisualizer.Vm
             }
         }
 
-        public bool TryLoadSlicepoints(string sourceFile)
-        {
-            _loggingService.Log("Загрузка точек");
-            SourceSlicepoints = Gpx.LoadGpxWaypoints(sourceFile);
-
-            if (SourceSlicepoints.Count < 2)
-            {
-                _loggingService.Log(
-                    "В выбранном файле недостаточно точек для разбиения трека по дням! Теперь точки нужно загрузить отдельно, либо пересохранить выбранный .gpx файл уже с точками.",true);
-                return false;
-            }
-
-            _loggingService.Log("Загружено " + SourceSlicepoints.Count + " точек, ок");
-
-            return true;
-        }
 
         public bool Exists() => 
             File.Exists(SourceTrackFileName);

@@ -138,11 +138,13 @@ namespace trackvisualizer.Vm
 
             // delete blind slices [17/12/2009 LysakA]
             for (var c = 0; c < _slicesCalc.Count - 1; ++c)
+            {
                 if (_slicesCalc[c].NPoint == _slicesCalc[c + 1].NPoint)
                 {
                     _slicesCalc.Remove(_slicesCalc[c]);
                     c = 0;
                 }
+            }
 
             if (!_slicesCalc.Any())
             {
@@ -175,7 +177,7 @@ namespace trackvisualizer.Vm
             {
                 var reportItem = _reportItemGenerator(Source);
 
-                reportItem.UseSlice(npoint, activeSegPts,_slicesCalc);
+                reportItem.CalculateGeoProperties(npoint, activeSegPts,_slicesCalc);
 
                 Results.Add(reportItem);
             }

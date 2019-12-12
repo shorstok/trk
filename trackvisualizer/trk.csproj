@@ -64,6 +64,9 @@
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="SharpKml.Core, Version=5.1.0.0, Culture=neutral, PublicKeyToken=9bb853c026a5c0ac, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpKml.Core.5.1.0\lib\net45\SharpKml.Core.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -104,16 +107,20 @@
     <Compile Include="Config\HeightmapSourceSettings.cs" />
     <Compile Include="Config\TrackReportGeneratorOptions.cs" />
     <Compile Include="Properties\Annotations.cs" />
+    <Compile Include="Service\GeoLoaderService.cs" />
+    <Compile Include="Service\Middleware\GpxLoaderMiddleware.cs" />
+    <Compile Include="Service\IGeoLoaderMiddleware.cs" />
     <Compile Include="Service\IHeightmapProvider.cs" />
     <Compile Include="Service\IUiService.cs" />
     <Compile Include="Service\HeightmapProviders\SrtmFileDownloadHeightmapProvider.cs" />
+    <Compile Include="Service\Middleware\KmlLoaderMiddleware.cs" />
     <Compile Include="View\DimensionConverter.cs" />
     <Compile Include="View\HeightmapDownloaderWindow.xaml.cs">
       <DependentUpon>HeightmapDownloaderWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\TrackSettings.cs" />
-    <Compile Include="View\TrackView.xaml.cs">
-      <DependentUpon>TrackView.xaml</DependentUpon>
+    <Compile Include="View\MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\UiService.cs" />
     <Compile Include="View\VisibilityAux.cs" />
@@ -178,7 +185,7 @@
     <Compile Include="View\GraphWnd.xaml.cs">
       <DependentUpon>GraphWnd.xaml</DependentUpon>
     </Compile>
-    <Page Include="View\TrackView.xaml">
+    <Page Include="View\MainWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

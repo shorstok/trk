@@ -19,11 +19,11 @@ namespace trackvisualizer.View
     /// <summary>
     /// Interaction logic for TrackView.xaml
     /// </summary>
-    public partial class TrackView : Window
+    public partial class MainWindow : Window
     {
         private readonly Func<TrackManagerVm> _trackManagerGenerator;
 
-        public TrackView(Func<TrackManagerVm> trackManagerGenerator)
+        public MainWindow(Func<TrackManagerVm> trackManagerGenerator)
         {
             _trackManagerGenerator = trackManagerGenerator;
             

@@ -21,6 +21,7 @@ namespace trackvisualizer.Vm
         public UiLoggingVm Logging { get; }
         public HeightmapManagerVm HeightmapManager { get; }
         private readonly TrekplannerConfiguration _configuration;
+        private readonly GeoLoaderService _geoLoader;
         private readonly Func<string, TrackVm> _trackGeneratorFunc;
         private TrackVm _activeTrack;
 
@@ -79,12 +80,14 @@ namespace trackvisualizer.Vm
 
         public TrackManagerVm(TrekplannerConfiguration configuration, 
             UiLoggingVm logging,
+            GeoLoaderService geoLoader,
             HeightmapManagerVm heightmapManager,
             Func<string, TrackVm> trackGeneratorFunc)
         {
             Logging = logging;
             HeightmapManager = heightmapManager;
             _configuration = configuration;
+            _geoLoader = geoLoader;
             _trackGeneratorFunc = trackGeneratorFunc;
 
             AvailableTracks = new ObservableCollection<TrackVm>(configuration.LastUsedTrackNames.Select(_trackGeneratorFunc));
@@ -93,10 +96,23 @@ namespace trackvisualizer.Vm
 
         private async void LoadTrackFromFileAsync(object obj)
         {
+            Logging.ResetLog();
+            var availableFormats = _geoLoader.GetAvailableFormatList().ToArray();
+
+            if (availableFormats.Length == 0)
+            {
+                Logging.LogError("No loader middleware!");
+                return;
+            }
+
             var openFileDialog = new OpenFileDialog
             {
-                DefaultExt = ".gpx",
-                Filter = $"GPX Exchange Format (.gpx)|*.gpx"
+                DefaultExt = "."+availableFormats.FirstOrDefault()?.Item2.FirstOrDefault(),
+                Filter =string.Join("|",
+                    availableFormats.Select(
+                        tuple => 
+                            tuple.Item1+"|"+string.Join(";",
+                                tuple.Item2.Select(i2=>"*."+i2))))
             };
 
             if (openFileDialog.ShowDialog() != true)

@@ -186,7 +186,7 @@ namespace trackvisualizer.Vm
             _srtmRepository = srtmRepository;
         }
 
-        public void UseSlice(int npoint, List<Point> activeSegPts, List<TrackSeg.Slice> slicesCalc)
+        public void CalculateGeoProperties(int npoint, List<Point> activeSegPts, List<TrackSeg.Slice> slicesCalc)
         {
             CalculateName(npoint, slicesCalc);
             CalculateLength(npoint, slicesCalc, activeSegPts);
@@ -264,20 +264,12 @@ namespace trackvisualizer.Vm
                 _srtmRepository);
 
             //////////////////////////////////////////////////////////////////////////
-            var extremeHgts = new List<double> { hstart };
 
-            if (ihmax < ihmin)
-            {
-                extremeHgts.Add(hmax);
-                extremeHgts.Add(hmin);
-            }
-            else
-            {
-                extremeHgts.Add(hmin);
-                extremeHgts.Add(hmax);
-            }
-
-            extremeHgts.Add(hend);
+            var extremeHgts = new List<double>{           
+                hstart,
+                ihmax < ihmin? hmax:hmin,
+                ihmax < ihmin? hmin:hmax,
+                hend};
 
             for (var i = 1; i < extremeHgts.Count; ++i)
             {
@@ -293,7 +285,7 @@ namespace trackvisualizer.Vm
                         Math.Abs(dprev) < deltaNonsignificant) //same sign
                     {
                         extremeHgts.RemoveAt(i);
-                        i = 1;
+                        i = 0;
                     }
                 }
             }

@@ -120,8 +120,9 @@ namespace trackvisualizer.Service.HeightmapProviders
                 if ((e.Response as HttpWebResponse)?.StatusCode == HttpStatusCode.NotFound)
                 {
                     var extendedError = "Удаленный сервер вернул 404 (не найден). Причины могут быть следующие:" +Environment.NewLine+
-                                        "🔘 SRTM-файлов больше нет на севрере, адрес устарел и нужно искать следующий" +Environment.NewLine+
-                                        "🔘 Неверно прописан путь к SRTM в окне загрузчика";
+                                        "🔘 SRTM-файлов для этого района нет на севрере" +Environment.NewLine+
+                                        "🔘 Адрес устарел и нужно искать следующий" +Environment.NewLine+
+                                        "🔘 Неверно прописан адрес сервера в окне загрузчика";
 
                     _uiService.NofityError(extendedError).ConfigureAwait(false);
                 }
