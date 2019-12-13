@@ -1,1 +1,12 @@
 theme: jekyll-theme-slate
+title: TKG Trekplanner - trekking route parameters calculator
+description: Программка для расчета горного похода (tkg trekplanner)
+show_downloads: true
+
+share-links-active:
+  twitter: true
+  facebook: true
+  linkedin: true
+
+github:
+  zip_url: https://shorstok.github.io/trk/trk-release.zip
