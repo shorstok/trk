@@ -94,6 +94,11 @@ namespace trackvisualizer.Service.HeightmapProviders
 
             try
             {
+
+                ServicePointManager.Expect100Continue = true;
+                ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+                // Use SecurityProtocolType.Ssl3 if needed for compatibility reasons
+
                 using (var client = new WebClient())
                 {
                     token.Register(() => client.CancelAsync());
