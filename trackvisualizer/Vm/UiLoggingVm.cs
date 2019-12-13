@@ -27,7 +27,7 @@ namespace trackvisualizer.Vm
             }
         }
 
-        public ObservableCollection<string> ActivityLog { get; } = new ObservableCollection<string>();
+        public ObservableCollection<UiLogItemVm> ActivityLog { get; } = new ObservableCollection<UiLogItemVm>();
 
         public UiLoggingVm()
         {
@@ -41,19 +41,20 @@ namespace trackvisualizer.Vm
 
         public async void Log(string text, bool persist = false)
         {
-            ActivityLog.Add(text);
+            var item = new UiLogItemVm(text,persist);
+            ActivityLog.Add(item);
 
             if (persist)
                 return;
 
             await Task.Delay(400);
 
-            ActivityLog.Remove(text);
+            ActivityLog.Remove(item);
         }
 
         public void LogError(string errorText)
         {
-            throw new NotImplementedException();
+            ActivityLog.Add(new UiLogItemVm(errorText,true){IsError = true});
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

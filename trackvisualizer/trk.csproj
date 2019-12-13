@@ -131,6 +131,7 @@
     <Compile Include="Vm\TrackReportVm.cs" />
     <Compile Include="Vm\TrackVm.Equitable.cs" />
     <Compile Include="Vm\UiLoggingVm.cs" />
+    <Compile Include="Vm\UiLogItemVm.cs" />
     <Compile Include="Vm\WeightSettings.cs" />
     <Compile Include="Vm\DelegateCommand.cs" />
     <Compile Include="Vm\HeightmapDownloaderVm.cs" />

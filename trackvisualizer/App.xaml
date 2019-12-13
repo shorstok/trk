@@ -20,6 +20,9 @@
         </Style>
         
         <SolidColorBrush x:Key="AccentColor" Color="SteelBlue"/>
+        <SolidColorBrush x:Key="BackgroundAccentColor" Color="#D7E5F0"/>
+        <SolidColorBrush x:Key="BackgroundAccentColor2" Color="#F7F7F7"/>
+
         <SolidColorBrush x:Key="BackgroundColor" Color="White"/>
         
 

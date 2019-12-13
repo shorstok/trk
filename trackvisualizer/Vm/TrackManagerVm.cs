@@ -49,7 +49,8 @@ namespace trackvisualizer.Vm
                 OnPropertyChanged();
 
                 //Load track on activation
-                if (_activeTrack?.IsLoaded == false)
+                if (_activeTrack?.IsLoaded == false && 
+                    _activeTrack?.IsOkToLoad != false)
                 {
                     IsLoading = true;
                     Logging.ResetLog();
@@ -126,6 +127,9 @@ namespace trackvisualizer.Vm
 
                 if (!await candidateTrack.LoadAsync())
                     return;
+
+                if(!AvailableTracks.Contains(candidateTrack))
+                    AvailableTracks.Add(candidateTrack);
 
                 ActiveTrack = candidateTrack;
 

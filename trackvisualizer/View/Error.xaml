@@ -1,24 +1,24 @@
 ﻿<Window x:Class="trackvisualizer.View.Error"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Ошибка" Height="Auto" Width="Auto" AllowsTransparency="True" Background="#30220000" WindowStyle="None"
+        Title="Ошибка" Height="Auto" Width="Auto" AllowsTransparency="True" Background="#90000000" WindowStyle="None"
         WindowState="Maximized"
-        FontFamily="Verdana" FontSize="12" Topmost="True">
-    <Border CornerRadius="4" BorderBrush="Black" BorderThickness="1" Padding="4" Width="550" Height="300">
-        <Border.Background>
-            <LinearGradientBrush>
-                <LinearGradientBrush.GradientStops>
-                    <GradientStopCollection>
-                        <GradientStop Offset="0" Color="White" />
-                        <GradientStop Offset="1" Color="MistyRose" />
-                    </GradientStopCollection>
-                </LinearGradientBrush.GradientStops>
-            </LinearGradientBrush>
-        </Border.Background>
-        <Grid>
-            <TextBlock VerticalAlignment="Top" HorizontalAlignment="Center" Text="Ошибка" FontWeight="Bold" />
+        FontSize="19" Topmost="True">
+    <Border BorderBrush="Black" BorderThickness="1" Width="550" Height="300" SnapsToDevicePixels="True"
+            UseLayoutRounding="True" 
+            Background="{StaticResource BackgroundColor}">
+        <Grid Margin="{StaticResource ControlMargin}" >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            
+            <TextBlock Grid.Row="0" Margin="{StaticResource ControlMargin}" VerticalAlignment="Top"
+                       HorizontalAlignment="Center" Text="Ошибка" FontWeight="Bold"
+                       Foreground="{StaticResource ValidationBadColor}" />
 
-            <ScrollViewer Margin="0,20,0,0" VerticalScrollBarVisibility="Auto" Padding="10">
+            <ScrollViewer Grid.Row="1" Margin="{StaticResource ControlMargin}" VerticalScrollBarVisibility="Auto"
+                          Padding="{StaticResource ControlMargin}">
                 <TextBlock Name="ErrorTxt" TextWrapping="Wrap" />
             </ScrollViewer>
         </Grid>

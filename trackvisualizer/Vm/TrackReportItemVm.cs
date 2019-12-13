@@ -18,10 +18,10 @@ namespace trackvisualizer.Vm
     public class TrackReportItemVm : INotifyPropertyChanged
     {
         public TrackVm Source { get; }
+
         private readonly TrekplannerConfiguration _configuration;
         private readonly SrtmRepository _srtmRepository;
-        private string _name;
-        private string _comment;
+        
         private double _distanceMeters;
         private double _fietsIndex;
         private double _lebedevHours;
@@ -33,26 +33,50 @@ namespace trackvisualizer.Vm
         private double _ascentPerDay;
         private double _maleWeight;
         private double _femaleWeight;
+        private int _sectionNumber;
+        private string _originalSectionStartName;
+        private string _originalNextSectionName;
 
-        public string Name
+        public bool HasComment => !string.IsNullOrWhiteSpace(Comment);
+
+        public string NextSectionName
         {
-            get => _name;
-            set
+            get
             {
-                if (value == _name) return;
-                _name = value;
-                OnPropertyChanged();
+                if (Source.Settings.CustomSectionName.TryGetValue(SectionNumber + 1, out var customName))
+                    return customName;
+
+                return _originalNextSectionName ?? "F";
             }
+            set => Source.Settings.OverrideSectionName(SectionNumber+1,value == _originalNextSectionName ? null : value);
+        }
+
+        public string SectionStartName
+        {
+            get
+            {
+                if (Source.Settings.CustomSectionName.TryGetValue(SectionNumber, out var customName))
+                    return customName;
+
+                return _originalSectionStartName ?? "S";
+            }
+            set => Source.Settings.OverrideSectionName(SectionNumber,value == _originalSectionStartName ? null : value);
         }
 
         public string Comment
         {
-            get => _comment;
-            set
+            get
             {
-                if (value == _comment) return;
-                _comment = value;
-                OnPropertyChanged();
+                if (SectionNumber == Source.Settings.ZabroskaStartPointNum+1)
+                    return "оставляем заброску";
+
+                if (SectionNumber == 1 && Source.Settings.ZabroskaStartPointNum == -1)
+                    return "завозим заброску до начала маршрута";
+
+                if (SectionNumber == Source.Settings.ZabroskaEndPointNum+1)
+                    return "забираем заброску";
+
+                return null;
             }
         }
 
@@ -178,12 +202,33 @@ namespace trackvisualizer.Vm
             }
         }
 
+        public int SectionNumber
+        {
+            get => _sectionNumber;
+            set
+            {
+                if (value == _sectionNumber) return;
+                _sectionNumber = value;
+                OnPropertyChanged();
+            }
+        }
+
 
         public TrackReportItemVm(TrekplannerConfiguration configuration, TrackVm source, SrtmRepository srtmRepository)
         {
             Source = source;
             _configuration = configuration;
             _srtmRepository = srtmRepository;
+
+            PropertyChangedEventManager.AddHandler(Source,OnSourceSettingsChanged,nameof(Source.Settings));
+            PropertyChangedEventManager.AddHandler(Source.Settings,OnSourceSettingsChanged,String.Empty);
+        }
+
+        private void OnSourceSettingsChanged(object sender, PropertyChangedEventArgs e)
+        {
+            OnPropertyChanged(SectionStartName);
+            OnPropertyChanged(NextSectionName);
+            OnPropertyChanged(Comment);
         }
 
         public void CalculateGeoProperties(int npoint, List<Point> activeSegPts, List<TrackSeg.Slice> slicesCalc)
@@ -191,6 +236,8 @@ namespace trackvisualizer.Vm
             CalculateName(npoint, slicesCalc);
             CalculateLength(npoint, slicesCalc, activeSegPts);
             GenSegmentAscents(npoint, slicesCalc, activeSegPts);
+
+            SectionNumber = npoint+1;
         }
 
         private void CalculateLength(int npoint, List<TrackSeg.Slice> slicesCalc, List<Point> activeSegPts)
@@ -208,34 +255,10 @@ namespace trackvisualizer.Vm
             var slicept = slicesCalc[npoint].SlicePoint;
             var nextSlicept = slicesCalc[npoint + 1].SlicePoint;
 
-            var nameConv = nextSlicept.Name;
-
-            if (_configuration.ReportGeneratorOptions.Comments)
-                nameConv += nextSlicept.Comment != null ? " (" + nextSlicept.Comment + ")" : "";
-
-            if (slicept.Name == null)
-                nameConv = "S.." + nameConv;
-            else if (nextSlicept.Name == null)
-                nameConv = slicept.Name + "..F";
-            else
-                nameConv = slicept.Name + " .. " + nameConv;
-
-            if (Source.Settings.CustomSectionNames.TryGetValue(npoint, out var customName))
-                nameConv = customName;
-
-            if (npoint == Source.Settings.ZabroskaStartPointNum)
-                Comment = "оставляем заброску";
-
-            if (npoint == 0 && Source.Settings.ZabroskaStartPointNum == -1)
-                Comment = "завозим заброску до начала маршрута";
-
-            if (npoint == Source.Settings.ZabroskaEndPointNum)
-                Comment = "забираем заброску";
-
-            Name = nameConv;
+            _originalSectionStartName = slicept.Name;
+            _originalNextSectionName = nextSlicept.Name;                
         }
-
-
+        
         private void GenSegmentAscents(int npoint, List<TrackSeg.Slice> slicesCalc, List<Point> activeSegPts)
         {
             const double deltaNonsignificant = 70; //m

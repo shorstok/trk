@@ -8,7 +8,7 @@ using System.Windows;
 [assembly: AssemblyTitle("tracker")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("Lysak Oleksandr")]
 [assembly: AssemblyProduct("tracker")]
 [assembly: AssemblyCopyright("")]
 [assembly: AssemblyTrademark("")]
@@ -49,4 +49,4 @@ using System.Windows;
 // Можно задать все значения или принять номер построения и номер редакции по умолчанию, 
 // используя "*", как показано ниже:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("0.6.*")]
+[assembly: AssemblyVersion("1.1.*")]

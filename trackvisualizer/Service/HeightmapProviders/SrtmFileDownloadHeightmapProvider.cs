@@ -133,6 +133,10 @@ namespace trackvisualizer.Service.HeightmapProviders
                 }
                 else
                     _uiService.NofityError(e.Message).ConfigureAwait(false);
+
+                if(File.Exists(temporaryArchiveName))
+                    File.Delete(temporaryArchiveName);
+
                 return false;
             }
 

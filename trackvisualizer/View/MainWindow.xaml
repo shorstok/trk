@@ -30,8 +30,16 @@
                   ItemsSource="{Binding Logging.ActivityLog}"
                   FontSize="13">
             <ListView.ItemTemplate>
-                <DataTemplate DataType="{x:Type system:String}">
-                    <TextBlock Text="{Binding}" TextWrapping="Wrap" MaxWidth="200" />
+                <DataTemplate DataType="{x:Type vm:UiLogItemVm}">
+                    <TextBlock Text="{Binding Text}" TextWrapping="Wrap" MaxWidth="200" Name="LogItem"/>
+                    <DataTemplate.Triggers>
+                        <DataTrigger Binding="{Binding Important}" Value="True">
+                            <Setter TargetName="LogItem" Property="FontWeight" Value="Bold"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding IsError}" Value="True">
+                            <Setter TargetName="LogItem" Property="Foreground" Value="{StaticResource ValidationBadColor}"/>
+                        </DataTrigger>
+                    </DataTemplate.Triggers>
                 </DataTemplate>
             </ListView.ItemTemplate>
 
@@ -100,8 +108,32 @@
         <DataGrid Grid.Column="1" Grid.Row="1" CanUserAddRows="False" CanUserDeleteRows="False"
                   Grid.RowSpan="2"
                   AutoGenerateColumns="False"
+                  GridLinesVisibility="None"
+                  AlternationCount="2"
+                  Grid.IsSharedSizeScope="True"
                   ItemsSource="{Binding ActiveTrack.Report.Results}"
                   Margin="{StaticResource ControlMargin}">
+            <DataGrid.RowStyle>
+                <Style TargetType="DataGridRow">
+                    <Style.Triggers>
+                        <Trigger Property="ItemsControl.AlternationIndex" Value="0">
+                            <Setter Property="Background" Value="{StaticResource BackgroundColor}" />
+                        </Trigger>
+                        <Trigger Property="ItemsControl.AlternationIndex" Value="1">
+                            <Setter Property="Background" Value="{StaticResource BackgroundAccentColor2}" />
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="true">
+                            <Setter Property="Background" Value="{StaticResource BackgroundAccentColor}" />
+                            <Setter Property="Foreground" Value="#000" />
+                        </Trigger>
+                        <Trigger Property="IsSelected" Value="true">
+                            <Setter Property="Background" Value="{StaticResource BackgroundAccentColor}" />
+                            <Setter Property="Foreground" Value="#000" />
+                        </Trigger>
+
+                    </Style.Triggers>
+                </Style>
+            </DataGrid.RowStyle>
             <DataGrid.ColumnHeaderStyle>
                 <Style TargetType="DataGridColumnHeader">
                     <Setter Property="ContentTemplate">
@@ -114,7 +146,39 @@
                 </Style>
             </DataGrid.ColumnHeaderStyle>
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Участок" Binding="{Binding Name}" Width="*" MinWidth="120" />
+                <DataGridTextColumn Header="#"
+                                    Binding="{Binding SectionNumber}"
+                                    IsReadOnly="True" Width="Auto" MinWidth="30"/>
+                <DataGridTemplateColumn Header="Участок" Width="Auto" MinWidth="120">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate DataType="{x:Type vm:TrackReportItemVm}">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" SharedSizeGroup="SG1"/>
+                                    <ColumnDefinition Width="*" MinWidth="30"/>
+                                    <ColumnDefinition Width="Auto" SharedSizeGroup="SG1"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <TextBlock Grid.Row="0" Grid.Column="0" Text="{Binding SectionStartName}" FontWeight="DemiBold" TextWrapping="Wrap" MaxWidth="200"/>
+                                <TextBlock Grid.Row="0" Grid.Column="1" Text="..." FontWeight="Thin" HorizontalAlignment="Center"/>
+                                <TextBlock Grid.Row="0" Grid.Column="2" Text="{Binding NextSectionName}" FontWeight="DemiBold" TextWrapping="Wrap" MaxWidth="200"/>
+
+                                <TextBlock Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Text="{Binding Comment}" Name="SectionComment" FontStyle="Italic" Opacity="0.5" 
+                                           view:VisibilityAux.IsVisible="{Binding HasComment}"
+                                           TextWrapping="Wrap"/>
+                            </Grid>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                    <DataGridTemplateColumn.CellEditingTemplate>
+                        <DataTemplate DataType="{x:Type vm:TrackReportItemVm}">
+                            <TextBox Text="{Binding SectionStartName}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellEditingTemplate>
+
+                </DataGridTemplateColumn>
                 <DataGridTextColumn Header="Расстояние"
                                     Binding="{Binding DistanceMeters, Converter={StaticResource DimensionConverter}, ConverterParameter={x:Static view:Dimension.MetersToKilometersLength}}"
                                     IsReadOnly="True" Width="Auto" />
@@ -148,7 +212,15 @@
                 <DataGridTextColumn Header="Индекс FIETS" Binding="{Binding FietsIndex, StringFormat={}0.0}"
                                     IsReadOnly="True" Width="Auto" />
 
-                <DataGridTextColumn Header="..." Binding="{Binding Comment}" />
+                <DataGridTemplateColumn Header="..." Width="Auto"  IsReadOnly="True">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate DataType="{x:Type vm:TrackReportItemVm}">
+                            <StackPanel Orientation="Vertical">
+
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
 
             </DataGrid.Columns>
 

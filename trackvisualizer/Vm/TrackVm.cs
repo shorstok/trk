@@ -22,7 +22,17 @@ namespace trackvisualizer.Vm
         public string ShortName => Path.GetFileName(SourceTrackFileName);
 
         public string SourceTrackFileName { get; }
-        public TrackSettings Settings { get; private set; }
+
+        public TrackSettings Settings
+        {
+            get => _settings;
+            private set
+            {
+                if (Equals(value, _settings)) return;
+                _settings = value;
+                OnPropertyChanged();
+            }
+        }
 
         public List<Point> SourceSlicepoints { get; private set; } = new List<Point>();
         public List<Track> SourceTracks { get; private set; }= new List<Track>();
@@ -36,6 +46,7 @@ namespace trackvisualizer.Vm
         private bool _trackTimesValid;
         private TrackReportVm _report;
         private bool _areHeightmapsMissing;
+        private TrackSettings _settings;
 
         public TrackReportVm Report
         {
@@ -97,6 +108,8 @@ namespace trackvisualizer.Vm
             }
         }
 
+        public bool IsOkToLoad => !AreHeightmapsMissing;
+
         public bool RealDataPresent => TrackTimesValid || WptTimesValid;
 
         public TrackSeg ActiveSeg { get; private set; }
@@ -135,6 +148,9 @@ namespace trackvisualizer.Vm
                 return false;
 
             Report = _trackReportGenerator(this);
+
+            if (AreHeightmapsMissing)
+                return true;
 
             if (!await Report.CreateReportAsync())
                 return false;

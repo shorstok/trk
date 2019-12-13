@@ -18,7 +18,7 @@ namespace trackvisualizer.View
     public class TrackSettings : INotifyPropertyChanged
     {
         [JsonProperty("renamed_sections")]
-        public Dictionary<int,string> CustomSectionNames = new Dictionary<int,string>();
+        public Dictionary<int,string> CustomSectionName { get; set; } = new Dictionary<int,string>();
 
         [JsonProperty("backpack_weight_settings")]
         public WeightSettings BackpackWeightSettings { get; set; } = new WeightSettings();
@@ -69,9 +69,29 @@ namespace trackvisualizer.View
         private int? _zabroskaEndPointNum;
         private string _sourceSeparateSlicepointSource;
 
+        public void OverrideSectionName(int sectionNumber, string value)
+        {
+            if (CustomSectionName.TryGetValue(sectionNumber, out var existing))
+            {
+                if(string.Equals(existing,value))
+                    return;
+            }
+
+            if (string.IsNullOrWhiteSpace(value))
+                CustomSectionName.Remove(sectionNumber);
+            else
+                CustomSectionName[sectionNumber] = value;
+
+            Save();
+
+            OnPropertyChanged(nameof(CustomSectionName));
+        }
+        
+
         public void Save()
         {
-            File.WriteAllText(_originalFilename, JsonConvert.SerializeObject(this, JsonFormatters.IndentedAutotype));
+            if(!string.IsNullOrWhiteSpace(_originalFilename))
+                File.WriteAllText(_originalFilename, JsonConvert.SerializeObject(this, JsonFormatters.IndentedAutotype));
         }
 
         public static TrackSettings TryLoadAlongsideTrack(string fileToLoad)
