@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Globalization;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using Microsoft.Win32;
@@ -69,18 +70,17 @@ namespace trackvisualizer.Service.ReportExporters
 
         public string BuildHtml(TableBuilder.CondensedItem[,] celldata,TrackReportVm source)
         {
-            
-            string rt = "";
+            var rt = "";
 
-            int ncols = celldata.GetUpperBound(0);
-            int nrows = celldata.GetUpperBound(1);
+            var ncols = celldata.GetUpperBound(0);
+            var nrows = celldata.GetUpperBound(1);
      
             var htmlBody = "<table border=1 bordercolor=black cellpadding=10 cellspacing=0>";     
 
-            for (int yc = 0; yc <= nrows; ++yc)
+            for (var yc = 0; yc <= nrows; ++yc)
             {
                 htmlBody += "<tr>";
-                for (int xc = 0; xc <= ncols; ++xc)
+                for (var xc = 0; xc <= ncols; ++xc)
                 {
                     if (celldata[xc, yc].Xspan > 1)
                         htmlBody += "<td colspan='" + celldata[xc, yc].Xspan + "'>";
@@ -100,12 +100,14 @@ namespace trackvisualizer.Service.ReportExporters
             htmlBody += "</table>";
 
             var assembly = Assembly.GetExecutingAssembly();
-            var resourceName = "trackvisualizer.Service.ReportExporters.report-template.html";
+            
+            var resourceName = assembly.GetManifestResourceNames()
+                .FirstOrDefault(rn => rn.EndsWith("report-template.html"));
 
-            using (Stream stream = assembly.GetManifestResourceStream(resourceName))
-            using (StreamReader reader = new StreamReader(stream))
+            using (var stream = assembly.GetManifestResourceStream(resourceName))
+            using (var reader = new StreamReader(stream))
             {
-                string result = reader.ReadToEnd();
+                var result = reader.ReadToEnd();
 
                 result = result.Replace("%TITLE%", $"Отчет на базе трека {source.Source.SourceTrackFileName}");
                 result = result.Replace("%BODY%", htmlBody);
