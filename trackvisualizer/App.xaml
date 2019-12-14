@@ -19,12 +19,19 @@
             <Setter Property="VerticalAlignment" Value="Center"/>
         </Style>
         
+        <Style x:Key="BasicTextBlockStyle" TargetType="TextBlock">
+            <Setter Property="Margin" Value="{StaticResource ControlMargin}"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+
         <SolidColorBrush x:Key="AccentColor" Color="SteelBlue"/>
         <SolidColorBrush x:Key="BackgroundAccentColor" Color="#D7E5F0"/>
         <SolidColorBrush x:Key="BackgroundAccentColor2" Color="#F7F7F7"/>
 
         <SolidColorBrush x:Key="BackgroundColor" Color="White"/>
+
         
+
 
     </Application.Resources>
 </Application>

@@ -58,5 +58,34 @@ namespace trackvisualizer.View
                 _foregroundSemaphore.Release();
             }
         }
+
+        public async Task<string> ChooseAsync(IEnumerable<Tuple<string, string>> choices)
+        {
+            var options = choices as Tuple<string, string>[] ?? choices.ToArray();
+            
+            if (options.Length == 1)
+                return options[0].Item1;
+
+            //Allow only 1 foreground 'blocking' window at once
+            await _foregroundSemaphore.WaitAsync();
+
+            try
+            {
+                var inputbox = new ChoiceWindow(options);
+
+                var taskCompletionSource = new TaskCompletionSource<bool>();
+
+                inputbox.Closed += (sender, args) => taskCompletionSource.TrySetResult(true);
+                inputbox.Show();
+
+                await taskCompletionSource.Task;
+
+                return inputbox.ChosenId;
+            }
+            finally
+            {
+                _foregroundSemaphore.Release();
+            }
+        }
     }
 }

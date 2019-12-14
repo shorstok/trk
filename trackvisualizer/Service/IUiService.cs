@@ -1,4 +1,6 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace trackvisualizer.Service
 {
@@ -6,5 +8,6 @@ namespace trackvisualizer.Service
     {
         Task NofityError(string text);
         Task<string> Ask(string what, string initialValue);
+        Task<string> ChooseAsync(IEnumerable<Tuple<string, string>> choices);
     }
 }

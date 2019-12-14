@@ -1,0 +1,58 @@
+﻿<Window x:Class="trackvisualizer.View.ChoiceWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:trackvisualizer.View"
+        mc:Ignorable="d"
+        Title="Choice" Height="450" Width="800"
+        AllowsTransparency="True" Background="#90000000" WindowStyle="None"
+        WindowState="Maximized"
+        Name="ContainerWindow"
+        DataContext="{Binding ElementName=ContainerWindow}"
+        MouseLeftButtonUp="ChoiceWindow_OnMouseLeftButtonUp"
+        FontSize="19" Topmost="True">
+    <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto" MinHeight="90" />
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto" MinWidth="400" />
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Border Grid.Column="1" Grid.Row="1" Background="{StaticResource BackgroundColor}" >            
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                
+                <!-- title -->
+                <TextBlock Grid.Row="0" Style="{StaticResource BasicTextBlockStyle}" Text="Доступные варианты" TextWrapping="Wrap" FontWeight="Bold"/>
+                
+                <!-- choices -->
+                <ListView Grid.Row="1" ItemsSource="{Binding Options}" Margin="{StaticResource ControlMargin}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate DataType="{x:Type local:ChoiceWindow+Choice}">
+                            <Border Padding="{StaticResource ControlMargin}">
+                                <Border.InputBindings>
+                                    <MouseBinding Command="{Binding ChoseItemCommand, ElementName=ContainerWindow}" CommandParameter="{Binding}" Gesture="LeftClick"/>
+                                </Border.InputBindings>
+                                <TextBlock Text="{Binding Description}"/>
+                            </Border>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+
+                </ListView>
+                
+                
+            </Grid>
+
+        </Border>
+    </Grid>
+</Window>

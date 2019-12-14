@@ -110,10 +110,16 @@
     <Compile Include="Service\GeoLoaderService.cs" />
     <Compile Include="Service\Middleware\GpxLoaderMiddleware.cs" />
     <Compile Include="Service\IGeoLoaderMiddleware.cs" />
-    <Compile Include="Service\IHeightmapProvider.cs" />
+    <Compile Include="Service\HeightmapProviders\IHeightmapProvider.cs" />
     <Compile Include="Service\IUiService.cs" />
     <Compile Include="Service\HeightmapProviders\SrtmFileDownloadHeightmapProvider.cs" />
     <Compile Include="Service\Middleware\KmlLoaderMiddleware.cs" />
+    <Compile Include="Service\ReportExporters\HtmlReportExporter.cs" />
+    <Compile Include="Service\ReportExporters\ITrackReportExporter.cs" />
+    <Compile Include="Service\TableBuilder.cs" />
+    <Compile Include="View\ChoiceWindow.xaml.cs">
+      <DependentUpon>ChoiceWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\DimensionConverter.cs" />
     <Compile Include="View\HeightmapDownloaderWindow.xaml.cs">
       <DependentUpon>HeightmapDownloaderWindow.xaml</DependentUpon>
@@ -128,6 +134,7 @@
     <Compile Include="Vm\HeightmapManagerVm.cs" />
     <Compile Include="Vm\TrackManagerVm.cs" />
     <Compile Include="Vm\TrackReportItemVm.cs" />
+    <Compile Include="Vm\TrackReportTotalsVm.cs" />
     <Compile Include="Vm\TrackReportVm.cs" />
     <Compile Include="Vm\TrackVm.Equitable.cs" />
     <Compile Include="Vm\UiLoggingVm.cs" />
@@ -138,6 +145,10 @@
     <Compile Include="Vm\TrackVm.cs" />
     <Compile Include="Vm\MainSettingsVm.cs" />
     <Page Include="View\BackpackWeightWnd.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ChoiceWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

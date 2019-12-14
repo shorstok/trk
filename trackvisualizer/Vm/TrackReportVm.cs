@@ -13,6 +13,7 @@ using trackvisualizer.Annotations;
 using trackvisualizer.Config;
 using trackvisualizer.Geodetic;
 using trackvisualizer.Service;
+using trackvisualizer.Service.ReportExporters;
 using Point = trackvisualizer.Geodetic.Point;
 
 namespace trackvisualizer.Vm
@@ -27,7 +28,9 @@ namespace trackvisualizer.Vm
     public class TrackReportVm : INotifyPropertyChanged
     {
         private readonly IUiLoggingService _loggingService;
+        private readonly IUiService _uiService;
         private readonly SrtmRepository _srtmRepository;
+        private readonly ITrackReportExporter[] _reportExporters;
         private readonly Func<TrackVm,TrackReportItemVm> _reportItemGenerator;
         private readonly TrekplannerConfiguration _configuration;
         public TrackVm Source { get; }
@@ -40,22 +43,53 @@ namespace trackvisualizer.Vm
 
         public ObservableCollection<TrackReportItemVm> Results { get; } = new ObservableCollection<TrackReportItemVm>();
 
+        public TrackReportTotalsVm Totals { get; }
+
         public TagGraphData GraphData { get; set; }
-        
+
+        public ICommand ExportCommand { get; }
+
         public TrackReportVm(TrackVm source, 
             IUiLoggingService loggingService,
+            IUiService uiService,
             SrtmRepository srtmRepository,
+            ITrackReportExporter[] reportExporters,
             Func<TrackVm,TrackReportItemVm> reportItemGenerator,
             TrekplannerConfiguration configuration)
         {
             _loggingService = loggingService;
+            _uiService = uiService;
             _srtmRepository = srtmRepository;
+            _reportExporters = reportExporters;
             _reportItemGenerator = reportItemGenerator;
             _configuration = configuration;
+            
             Source = source;
+            Totals = new TrackReportTotalsVm(this);
+
+            ExportCommand = new DelegateCommand(o=>Results.Any(), ExportReportAsync);
         }
 
-        
+        private async void ExportReportAsync(object obj)
+        {
+            var exporterId =
+                await _uiService.ChooseAsync(_reportExporters.Select(e => Tuple.Create(e.Id, e.Description)));
+
+            if(null == exporterId)
+                return;
+
+            var exporter = _reportExporters.FirstOrDefault(re => re.Id == exporterId);
+
+            if (null == exporter)
+            {
+                await _uiService.NofityError($"Report exporter with ID {exporterId} unknown");
+                return;
+            }
+
+            await exporter.Export(this);
+        }
+
+
         private List<Point> FilterSlicepts()
         {
             var filteredSlicepoints = (from Point pt in Source.SourceSlicepoints
@@ -91,6 +125,7 @@ namespace trackvisualizer.Vm
             var activeSegPts = activeSeg?.Pts;
 
             Results.Clear();
+            Totals.Recalculate();
 
             if (Source.AreHeightmapsMissing)
             {
@@ -193,6 +228,8 @@ namespace trackvisualizer.Vm
                                      "> обнаружены неверные значения.\nЗапустите из командной строки\n\nsrtm_interp " +
                                      s.Loadname +
                                      "\n\nиначе все расчеты, зависящие от высоты, будут совершенно бредовыми!");
+
+            Totals.Recalculate();
 
             return true;
         }

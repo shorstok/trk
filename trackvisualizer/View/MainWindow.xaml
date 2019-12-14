@@ -31,13 +31,14 @@
                   FontSize="13">
             <ListView.ItemTemplate>
                 <DataTemplate DataType="{x:Type vm:UiLogItemVm}">
-                    <TextBlock Text="{Binding Text}" TextWrapping="Wrap" MaxWidth="200" Name="LogItem"/>
+                    <TextBlock Text="{Binding Text}" TextWrapping="Wrap" MaxWidth="200" Name="LogItem" />
                     <DataTemplate.Triggers>
                         <DataTrigger Binding="{Binding Important}" Value="True">
-                            <Setter TargetName="LogItem" Property="FontWeight" Value="Bold"/>
+                            <Setter TargetName="LogItem" Property="FontWeight" Value="Bold" />
                         </DataTrigger>
                         <DataTrigger Binding="{Binding IsError}" Value="True">
-                            <Setter TargetName="LogItem" Property="Foreground" Value="{StaticResource ValidationBadColor}"/>
+                            <Setter TargetName="LogItem" Property="Foreground"
+                                    Value="{StaticResource ValidationBadColor}" />
                         </DataTrigger>
                     </DataTemplate.Triggers>
                 </DataTemplate>
@@ -54,7 +55,8 @@
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 
-            <TextBlock Text="Отсутствуют карты высот" FontWeight="Bold" Foreground="{StaticResource ValidationBadColor}" Margin="{StaticResource ControlMargin}"/>
+            <TextBlock Text="Отсутствуют карты высот" FontWeight="Bold"
+                       Foreground="{StaticResource ValidationBadColor}" Margin="{StaticResource ControlMargin}" />
             <ItemsControl Grid.Row="1" ItemsSource="{Binding HeightmapManager.MissingHeightmapNames}">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
@@ -63,11 +65,14 @@
                 </ItemsControl.ItemsPanel>
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <TextBlock Text="{Binding}" Margin="{StaticResource ControlMargin}" FontWeight="Bold" Background="{StaticResource ValidationBadColor}" Foreground="{StaticResource ValidationBadColorInverse}"/>
+                        <TextBlock Text="{Binding}" Margin="{StaticResource ControlMargin}" FontWeight="Bold"
+                                   Background="{StaticResource ValidationBadColor}"
+                                   Foreground="{StaticResource ValidationBadColorInverse}" />
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
-            <Button Grid.Row="2" Command="{Binding HeightmapManager.DownloadMissingHeightmapsCommand}" Content="Загрузить карты высот" Margin="{StaticResource ControlMargin}"/>
+            <Button Grid.Row="2" Command="{Binding HeightmapManager.DownloadMissingHeightmapsCommand}"
+                    Content="Загрузить карты высот" Margin="{StaticResource ControlMargin}" />
         </Grid>
 
         <!-- Source track selector -->
@@ -89,7 +94,8 @@
                        view:VisibilityAux.IsVisible="{Binding IsLoading}" VerticalAlignment="Center" />
 
             <!-- recently used tracks selector -->
-            <ComboBox Grid.Column="2" Style="{StaticResource BasicComboBoxStyle}" ItemsSource="{Binding AvailableTracks}"
+            <ComboBox Grid.Column="2" Style="{StaticResource BasicComboBoxStyle}"
+                      ItemsSource="{Binding AvailableTracks}"
                       SelectedItem="{Binding ActiveTrack}" IsSynchronizedWithCurrentItem="True">
                 <ComboBox.ItemTemplate>
                     <DataTemplate DataType="{x:Type vm:TrackVm}">
@@ -105,126 +111,156 @@
         </Grid>
 
         <!-- Report data -->
-        <DataGrid Grid.Column="1" Grid.Row="1" CanUserAddRows="False" CanUserDeleteRows="False"
-                  Grid.RowSpan="2"
-                  AutoGenerateColumns="False"
-                  GridLinesVisibility="None"
-                  AlternationCount="2"
-                  Grid.IsSharedSizeScope="True"
-                  ItemsSource="{Binding ActiveTrack.Report.Results}"
-                  Margin="{StaticResource ControlMargin}">
-            <DataGrid.RowStyle>
-                <Style TargetType="DataGridRow">
-                    <Style.Triggers>
-                        <Trigger Property="ItemsControl.AlternationIndex" Value="0">
-                            <Setter Property="Background" Value="{StaticResource BackgroundColor}" />
-                        </Trigger>
-                        <Trigger Property="ItemsControl.AlternationIndex" Value="1">
-                            <Setter Property="Background" Value="{StaticResource BackgroundAccentColor2}" />
-                        </Trigger>
-                        <Trigger Property="IsMouseOver" Value="true">
-                            <Setter Property="Background" Value="{StaticResource BackgroundAccentColor}" />
-                            <Setter Property="Foreground" Value="#000" />
-                        </Trigger>
-                        <Trigger Property="IsSelected" Value="true">
-                            <Setter Property="Background" Value="{StaticResource BackgroundAccentColor}" />
-                            <Setter Property="Foreground" Value="#000" />
-                        </Trigger>
+        <TabControl Grid.Column="1" Grid.Row="1"
+                    Grid.RowSpan="2">
+            <TabControl.Items>
+                <TabItem Header="Маршрут">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
 
-                    </Style.Triggers>
-                </Style>
-            </DataGrid.RowStyle>
-            <DataGrid.ColumnHeaderStyle>
-                <Style TargetType="DataGridColumnHeader">
-                    <Setter Property="ContentTemplate">
-                        <Setter.Value>
-                            <DataTemplate>
-                                <TextBlock TextWrapping="Wrap" Text="{Binding}" />
-                            </DataTemplate>
-                        </Setter.Value>
-                    </Setter>
-                </Style>
-            </DataGrid.ColumnHeaderStyle>
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="#"
-                                    Binding="{Binding SectionNumber}"
-                                    IsReadOnly="True" Width="Auto" MinWidth="30"/>
-                <DataGridTemplateColumn Header="Участок" Width="Auto" MinWidth="120">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate DataType="{x:Type vm:TrackReportItemVm}">
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto" SharedSizeGroup="SG1"/>
-                                    <ColumnDefinition Width="*" MinWidth="30"/>
-                                    <ColumnDefinition Width="Auto" SharedSizeGroup="SG1"/>
-                                </Grid.ColumnDefinitions>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                </Grid.RowDefinitions>
-                                <TextBlock Grid.Row="0" Grid.Column="0" Text="{Binding SectionStartName}" FontWeight="DemiBold" TextWrapping="Wrap" MaxWidth="200"/>
-                                <TextBlock Grid.Row="0" Grid.Column="1" Text="..." FontWeight="Thin" HorizontalAlignment="Center"/>
-                                <TextBlock Grid.Row="0" Grid.Column="2" Text="{Binding NextSectionName}" FontWeight="DemiBold" TextWrapping="Wrap" MaxWidth="200"/>
+                        <DataGrid CanUserAddRows="False" CanUserDeleteRows="False"
+                                  AutoGenerateColumns="False"
+                                  GridLinesVisibility="None"
+                                  AlternationCount="2"
+                                  Grid.IsSharedSizeScope="True"
+                                  ItemsSource="{Binding ActiveTrack.Report.Results}"
+                                  Margin="{StaticResource ControlMargin}">
+                            <DataGrid.RowStyle>
+                                <Style TargetType="DataGridRow">
+                                    <Style.Triggers>
+                                        <Trigger Property="ItemsControl.AlternationIndex" Value="0">
+                                            <Setter Property="Background" Value="{StaticResource BackgroundColor}" />
+                                        </Trigger>
+                                        <Trigger Property="ItemsControl.AlternationIndex" Value="1">
+                                            <Setter Property="Background"
+                                                    Value="{StaticResource BackgroundAccentColor2}" />
+                                        </Trigger>
+                                        <Trigger Property="IsMouseOver" Value="true">
+                                            <Setter Property="Background"
+                                                    Value="{StaticResource BackgroundAccentColor}" />
+                                            <Setter Property="Foreground" Value="#000" />
+                                        </Trigger>
+                                        <Trigger Property="IsSelected" Value="true">
+                                            <Setter Property="Background"
+                                                    Value="{StaticResource BackgroundAccentColor}" />
+                                            <Setter Property="Foreground" Value="#000" />
+                                        </Trigger>
 
-                                <TextBlock Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Text="{Binding Comment}" Name="SectionComment" FontStyle="Italic" Opacity="0.5" 
-                                           view:VisibilityAux.IsVisible="{Binding HasComment}"
-                                           TextWrapping="Wrap"/>
-                            </Grid>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                    <DataGridTemplateColumn.CellEditingTemplate>
-                        <DataTemplate DataType="{x:Type vm:TrackReportItemVm}">
-                            <TextBox Text="{Binding SectionStartName}"/>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellEditingTemplate>
+                                    </Style.Triggers>
+                                </Style>
+                            </DataGrid.RowStyle>
+                            <DataGrid.ColumnHeaderStyle>
+                                <Style TargetType="DataGridColumnHeader">
+                                    <Setter Property="ContentTemplate">
+                                        <Setter.Value>
+                                            <DataTemplate>
+                                                <TextBlock TextWrapping="Wrap" Text="{Binding}" />
+                                            </DataTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </DataGrid.ColumnHeaderStyle>
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="#"
+                                                    Binding="{Binding SectionNumber}"
+                                                    IsReadOnly="True" Width="Auto" MinWidth="30" />
+                                <DataGridTemplateColumn Header="Участок" Width="Auto" MinWidth="120">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate DataType="{x:Type vm:TrackReportItemVm}">
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="Auto" SharedSizeGroup="SG1" />
+                                                    <ColumnDefinition Width="*" MinWidth="30" />
+                                                    <ColumnDefinition Width="Auto" SharedSizeGroup="SG1" />
+                                                </Grid.ColumnDefinitions>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="Auto" />
+                                                    <RowDefinition Height="Auto" />
+                                                </Grid.RowDefinitions>
+                                                <TextBlock Grid.Row="0" Grid.Column="0"
+                                                           Text="{Binding SectionStartName}" FontWeight="DemiBold"
+                                                           TextWrapping="Wrap" MaxWidth="200" />
+                                                <TextBlock Grid.Row="0" Grid.Column="1" Text="..." FontWeight="Thin"
+                                                           HorizontalAlignment="Center" />
+                                                <TextBlock Grid.Row="0" Grid.Column="2"
+                                                           Text="{Binding NextSectionName}" FontWeight="DemiBold"
+                                                           TextWrapping="Wrap" MaxWidth="200" />
 
-                </DataGridTemplateColumn>
-                <DataGridTextColumn Header="Расстояние"
-                                    Binding="{Binding DistanceMeters, Converter={StaticResource DimensionConverter}, ConverterParameter={x:Static view:Dimension.MetersToKilometersLength}}"
-                                    IsReadOnly="True" Width="Auto" />
-                <DataGridTextColumn Header="Ходовое время"
-                                    Binding="{Binding LebedevHours, Converter={StaticResource DimensionConverter}, ConverterParameter={x:Static view:Dimension.TimeHours}}"
-                                    IsReadOnly="True" Width="Auto" />
-                <DataGridTextColumn Header="Максимальная высота"
-                                    Binding="{Binding MaxHeight, Converter={StaticResource DimensionConverter}, ConverterParameter={x:Static view:Dimension.MetersHeight}}"
-                                    IsReadOnly="True" Width="Auto" />
-                <DataGridTextColumn Header="Высота ночевки"
-                                    Binding="{Binding SleepHeight, Converter={StaticResource DimensionConverter}, ConverterParameter={x:Static view:Dimension.MetersHeight}}"
-                                    IsReadOnly="True" Width="Auto" />
-                <DataGridTextColumn Header="Перепад за день"
-                                    Binding="{Binding DeltaHeightAbsPerDay, Converter={StaticResource DimensionConverter}, ConverterParameter={x:Static view:Dimension.MetersHeight}}"
-                                    IsReadOnly="True" Width="Auto" />
-                <DataGridTextColumn Header="Основные высоты на участке"
-                                    Binding="{Binding ExtremeHeights, Converter={StaticResource DimensionConverter}, ConverterParameter={x:Static view:Dimension.ExtremeHeightsList}}"                                    
-                                    IsReadOnly="True" Width="Auto" />
-                <DataGridTextColumn Header="Сброс за день"
-                                    Binding="{Binding DescentPerDay, Converter={StaticResource DimensionConverter}, ConverterParameter={x:Static view:Dimension.MetersHeight}}"
-                                    IsReadOnly="True" Width="Auto" />
-                <DataGridTextColumn Header="Набор за день"
-                                    Binding="{Binding AscentPerDay, Converter={StaticResource DimensionConverter}, ConverterParameter={x:Static view:Dimension.MetersHeight}}"
-                                    IsReadOnly="True" Width="Auto" />
-                <DataGridTextColumn Header="Вес рюкзака, М"
-                                    Binding="{Binding MaleWeight, Converter={StaticResource DimensionConverter}, ConverterParameter={x:Static view:Dimension.WeightKg}}"
-                                    IsReadOnly="True" Width="Auto" />
-                <DataGridTextColumn Header="Вес рюкзака, Ж"
-                                    Binding="{Binding FemaleWeight, Converter={StaticResource DimensionConverter}, ConverterParameter={x:Static view:Dimension.WeightKg}}"
-                                    IsReadOnly="True" Width="Auto" />
-                <DataGridTextColumn Header="Индекс FIETS" Binding="{Binding FietsIndex, StringFormat={}0.0}"
-                                    IsReadOnly="True" Width="Auto" />
+                                                <TextBlock Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3"
+                                                           Text="{Binding Comment}" Name="SectionComment"
+                                                           FontStyle="Italic" Opacity="0.5"
+                                                           view:VisibilityAux.IsVisible="{Binding HasComment}"
+                                                           TextWrapping="Wrap" />
+                                            </Grid>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                    <DataGridTemplateColumn.CellEditingTemplate>
+                                        <DataTemplate DataType="{x:Type vm:TrackReportItemVm}">
+                                            <TextBox Text="{Binding SectionStartName}" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellEditingTemplate>
 
-                <DataGridTemplateColumn Header="..." Width="Auto"  IsReadOnly="True">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate DataType="{x:Type vm:TrackReportItemVm}">
-                            <StackPanel Orientation="Vertical">
+                                </DataGridTemplateColumn>
+                                <DataGridTextColumn Header="Расстояние"
+                                                    Binding="{Binding DistanceMeters, Converter={StaticResource DimensionConverter}, ConverterParameter={x:Static view:Dimension.MetersToKilometersLength}}"
+                                                    IsReadOnly="True" Width="Auto" />
+                                <DataGridTextColumn Header="Ходовое время"
+                                                    Binding="{Binding LebedevHours, Converter={StaticResource DimensionConverter}, ConverterParameter={x:Static view:Dimension.TimeHours}}"
+                                                    IsReadOnly="True" Width="Auto" />
+                                <DataGridTextColumn Header="Максимальная высота"
+                                                    Binding="{Binding MaxHeight, Converter={StaticResource DimensionConverter}, ConverterParameter={x:Static view:Dimension.MetersHeight}}"
+                                                    IsReadOnly="True" Width="Auto" />
+                                <DataGridTextColumn Header="Высота ночевки"
+                                                    Binding="{Binding SleepHeight, Converter={StaticResource DimensionConverter}, ConverterParameter={x:Static view:Dimension.MetersHeight}}"
+                                                    IsReadOnly="True" Width="Auto" />
+                                <DataGridTextColumn Header="Перепад за день"
+                                                    Binding="{Binding DeltaHeightAbsPerDay, Converter={StaticResource DimensionConverter}, ConverterParameter={x:Static view:Dimension.MetersHeight}}"
+                                                    IsReadOnly="True" Width="Auto" />
+                                <DataGridTextColumn Header="Основные высоты на участке"
+                                                    Binding="{Binding ExtremeHeights, Converter={StaticResource DimensionConverter}, ConverterParameter={x:Static view:Dimension.ExtremeHeightsList}}"
+                                                    IsReadOnly="True" Width="Auto" />
+                                <DataGridTextColumn Header="Сброс за день"
+                                                    Binding="{Binding DescentPerDay, Converter={StaticResource DimensionConverter}, ConverterParameter={x:Static view:Dimension.MetersHeight}}"
+                                                    IsReadOnly="True" Width="Auto" />
+                                <DataGridTextColumn Header="Набор за день"
+                                                    Binding="{Binding AscentPerDay, Converter={StaticResource DimensionConverter}, ConverterParameter={x:Static view:Dimension.MetersHeight}}"
+                                                    IsReadOnly="True" Width="Auto" />
+                                <DataGridTextColumn Header="Вес рюкзака, М"
+                                                    Binding="{Binding MaleWeight, Converter={StaticResource DimensionConverter}, ConverterParameter={x:Static view:Dimension.WeightKg}}"
+                                                    IsReadOnly="True" Width="Auto" />
+                                <DataGridTextColumn Header="Вес рюкзака, Ж"
+                                                    Binding="{Binding FemaleWeight, Converter={StaticResource DimensionConverter}, ConverterParameter={x:Static view:Dimension.WeightKg}}"
+                                                    IsReadOnly="True" Width="Auto" />
+                                <DataGridTextColumn Header="Индекс FIETS"
+                                                    Binding="{Binding FietsIndex, StringFormat={}0.0}"
+                                                    IsReadOnly="True" Width="Auto" />
 
-                            </StackPanel>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
+                                <DataGridTemplateColumn Header="..." Width="Auto" IsReadOnly="True">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate DataType="{x:Type vm:TrackReportItemVm}">
+                                            <StackPanel Orientation="Vertical" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
 
-            </DataGrid.Columns>
+                            </DataGrid.Columns>
 
-        </DataGrid>
+                        </DataGrid>
+
+                        <!-- export button -->
+                        <StackPanel Grid.Row="1" Orientation="Horizontal">
+                            <Button Style="{StaticResource BasicButtonStyle}" Content="Экспорт" Command="{Binding ActiveTrack.Report.ExportCommand}"/>
+                        </StackPanel>
+
+                    </Grid>
+
+                </TabItem>
+            </TabControl.Items>
+
+        </TabControl>
 
         <!-- Settings -->
 

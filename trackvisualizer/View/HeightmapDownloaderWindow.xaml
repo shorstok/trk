@@ -28,7 +28,7 @@
         <TextBlock Text="Провайдер карт высот" Grid.Column="0" Grid.Row="0" Margin="{StaticResource ControlMargin}" VerticalAlignment="Center"/>
         <ComboBox Grid.Column="1" Grid.Row="0" ItemsSource="{Binding HeightmapProviders}" SelectedItem="{Binding ActiveHeightmapProvider}" IsSynchronizedWithCurrentItem="True" Style="{StaticResource BasicComboBoxStyle}">
             <ComboBox.ItemTemplate>
-                <DataTemplate DataType="{x:Type service:IHeightmapProvider}">
+                <DataTemplate DataType="{x:Type heightmapProviders:IHeightmapProvider}">
                     <TextBlock Text="{Binding Description}"/>
                 </DataTemplate>
             </ComboBox.ItemTemplate>

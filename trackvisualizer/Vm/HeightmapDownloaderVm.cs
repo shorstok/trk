@@ -11,6 +11,7 @@ using System.Windows.Input;
 using trackvisualizer.Annotations;
 using trackvisualizer.Config;
 using trackvisualizer.Service;
+using trackvisualizer.Service.HeightmapProviders;
 
 namespace trackvisualizer.Vm
 {

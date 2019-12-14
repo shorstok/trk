@@ -10,6 +10,7 @@ using trackvisualizer.Config;
 using trackvisualizer.Service;
 using trackvisualizer.Service.HeightmapProviders;
 using trackvisualizer.Service.Middleware;
+using trackvisualizer.Service.ReportExporters;
 using trackvisualizer.View;
 using trackvisualizer.Vm;
 
@@ -44,6 +45,8 @@ namespace trackvisualizer.Ioc
             //Middleware
             builder.RegisterType<KmlLoaderMiddleware>().As<IGeoLoaderMiddleware>().SingleInstance();
             builder.RegisterType<GpxLoaderMiddleware>().As<IGeoLoaderMiddleware>().SingleInstance();
+            
+            builder.RegisterType<HtmlReportExporter>().As<ITrackReportExporter>().SingleInstance();
 
             //Services
             builder.RegisterType<UiService>().As<IUiService>().AsSelf().SingleInstance();
