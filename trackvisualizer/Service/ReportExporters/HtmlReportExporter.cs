@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Globalization;
 using System.IO;
+using System.Reflection;
 using System.Threading.Tasks;
 using Microsoft.Win32;
 using trackvisualizer.Vm;
@@ -11,19 +12,7 @@ namespace trackvisualizer.Service.ReportExporters
     {
         public string Id { get; } = "html_exporter";
         public string Description { get; } = "HTML";
-
-        
-        private const string header_html = @"<!DOCTYPE html PUBLIC ""-//W3C//DTD XHTML 1.0 Transitional//EN""
-   ""http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"">
-<html xmlns=""http://www.w3.org/1999/xhtml"" xml:lang=""en"" lang=""en"">
-<head>
-<meta http-equiv=""Content-Type"" content=""text/html; charset=utf-8""/>
-<title>{tableheader}</title>
-</head>
-<body>";
-        private const string footer_html = @"</body></html>";
-
-        
+       
         public async Task<bool> Export(TrackReportVm source)
         {
             var saveFileDialog = new SaveFileDialog
@@ -44,8 +33,8 @@ namespace trackvisualizer.Service.ReportExporters
 
             table.Setval(0,0,"#");
             table.Setval(1,0,"Участок");
-            table.Setval(2,0,"Ходовое время");
-            table.Setval(3,0,"Расстояние, км");
+            table.Setval(2,0,"Расстояние, км");
+            table.Setval(3,0,"Ходовое время");
             table.Setval(4,0,"Набор, м");
             table.Setval(5,0,"Сброс, м");
             table.Setval(6,0,"Максимальная высота");
@@ -54,8 +43,8 @@ namespace trackvisualizer.Service.ReportExporters
             {
                 table.Setval(0,reportItemVm.SectionNumber,reportItemVm.SectionNumber.ToString());
                 table.Setval(1,reportItemVm.SectionNumber,$"{reportItemVm.SectionStartName} — {reportItemVm.NextSectionName}");
-                table.Setval(2,reportItemVm.SectionNumber,(reportItemVm.LebedevHours).ToString("0.0",CultureInfo.InvariantCulture));
-                table.Setval(3,reportItemVm.SectionNumber,(reportItemVm.DistanceMeters/1e3).ToString("0.0",CultureInfo.InvariantCulture));
+                table.Setval(2,reportItemVm.SectionNumber,(reportItemVm.DistanceMeters/1e3).ToString("0.0",CultureInfo.InvariantCulture));
+                table.Setval(3,reportItemVm.SectionNumber,(reportItemVm.LebedevHours).ToString("0.0",CultureInfo.InvariantCulture));
                 table.Setval(4,reportItemVm.SectionNumber,(reportItemVm.AscentPerDay).ToString("0.0",CultureInfo.InvariantCulture));
                 table.Setval(5,reportItemVm.SectionNumber,(reportItemVm.DescentPerDay).ToString("0.0",CultureInfo.InvariantCulture));
                 table.Setval(6,reportItemVm.SectionNumber,(reportItemVm.MaxHeight).ToString("0.0",CultureInfo.InvariantCulture));
@@ -65,7 +54,7 @@ namespace trackvisualizer.Service.ReportExporters
 
             table.Setval(0,finalrow, "Всего за поход");
 
-            table.Setval(3,finalrow, source.Totals.DistanceTotalKilometers?.ToString("0.0",CultureInfo.InvariantCulture) ?? String.Empty);
+            table.Setval(2,finalrow, source.Totals.DistanceTotalKilometers?.ToString("0.0",CultureInfo.InvariantCulture) ?? String.Empty);
             table.Setval(4,finalrow, source.Totals.AscentTotalMeters?.ToString("0.0",CultureInfo.InvariantCulture) ?? String.Empty);
             table.Setval(5,finalrow, source.Totals.DescentTotal?.ToString("0.0",CultureInfo.InvariantCulture) ?? String.Empty);
             
@@ -85,40 +74,45 @@ namespace trackvisualizer.Service.ReportExporters
 
             int ncols = celldata.GetUpperBound(0);
             int nrows = celldata.GetUpperBound(1);
-
-            rt = header_html;
-
-            rt = rt.Replace("{tableheader}", $"Отчет на базе трека {source.Source.SourceTrackFileName}");
-
-            rt += "<table border=1 bordercolor=black cellpadding=10 cellspacing=0>";     
+     
+            var htmlBody = "<table border=1 bordercolor=black cellpadding=10 cellspacing=0>";     
 
             for (int yc = 0; yc <= nrows; ++yc)
             {
-                rt += "<tr>";
+                htmlBody += "<tr>";
                 for (int xc = 0; xc <= ncols; ++xc)
                 {
                     if (celldata[xc, yc].Xspan > 1)
-                        rt += "<td colspan='" + celldata[xc, yc].Xspan + "'>";
+                        htmlBody += "<td colspan='" + celldata[xc, yc].Xspan + "'>";
                     else
-                        rt += "<td>";
+                        htmlBody += "<td>";
 
                     if (celldata[xc, yc].V == null)
-                        rt += "&nbsp;";
+                        htmlBody += "&nbsp;";
                     else
-                    {
-                        rt += celldata[xc, yc].V;
-                    }
+                        htmlBody += celldata[xc, yc].V;
 
-                    rt += "</td>";
+                    htmlBody += "</td>";
                 }
-                rt += "</tr>";
+                htmlBody += "</tr>";
             }
 
-            rt += "</table>";
+            htmlBody += "</table>";
 
-            rt+=footer_html;
+            var assembly = Assembly.GetExecutingAssembly();
+            var resourceName = "trackvisualizer.Service.ReportExporters.report-template.html";
 
-            return rt;
+            using (Stream stream = assembly.GetManifestResourceStream(resourceName))
+            using (StreamReader reader = new StreamReader(stream))
+            {
+                string result = reader.ReadToEnd();
+
+                result = result.Replace("%TITLE%", $"Отчет на базе трека {source.Source.SourceTrackFileName}");
+                result = result.Replace("%BODY%", htmlBody);
+
+                return result;
+            }
+
         }
 
     }
