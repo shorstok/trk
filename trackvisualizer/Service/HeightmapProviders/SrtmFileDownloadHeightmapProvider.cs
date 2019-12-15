@@ -11,6 +11,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using trackvisualizer.Annotations;
 using trackvisualizer.Config;
+using trackvisualizer.Properties;
 
 namespace trackvisualizer.Service.HeightmapProviders
 {
@@ -49,7 +50,7 @@ namespace trackvisualizer.Service.HeightmapProviders
         private readonly TrekplannerConfiguration _configuration;
         private readonly IUiService _uiService;
 
-        public Guid InternalId => Guid.Parse("6E5C367A-4C4E-4E8E-BA95-FDBDFC39F85A");
+        public Guid InternalId => Guid.Parse(@"6E5C367A-4C4E-4E8E-BA95-FDBDFC39F85A");
 
         private bool _isAvailable = true;
         public bool IsAvailable
@@ -64,7 +65,7 @@ namespace trackvisualizer.Service.HeightmapProviders
         }
         
         public int Priority => 1;
-        public string Description { get; } = "SRTM";
+        public string Description { get; } = Resources.SrtmFileDownloadHeightmapProvider_Description;
         public int MaxConcurrentInstances => 1;
         public object Settings { get; }
 
@@ -78,17 +79,17 @@ namespace trackvisualizer.Service.HeightmapProviders
         public async Task<bool> DownloadHeightmap(string missingSrtmName, Action<double, string> reportProgressAsync,
             CancellationToken token)
         {
-            var srtmCleanerPath = PathService.StartupDir + "\\" + "srtm_interp.exe";
+            var srtmCleanerPath = PathService.StartupDir + @"\" + @"srtm_interp.exe";
 
             var temporaryFilenameUnpacked =                     
                 Path.Combine(PathService.GetOrCreateTempDirectory(_configuration), $"downloaded-{missingSrtmName}.hgt");
-            var temporaryArchiveName = temporaryFilenameUnpacked + ".zip";
+            var temporaryArchiveName = temporaryFilenameUnpacked + @".zip";
 
-            var srtmFilePacked = missingSrtmName + ".hgt.zip";
+            var srtmFilePacked = missingSrtmName + @".hgt.zip";
 
             if (!File.Exists(srtmCleanerPath))
             {
-                await _uiService.NofityError($"Не найдена програма коррекции высот `{srtmCleanerPath}`");
+                await _uiService.NofityError(string.Format(Resources.SrtmFileDownloadHeightmapProvider_DownloadHeightmap_SrtmInterpNotFound, srtmCleanerPath));
                 return false;
             }
 
@@ -106,13 +107,13 @@ namespace trackvisualizer.Service.HeightmapProviders
                     var sourcePath = PathService.MapPath(_configuration.Heightmap.SrtmBaseUrlTemplate,
                         Tuple.Create(HeightmapTemplateTokens.SrtmZippedName,srtmFilePacked));
                 
-                    reportProgressAsync(0, "Загрузка " + srtmFilePacked + " ...");
+                    reportProgressAsync(0, string.Format(Resources.SrtmFileDownloadHeightmapProvider_DownloadHeightmap_DownloadingFormatted, srtmFilePacked));
 
                     client.DownloadProgressChanged += (sender, args) =>
                     {
                         var progressRelative = 0.8 * args.BytesReceived / args.TotalBytesToReceive;
 
-                        reportProgressAsync(progressRelative, $"Загрузка {args.BytesReceived/1e3:0.0} КБ...");
+                        reportProgressAsync(progressRelative, string.Format(Resources.SrtmFileDownloadHeightmapProvider_DownloadHeightmap_LoadProgressFormatted, args.BytesReceived/1e3));
                     };
 
                     await client.DownloadFileTaskAsync(
@@ -124,10 +125,10 @@ namespace trackvisualizer.Service.HeightmapProviders
             {
                 if ((e.Response as HttpWebResponse)?.StatusCode == HttpStatusCode.NotFound)
                 {
-                    var extendedError = "Удаленный сервер вернул 404 (не найден). Причины могут быть следующие:" +Environment.NewLine+
-                                        "🔘 SRTM-файлов для этого района нет на севрере" +Environment.NewLine+
-                                        "🔘 Адрес устарел и нужно искать следующий" +Environment.NewLine+
-                                        "🔘 Неверно прописан адрес сервера в окне загрузчика";
+                    var extendedError = Resources.SrtmFileDownloadHeightmapProvider_DownloadHeightmap_Error404Reasons +Environment.NewLine+
+                                        Resources.SrtmFileDownloadHeightmapProvider_DownloadHeightmap_E404NoSrtmOnServer +Environment.NewLine+
+                                        Resources.SrtmFileDownloadHeightmapProvider_DownloadHeightmap_E404ServerAddrObsolete +Environment.NewLine+
+                                        Resources.SrtmFileDownloadHeightmapProvider_DownloadHeightmap_E404ServerAddrInvalid;
 
                     _uiService.NofityError(extendedError).ConfigureAwait(false);
                 }
@@ -140,21 +141,21 @@ namespace trackvisualizer.Service.HeightmapProviders
                 return false;
             }
 
-            reportProgressAsync(0.8, "Распаковка " + srtmFilePacked);
+            reportProgressAsync(0.8, string.Format(Resources.SrtmFileDownloadHeightmapProvider_DownloadHeightmap_UnpackingFormatted, srtmFilePacked));
             
             try
             {
-                var srtmFileUnpackedName = missingSrtmName + ".hgt";
+                var srtmFileUnpackedName = missingSrtmName + @".hgt";
 
                 using (var archive = ZipFile.OpenRead(temporaryArchiveName))
                 {
                     var hgtEntry =
                         archive.Entries.FirstOrDefault(e =>
-                            e.FullName.EndsWith(".hgt", StringComparison.InvariantCultureIgnoreCase));
+                            e.FullName.EndsWith(@".hgt", StringComparison.InvariantCultureIgnoreCase));
 
                     if (null == hgtEntry)
                     {
-                        reportProgressAsync(0.8,srtmFilePacked + " - файл .hgt не найден в архиве, что-то не так");
+                        reportProgressAsync(0.8, string.Format(Resources.SrtmFileDownloadHeightmapProvider_DownloadHeightmap_ErrorNoHgtFileInArchive, srtmFilePacked));
                         return false;
                     }
 
@@ -166,19 +167,19 @@ namespace trackvisualizer.Service.HeightmapProviders
 
                 File.Delete(temporaryArchiveName);
 
-                reportProgressAsync(0.9,missingSrtmName + ".hgt, подчистка лакун... ");
+                reportProgressAsync(0.9, string.Format(Resources.SrtmFileDownloadHeightmapProvider_DownloadHeightmap_CleanupActionFormatted, missingSrtmName));
 
                 if (!await ExecuteCommandAsync(srtmCleanerPath, srtmFileUnpackedName))
                     return false;
 
-                reportProgressAsync(1,srtmFilePacked + " готов. ");
+                reportProgressAsync(1, string.Format(Resources.SrtmFileDownloadHeightmapProvider_DownloadHeightmap_HeightmapReadyFormatted, srtmFilePacked));
 
                 return true;
             }
             catch (Exception e)
             {
-                await _uiService.NofityError($"Ошибка при распаковке: `{e.Message}`! Файл " + srtmFilePacked +
-                                             " загружен, но вам придётся распаковать его вручную. ");
+                await _uiService.NofityError(
+                    string.Format(Resources.SrtmFileDownloadHeightmapProvider_DownloadHeightmap_UnpackingErrorFormatted_ManualActionRequired, e.Message, srtmFilePacked));
 
                 return false;
             }
@@ -212,7 +213,7 @@ namespace trackvisualizer.Service.HeightmapProviders
             }
             catch (Exception ex)
             {
-                await _uiService.NofityError("Ошибка: " + ex.Message);
+                await _uiService.NofityError(Resources.SrtmFileDownloadHeightmapProvider_ExecuteCommandAsync_ErrorGeneral + ex.Message);
                 return false;
             }
         }

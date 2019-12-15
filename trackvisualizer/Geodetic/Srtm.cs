@@ -74,10 +74,10 @@ namespace trackvisualizer.Geodetic
             var latSw = Math.Floor(ptToGuessFor.Lat);
             var lonSw = Math.Floor(ptToGuessFor.Lon);
 
-            var ns = latSw > 0 ? "N" : "S";
-            var ew = lonSw > 0 ? "E" : "W";
+            var ns = latSw > 0 ? @"N" : @"S";
+            var ew = lonSw > 0 ? @"E" : @"W";
 
-            return ns + Math.Abs(latSw).ToString("00.") + ew + Math.Abs(lonSw).ToString("000.");
+            return ns + Math.Abs(latSw).ToString(@"00.") + ew + Math.Abs(lonSw).ToString(@"000.");
         }
 
         /// <summary>
@@ -160,10 +160,10 @@ namespace trackvisualizer.Geodetic
             latDeg = fn.Substring(1, 2);
             lonDeg = fn.Substring(4, 3);
 
-            if (ns == "s" || ns == "S")
-                latDeg = "-" + latDeg;
-            if (ew == "w" || ew == "W")
-                lonDeg = "-" + lonDeg;
+            if (ns == @"s" || ns == @"S")
+                latDeg = @"-" + latDeg;
+            if (ew == @"w" || ew == @"W")
+                lonDeg = @"-" + lonDeg;
         }
 
         public double? GetHeightForPoint(Point pt)

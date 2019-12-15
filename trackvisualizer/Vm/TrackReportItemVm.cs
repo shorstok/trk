@@ -10,6 +10,7 @@ using System.Windows.Media;
 using trackvisualizer.Annotations;
 using trackvisualizer.Config;
 using trackvisualizer.Geodetic;
+using trackvisualizer.Properties;
 using trackvisualizer.Service;
 using Point = trackvisualizer.Geodetic.Point;
 
@@ -46,7 +47,7 @@ namespace trackvisualizer.Vm
                 if (Source.Settings.CustomSectionName.TryGetValue(SectionNumber + 1, out var customName))
                     return customName;
 
-                return _originalNextSectionName ?? "F";
+                return _originalNextSectionName ?? Resources.TrackReportItemVm_NextSectionName_StubFinishName;
             }
             set => Source.Settings.OverrideSectionName(SectionNumber+1,value == _originalNextSectionName ? null : value);
         }
@@ -58,7 +59,7 @@ namespace trackvisualizer.Vm
                 if (Source.Settings.CustomSectionName.TryGetValue(SectionNumber, out var customName))
                     return customName;
 
-                return _originalSectionStartName ?? "S";
+                return _originalSectionStartName ?? Resources.TrackReportItemVm_SectionStartName_StubStartName;
             }
             set => Source.Settings.OverrideSectionName(SectionNumber,value == _originalSectionStartName ? null : value);
         }
@@ -68,13 +69,13 @@ namespace trackvisualizer.Vm
             get
             {
                 if (SectionNumber == Source.Settings.ZabroskaStartPointNum+1)
-                    return "оставляем заброску";
+                    return Resources.TrackReportItemVm_Comment_LeavingDrop;
 
                 if (SectionNumber == 1 && Source.Settings.ZabroskaStartPointNum == -1)
-                    return "завозим заброску до начала маршрута";
+                    return Resources.TrackReportItemVm_Comment_DropBeforeStart;
 
                 if (SectionNumber == Source.Settings.ZabroskaEndPointNum+1)
-                    return "забираем заброску";
+                    return Resources.TrackReportItemVm_Comment_PickingDrop;
 
                 return null;
             }

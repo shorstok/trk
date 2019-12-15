@@ -21,9 +21,9 @@ namespace trackvisualizer.View
         {
             var sfd = new SaveFileDialog
             {
-                Filter = "PNG| *.png",
-                FileName = "graph.png",
-                DefaultExt = "*.png"
+                Filter = @"PNG| *.png",
+                FileName = @"graph.png",
+                DefaultExt = @"*.png"
             };
 
             if (sfd.ShowDialog() != true)

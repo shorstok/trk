@@ -7,11 +7,12 @@
         xmlns:view="clr-namespace:trackvisualizer.View"
         xmlns:system="clr-namespace:System;assembly=mscorlib"
         xmlns:wpf="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
+        xmlns:localization="clr-namespace:trackvisualizer.Properties"
         mc:Ignorable="d"
         d:DataContext="{d:DesignInstance vm:TrackManagerVm}"
         FontSize="17"
         WindowState="Maximized"
-        Title="Работа с треком" Height="550" Width="900">
+        Title="{x:Static localization:Resources.MainWindow_Title}" Height="550" Width="900">
     <Grid Margin="{StaticResource ControlMargin}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
@@ -56,7 +57,7 @@
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 
-            <TextBlock Text="Отсутствуют карты высот" FontWeight="Bold"
+            <TextBlock Text="{x:Static localization:Resources.MainWindow_Route_HeightmapsMissingLabel}" FontWeight="Bold"
                        Foreground="{StaticResource ValidationBadColor}" Margin="{StaticResource ControlMargin}" />
             <ItemsControl Grid.Row="1" ItemsSource="{Binding HeightmapManager.MissingHeightmapNames}">
                 <ItemsControl.ItemsPanel>
@@ -73,7 +74,7 @@
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
             <Button Grid.Row="2" Command="{Binding HeightmapManager.DownloadMissingHeightmapsCommand}"
-                    Content="Загрузить карты высот" Margin="{StaticResource ControlMargin}" />
+                    Content="{x:Static localization:Resources.MainWindow_LoadHeightmaps_Label}" Margin="{StaticResource ControlMargin}" />
         </Grid>
 
         <!-- Source track selector -->
@@ -85,11 +86,11 @@
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
 
-            <TextBlock Margin="{StaticResource ControlMargin}" Grid.Column="0" Text="Загрузить трек"
+            <TextBlock Margin="{StaticResource ControlMargin}" Grid.Column="0" Text="{x:Static localization:Resources.MainWindow_LoadTrackLabel}"
                        VerticalAlignment="Center" />
 
             <!-- load from file -->
-            <TextBlock Margin="{StaticResource ControlMargin}" Grid.Column="1" Text="Загрузка..."
+            <TextBlock Margin="{StaticResource ControlMargin}" Grid.Column="1" Text="{x:Static localization:Resources.MainWindow_LoadingLabel}"
                        Background="{StaticResource AccentColor}"
                        Foreground="{StaticResource BackgroundColor}"
                        view:VisibilityAux.IsVisible="{Binding IsLoading}" VerticalAlignment="Center" />
@@ -106,7 +107,7 @@
             </ComboBox>
 
             <!-- load from file -->
-            <Button Style="{StaticResource BasicButtonStyle}" Grid.Column="3" Content="Загрузить"
+            <Button Style="{StaticResource BasicButtonStyle}" Grid.Column="3" Content="{x:Static localization:Resources.MainWindow_LoadButtonTitle}"
                     Command="{Binding LoadFromFileCommand}" />
 
         </Grid>
@@ -115,7 +116,7 @@
         <TabControl Grid.Column="1" Grid.Row="1"
                     Grid.RowSpan="2">
             <TabControl.Items>
-                <TabItem Header="Маршрут">
+                <TabItem Header="{x:Static localization:Resources.MainWindow_RouteHeader}">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition />
@@ -165,10 +166,10 @@
                                 </Style>
                             </DataGrid.ColumnHeaderStyle>
                             <DataGrid.Columns>
-                                <DataGridTextColumn Header="#"
+                                <DataGridTextColumn Header="{x:Static localization:Resources.MainWindow_Route_SectionNumHeader}"
                                                     Binding="{Binding SectionNumber}"
                                                     IsReadOnly="True" Width="Auto" MinWidth="30" />
-                                <DataGridTemplateColumn Header="Участок" Width="Auto" MinWidth="120">
+                                <DataGridTemplateColumn Header="{x:Static localization:Resources.MainWindow_Route_SectionHeader}" Width="Auto" MinWidth="120">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate DataType="{x:Type vm:TrackReportItemVm}">
                                             <Grid>
@@ -205,37 +206,37 @@
                                     </DataGridTemplateColumn.CellEditingTemplate>
 
                                 </DataGridTemplateColumn>
-                                <DataGridTextColumn Header="Расстояние"
+                                <DataGridTextColumn Header="{x:Static localization:Resources.MainWindow_Route_DistanceHeader}"
                                                     Binding="{Binding DistanceMeters, Converter={StaticResource DimensionConverter}, ConverterParameter={x:Static view:Dimension.MetersToKilometersLength}}"
                                                     IsReadOnly="True" Width="Auto" />
-                                <DataGridTextColumn Header="Ходовое время"
+                                <DataGridTextColumn Header="{x:Static localization:Resources.MainWindow_Route_TimeHeader}"
                                                     Binding="{Binding LebedevHours, Converter={StaticResource DimensionConverter}, ConverterParameter={x:Static view:Dimension.TimeHours}}"
                                                     IsReadOnly="True" Width="Auto" />
-                                <DataGridTextColumn Header="Максимальная высота"
+                                <DataGridTextColumn Header="{x:Static localization:Resources.MainWindow_Route_MaxHeightHeader}"
                                                     Binding="{Binding MaxHeight, Converter={StaticResource DimensionConverter}, ConverterParameter={x:Static view:Dimension.MetersHeight}}"
                                                     IsReadOnly="True" Width="Auto" />
-                                <DataGridTextColumn Header="Высота ночевки"
+                                <DataGridTextColumn Header="{x:Static localization:Resources.MainWindow_Route_FinHeightHeader}"
                                                     Binding="{Binding SleepHeight, Converter={StaticResource DimensionConverter}, ConverterParameter={x:Static view:Dimension.MetersHeight}}"
                                                     IsReadOnly="True" Width="Auto" />
-                                <DataGridTextColumn Header="Перепад за день"
+                                <DataGridTextColumn Header="{x:Static localization:Resources.MainWindow_Route_DeltaHeightHeader}"
                                                     Binding="{Binding DeltaHeightAbsPerDay, Converter={StaticResource DimensionConverter}, ConverterParameter={x:Static view:Dimension.MetersHeight}}"
                                                     IsReadOnly="True" Width="Auto" />
-                                <DataGridTextColumn Header="Основные высоты на участке"
+                                <DataGridTextColumn Header="{x:Static localization:Resources.MainWindow_Route_NotableHeightsHeader}"
                                                     Binding="{Binding ExtremeHeights, Converter={StaticResource DimensionConverter}, ConverterParameter={x:Static view:Dimension.ExtremeHeightsList}}"
                                                     IsReadOnly="True" Width="Auto" />
-                                <DataGridTextColumn Header="Сброс за день"
+                                <DataGridTextColumn Header="{x:Static localization:Resources.MainWindow_Route_DescentHeader}"
                                                     Binding="{Binding DescentPerDay, Converter={StaticResource DimensionConverter}, ConverterParameter={x:Static view:Dimension.MetersHeight}}"
                                                     IsReadOnly="True" Width="Auto" />
-                                <DataGridTextColumn Header="Набор за день"
+                                <DataGridTextColumn Header="{x:Static localization:Resources.MainWindow_Route_AscentHeader}"
                                                     Binding="{Binding AscentPerDay, Converter={StaticResource DimensionConverter}, ConverterParameter={x:Static view:Dimension.MetersHeight}}"
                                                     IsReadOnly="True" Width="Auto" />
-                                <DataGridTextColumn Header="Вес рюкзака, М"
+                                <DataGridTextColumn Header="{x:Static localization:Resources.MainWindow_Route_BackpackWeightMHeader}"
                                                     Binding="{Binding MaleWeight, Converter={StaticResource DimensionConverter}, ConverterParameter={x:Static view:Dimension.WeightKg}}"
                                                     IsReadOnly="True" Width="Auto" />
-                                <DataGridTextColumn Header="Вес рюкзака, Ж"
+                                <DataGridTextColumn Header="{x:Static localization:Resources.MainWindow_Route_BackpackWeightFHeader}"
                                                     Binding="{Binding FemaleWeight, Converter={StaticResource DimensionConverter}, ConverterParameter={x:Static view:Dimension.WeightKg}}"
                                                     IsReadOnly="True" Width="Auto" />
-                                <DataGridTextColumn Header="Индекс FIETS"
+                                <DataGridTextColumn Header="{x:Static localization:Resources.MainWindow_Route_FietsHeader}"
                                                     Binding="{Binding FietsIndex, StringFormat={}0.0}"
                                                     IsReadOnly="True" Width="Auto" />
 
@@ -253,13 +254,14 @@
 
                         <!-- export button -->
                         <StackPanel Grid.Row="1" Orientation="Horizontal">
-                            <Button Style="{StaticResource BasicButtonStyle}" Content="Экспорт" Command="{Binding ActiveTrack.Report.ExportCommand}"/>
+                            <Button Style="{StaticResource BasicButtonStyle}" Content="{x:Static localization:Resources.MainWindow_Route_ExportLabel}" 
+                                    Command="{Binding ActiveTrack.Report.ExportCommand}"/>
                         </StackPanel>
 
                     </Grid>
 
                 </TabItem>
-                <TabItem Header="Высотный график">
+                <TabItem Header="{x:Static localization:Resources.MainWindow_HeightmapHeader}">
                     <wpf:CartesianChart Series="{Binding ActiveTrack.Report.Chart.Series}" LegendLocation="Right" >
                         <wpf:CartesianChart.AxisY>
                             <wpf:Axis LabelFormatter="{Binding ActiveTrack.Report.Chart.YFormatter}"></wpf:Axis>

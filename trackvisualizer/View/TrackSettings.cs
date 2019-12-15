@@ -96,7 +96,7 @@ namespace trackvisualizer.View
 
         public static TrackSettings TryLoadAlongsideTrack(string fileToLoad)
         {
-            fileToLoad += ".jsettings";
+            fileToLoad += @".jsettings";
 
             if (!File.Exists(fileToLoad))
             {

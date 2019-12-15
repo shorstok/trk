@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using trackvisualizer.Annotations;
 using trackvisualizer.Config;
+using trackvisualizer.Properties;
 using trackvisualizer.Service;
 using trackvisualizer.Service.HeightmapProviders;
 
@@ -95,7 +96,7 @@ namespace trackvisualizer.Vm
 
                 if (null == provider)
                 {
-                    await _uiService.NofityError("Выберите источник для загрузки");
+                    await _uiService.NofityError(Resources.HeightmapDownloaderVm_StartDownloadAsync_SelectSource);
                     return;
                 }
 
@@ -141,7 +142,7 @@ namespace trackvisualizer.Vm
         {
             if (!HeightmapProviders.Any())
             {
-                await _uiService.NofityError("Отсутствуют источники для загрузки карт высоты");
+                await _uiService.NofityError(Resources.HeightmapDownloaderVm_Initialize_ErrorNoSourcesFound);
                 return false;
             }
             

@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using trackvisualizer.Annotations;
 using trackvisualizer.Geodetic;
+using trackvisualizer.Properties;
 using trackvisualizer.Service;
 using trackvisualizer.View;
 using Point = trackvisualizer.Geodetic.Point;
@@ -35,7 +36,7 @@ namespace trackvisualizer.Vm
         }
 
         public List<Point> SourceSlicepoints { get; private set; } = new List<Point>();
-        public List<Track> SourceTracks { get; private set; }= new List<Track>();
+        public List<Track> SourceTracks { get; private set; } = new List<Track>();
 
         private readonly HeightmapManagerVm _heightmapManager;
         private readonly IUiLoggingService _loggingService;
@@ -71,7 +72,7 @@ namespace trackvisualizer.Vm
             }
         }
 
-        public ObservableCollection<string> Errors { get;} = new ObservableCollection<string>();
+        public ObservableCollection<string> Errors { get; } = new ObservableCollection<string>();
 
         public bool WptTimesValid
         {
@@ -132,7 +133,7 @@ namespace trackvisualizer.Vm
         internal void RegisterError(string error)
         {
             Errors.Add(error);
-            _loggingService.Log(error,true);
+            _loggingService.Log(error, true);
         }
 
         public async Task<bool> LoadAsync()
@@ -168,7 +169,7 @@ namespace trackvisualizer.Vm
 
             if (loadedTrack == null)
             {
-                RegisterError("Ошибка при загрузке файла!");
+                RegisterError(Resources.TrackVm_LoadTracksFromFile_GeneralErrDuringFileLoad);
                 return false;
             }
 
@@ -176,7 +177,7 @@ namespace trackvisualizer.Vm
 
             if (SourceTracks.Count == 0)
             {
-                RegisterError("Нет трека в файле!");
+                RegisterError(Resources.TrackVm_LoadTracksFromFile_TrackNotFound);
                 return false;
             }
 
@@ -186,15 +187,16 @@ namespace trackvisualizer.Vm
                 {
                     new Track
                     {
-                        Name = string.Join("*", SourceTracks.Select(t => t.Name).ToArray()),
+                        Name = string.Join(@"*", SourceTracks.Select(t => t.Name).ToArray()),
                         Segments = SourceTracks.SelectMany(t => t.Segments).ToList()
                     }
                 });
 
-                _loggingService.Log($"Склеиваю {SourceTracks.Count} треков");
+                _loggingService.Log(string.Format(Resources.TrackVm_LoadTracksFromFile_MergingTracksFormatted,
+                    SourceTracks.Count));
             }
             else
-                _loggingService.Log($"Загружен 1 трек");
+                _loggingService.Log(Resources.TrackVm_LoadTracksFromFile_SingleTrackLoaded);
 
             ActiveSeg = SourceTracks?.FirstOrDefault()?.GetWithFusedSegments()?.Segments?.FirstOrDefault();
 
@@ -206,48 +208,48 @@ namespace trackvisualizer.Vm
             var requiredSrtms = SrtmRepository.GuessAllFilenames(ptsKey);
 
             var loadedSrtmNames =
-                _srtmRepository.LoadedSrtms.Select(srt => srt.Loadname.Replace(".hgt", "")).ToList();
-            
+                _srtmRepository.LoadedSrtms.Select(srt => srt.Loadname.Replace(@".hgt", "")).ToList();
+
             //////////////////////////////////////////////////////////////////////////
             if (requiredSrtms.Except(loadedSrtmNames).Any())
             {
-                _loggingService.Log("Загрузка данных высот (SRTM)");
-                _loggingService.Log("Для трека 1 необходимы файлы ");
+                _loggingService.Log(Resources.TrackVm_LoadTracksFromFile_LoadingHeightmap);
+                _loggingService.Log(Resources.TrackVm_LoadTracksFromFile_HeightmapsRequired);
 
                 foreach (var sFile in requiredSrtms)
-                    _loggingService.Log(sFile + ".hgt");
+                    _loggingService.Log(sFile + @".hgt");
 
-                _loggingService.Log("Загрузка файлов...");
+                _loggingService.Log(Resources.TrackVm_LoadTracksFromFile_LoadingHeightmaps);
 
                 var srtmsOk = await _srtmRepository.LoadSrtmsForPoints(ptsKey);
                 var strmsFailed = requiredSrtms.Except(srtmsOk).ToList();
 
                 if (strmsFailed.Count > 0)
                 {
-                    RegisterError("На этапе загрузки SRTM не найдены следующие карты высот:");
+                    RegisterError(Resources.TrackVm_LoadTracksFromFile_ErrHeightmapsMissing);
                     foreach (var sFile in strmsFailed)
                     {
                         _heightmapManager.RegisterMissingSrtm(sFile);
-                        _loggingService.Log(sFile + ".hgt", true);
+                        _loggingService.Log(sFile + @".hgt", true);
                     }
-                    
-                    RegisterError("Их необходимо загрузить с сервера NASA или иного источника");
+
+                    RegisterError(Resources.TrackVm_LoadTracksFromFile_ErrHeightmapDownloadRequired);
                     AreHeightmapsMissing = true;
                 }
                 else
                 {
-                    _loggingService.Log("Все SRTM файлы загружены успешно!");
+                    _loggingService.Log(Resources.TrackVm_LoadTracksFromFile_AllHeightmapsLoadedOk);
                     AreHeightmapsMissing = false;
                 }
             }
 
-            _loggingService.Log("Все загружено без ошибок, всё есть!");
+            _loggingService.Log(Resources.TrackVm_LoadTracksFromFile_TrackLoadedOk);
             DeterminePointsReality();
-            
+
             return true;
         }
 
-        
+
         public bool ValidateSlicepoints(List<Point> slicepoints)
         {
             SourceSlicepoints = slicepoints;
@@ -255,11 +257,12 @@ namespace trackvisualizer.Vm
             if (SourceSlicepoints.Count < 2)
             {
                 _loggingService.Log(
-                    "В выбранном файле недостаточно точек для разбиения трека по дням! Теперь точки нужно загрузить отдельно, либо пересохранить выбранный .gpx файл уже с точками.",true);
+                    Resources.TrackVm_ValidateSlicepoints_NotEnoughSlicepoints,
+                    true);
                 return false;
             }
 
-            _loggingService.Log("Загружено " + SourceSlicepoints.Count + " точек, ок");
+            _loggingService.Log(string.Format(Resources.TrackVm_ValidateSlicepoints_FoundNSlicepointsFormatted, SourceSlicepoints.Count));
 
             return true;
         }
@@ -289,7 +292,8 @@ namespace trackvisualizer.Vm
                     TrackTimesValid = false;
                 }
 
-            var validtimePoints = SourceSlicepoints.Where(pt => pt.DateTimeGpx != null).OrderBy(pt => pt.DateTimeGpx).ToArray();
+            var validtimePoints = SourceSlicepoints.Where(pt => pt.DateTimeGpx != null).OrderBy(pt => pt.DateTimeGpx)
+                .ToArray();
 
             if (validtimePoints.Count() > 1)
             {
@@ -307,9 +311,9 @@ namespace trackvisualizer.Vm
         }
 
 
-        public bool Exists() => 
+        public bool Exists() =>
             File.Exists(SourceTrackFileName);
-        
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         [NotifyPropertyChangedInvocator]
@@ -317,7 +321,5 @@ namespace trackvisualizer.Vm
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-
-
     }
 }

@@ -6,17 +6,18 @@ using System.Threading.Tasks;
 using SharpKml.Dom;
 using SharpKml.Engine;
 using trackvisualizer.Geodetic;
+using trackvisualizer.Properties;
 using Point = trackvisualizer.Geodetic.Point;
 
 namespace trackvisualizer.Service.Middleware
 {
     public class KmlLoaderMiddleware : IGeoLoaderMiddleware
     {
-        public string Description => "KML Keyhole Markup Language";
-        public string[] Extensions => new[] {"kml", "kmz"};
+        public string Description => Resources.KmlLoaderMiddleware_Description;
+        public string[] Extensions => new[] {@"kml", @"kmz"};
         
-        public bool CanLoad(string sourceFileName) => sourceFileName.EndsWith(".kml",StringComparison.InvariantCultureIgnoreCase)||
-                                                      sourceFileName.EndsWith(".kmz",StringComparison.InvariantCultureIgnoreCase);
+        public bool CanLoad(string sourceFileName) => sourceFileName.EndsWith(@".kml",StringComparison.InvariantCultureIgnoreCase)||
+                                                      sourceFileName.EndsWith(@".kmz",StringComparison.InvariantCultureIgnoreCase);
 
         public Task<Tuple<List<Track>, List<Point>>> LoadTrackAndSlicepointsAsync(string sourceFileName, string slicepointSourceFileName)
         {
@@ -25,7 +26,7 @@ namespace trackvisualizer.Service.Middleware
             
             using (var stream = File.Open(sourceFileName,FileMode.Open))
             {
-                var root = ExtractElementFromFile(stream, sourceFileName.EndsWith("kmz"));
+                var root = ExtractElementFromFile(stream, sourceFileName.EndsWith(@"kmz"));
 
                 tracks = new List<Track>();
 
@@ -54,7 +55,7 @@ namespace trackvisualizer.Service.Middleware
             
             using (var stream = File.Open(slicepointSourceFileName,FileMode.Open))
             {
-                var root = ExtractElementFromFile(stream, slicepointSourceFileName.EndsWith("kmz"));
+                var root = ExtractElementFromFile(stream, slicepointSourceFileName.EndsWith(@"kmz"));
 
                 points = new List<Point>();
 

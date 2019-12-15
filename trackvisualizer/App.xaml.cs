@@ -23,7 +23,7 @@ namespace trackvisualizer
 
         private void App_DispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
         {
-            MessageBox.Show("Unhandled exception: " + e.Exception);
+            MessageBox.Show(@"Unhandled exception: " + e.Exception);
         }
 
 

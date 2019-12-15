@@ -4,6 +4,7 @@ using System.IO.Compression;
 using System.Linq;
 using System.Net;
 using System.Windows.Media.Imaging;
+using trackvisualizer.Properties;
 
 namespace trackvisualizer.Geodetic
 {
@@ -13,7 +14,7 @@ namespace trackvisualizer.Geodetic
 
         public static Action<string> ProgressReporter = null;
 
-        private static readonly string AsterServerAddr = "113.35.103.196";
+        private static readonly string AsterServerAddr = @"113.35.103.196";
 
         /// <summary>
         ///     point heights in meters
@@ -64,15 +65,15 @@ namespace trackvisualizer.Geodetic
 
         public static string GetTileNameForLatLon(int lat, int lon, bool zipname = true)
         {
-            var hemisphereNs = lat > 0 ? "N" : "S";
-            var hemisphereWe = lon < 0 ? "W" : "E";
+            var hemisphereNs = lat > 0 ? @"N" : @"S";
+            var hemisphereWe = lon < 0 ? @"W" : @"E";
 
             lat = Math.Abs(lat);
             lon = Math.Abs(lon);
 
-            var basename = $"ASTGTM2_{hemisphereNs}{lat:00}{hemisphereWe}{lon:000}";
+            var basename = $@"ASTGTM2_{hemisphereNs}{lat:00}{hemisphereWe}{lon:000}";
 
-            return zipname ? $"{basename}.zip" : $"{basename}_dem.tif";
+            return zipname ? $@"{basename}.zip" : $@"{basename}_dem.tif";
         }
 
         private static void _rep_progress(string x)
@@ -95,19 +96,19 @@ namespace trackvisualizer.Geodetic
 
                 if (File.Exists(tiffFilename))
                 {
-                    _rep_progress($"Найден файл {tiffFilename}, использую как уже загруженный GEOTIFF");
+                    _rep_progress(string.Format(Resources.AsterTileLocal_DownloadAndUnpack_UsingExistingGeotiffFormatted, tiffFilename));
 
                     return FromFile(tiffFilename, new Point(latDeg, lonDeg));
                 }
 
-                _rep_progress($"Соединение с сервером ASTER ({AsterServerAddr})...");
+                _rep_progress(string.Format(Resources.AsterTileLocal_DownloadAndUnpack_ConnectingToAsterServer, AsterServerAddr));
 
                 var stream = GetAsterTileStream(latDeg, lonDeg, out var contentLen);
 
                 if (stream == null)
                     return null;
 
-                var temporaryZipFileName = Path.GetTempFileName().Replace(".", "_") + ".zip";
+                var temporaryZipFileName = Path.GetTempFileName().Replace(@".", @"_") + @".zip";
 
                 var outputStream = File.OpenWrite(temporaryZipFileName);
 
@@ -124,19 +125,19 @@ namespace trackvisualizer.Geodetic
                     outputStream.Write(buffer, 0, nread);
 
                     i += nread;
-                    _rep_progress($"Загрузка тайла {i / 1024} кБ / {contentLen / 1024} кБ");
+                    _rep_progress(string.Format(Resources.AsterTileLocal_DownloadAndUnpack_LoadingTileFormatted, i / 1024, contentLen / 1024));
                 }
 
                 outputStream.Close();
 
-                _rep_progress("Распаковка...");
+                _rep_progress(Resources.AsterTileLocal_DownloadAndUnpack_UnpackingFormatted);
 
                 using (var archive = ZipFile.OpenRead(temporaryZipFileName))
                 {
                     foreach (var entry in archive.Entries)
                     {
-                        if (!entry.FullName.EndsWith(".tif", StringComparison.OrdinalIgnoreCase) ||
-                            entry.FullName.IndexOf("_dem", StringComparison.Ordinal) == -1)
+                        if (!entry.FullName.EndsWith(@".tif", StringComparison.OrdinalIgnoreCase) ||
+                            entry.FullName.IndexOf(@"_dem", StringComparison.Ordinal) == -1)
                             continue;
 
                         tiffFilename = Path.Combine(basedir, Path.GetFileName(entry.FullName));
@@ -145,7 +146,7 @@ namespace trackvisualizer.Geodetic
                     }
                 }
 
-                _rep_progress("Готово");
+                _rep_progress(Resources.AsterTileLocal_DownloadAndUnpack_Ready);
             }
             catch (Exception)
             {
@@ -190,7 +191,7 @@ namespace trackvisualizer.Geodetic
         public void SaveAsHgt(string dir)
         {
             var srtmFilenameConv =
-                $"{(PtSouthwest.Lat > 0 ? "N" : "S")}{(int) PtSouthwest.Lat:00}{(PtSouthwest.Lon > 0 ? "E" : "W")}{(int) PtSouthwest.Lon:000}.hgt";
+                $@"{(PtSouthwest.Lat > 0 ? @"N" : @"S")}{(int) PtSouthwest.Lat:00}{(PtSouthwest.Lon > 0 ? @"E" : @"W")}{(int) PtSouthwest.Lon:000}.hgt";
 
             using (var fs = File.OpenWrite(Path.Combine(dir, srtmFilenameConv)))
             {

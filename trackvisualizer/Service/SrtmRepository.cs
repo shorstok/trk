@@ -41,7 +41,7 @@ namespace trackvisualizer.Service
 
             foreach (var fn in fnames)
             {
-                var srtm = await Srtm.FromFileAsync(fn + ".hgt");
+                var srtm = await Srtm.FromFileAsync(fn + @".hgt");
 
                 if (srtm == null) 
                     continue;

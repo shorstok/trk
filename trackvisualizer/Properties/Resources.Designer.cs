@@ -19,10 +19,10 @@ namespace trackvisualizer.Properties {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Resources {
+    public class Resources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -36,7 +36,7 @@ namespace trackvisualizer.Properties {
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("trackvisualizer.Properties.Resources", typeof(Resources).Assembly);
@@ -51,12 +51,819 @@ namespace trackvisualizer.Properties {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
             set {
                 resourceCulture = value;
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Соединение с сервером ASTER ({0})....
+        /// </summary>
+        public static string AsterTileLocal_DownloadAndUnpack_ConnectingToAsterServer {
+            get {
+                return ResourceManager.GetString("AsterTileLocal_DownloadAndUnpack_ConnectingToAsterServer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Загрузка тайла {0} кБ / {1} кБ.
+        /// </summary>
+        public static string AsterTileLocal_DownloadAndUnpack_LoadingTileFormatted {
+            get {
+                return ResourceManager.GetString("AsterTileLocal_DownloadAndUnpack_LoadingTileFormatted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Готово.
+        /// </summary>
+        public static string AsterTileLocal_DownloadAndUnpack_Ready {
+            get {
+                return ResourceManager.GetString("AsterTileLocal_DownloadAndUnpack_Ready", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Распаковка....
+        /// </summary>
+        public static string AsterTileLocal_DownloadAndUnpack_UnpackingFormatted {
+            get {
+                return ResourceManager.GetString("AsterTileLocal_DownloadAndUnpack_UnpackingFormatted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Найден файл {0}, использую как уже загруженный GEOTIFF.
+        /// </summary>
+        public static string AsterTileLocal_DownloadAndUnpack_UsingExistingGeotiffFormatted {
+            get {
+                return ResourceManager.GetString("AsterTileLocal_DownloadAndUnpack_UsingExistingGeotiffFormatted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to GPX Gps Exchange format.
+        /// </summary>
+        public static string GpxLoaderMiddleware_Description {
+            get {
+                return ResourceManager.GetString("GpxLoaderMiddleware_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Отсутствуют источники для загрузки карт высоты.
+        /// </summary>
+        public static string HeightmapDownloaderVm_Initialize_ErrorNoSourcesFound {
+            get {
+                return ResourceManager.GetString("HeightmapDownloaderVm_Initialize_ErrorNoSourcesFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Выберите источник для загрузки.
+        /// </summary>
+        public static string HeightmapDownloaderVm_StartDownloadAsync_SelectSource {
+            get {
+                return ResourceManager.GetString("HeightmapDownloaderVm_StartDownloadAsync_SelectSource", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Отчет на базе трека {0}.
+        /// </summary>
+        public static string HtmlReportExporter_BuildHtml_ReportTitleTemplateFormatted {
+            get {
+                return ResourceManager.GetString("HtmlReportExporter_BuildHtml_ReportTitleTemplateFormatted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to HTML.
+        /// </summary>
+        public static string HtmlReportExporter_Description {
+            get {
+                return ResourceManager.GetString("HtmlReportExporter_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Набор, м.
+        /// </summary>
+        public static string HtmlReportExporter_Export_AscentHeader {
+            get {
+                return ResourceManager.GetString("HtmlReportExporter_Export_AscentHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Сброс, м.
+        /// </summary>
+        public static string HtmlReportExporter_Export_DescentHeader {
+            get {
+                return ResourceManager.GetString("HtmlReportExporter_Export_DescentHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Максимальная высота.
+        /// </summary>
+        public static string HtmlReportExporter_Export_MaxHeightHeader {
+            get {
+                return ResourceManager.GetString("HtmlReportExporter_Export_MaxHeightHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Расстояние, км.
+        /// </summary>
+        public static string HtmlReportExporter_Export_SectionDistanceHeader {
+            get {
+                return ResourceManager.GetString("HtmlReportExporter_Export_SectionDistanceHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Участок.
+        /// </summary>
+        public static string HtmlReportExporter_Export_SectionNameHeader {
+            get {
+                return ResourceManager.GetString("HtmlReportExporter_Export_SectionNameHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to #.
+        /// </summary>
+        public static string HtmlReportExporter_Export_SectionNumHeader {
+            get {
+                return ResourceManager.GetString("HtmlReportExporter_Export_SectionNumHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Всего за поход.
+        /// </summary>
+        public static string HtmlReportExporter_Export_TotalsRowLabel {
+            get {
+                return ResourceManager.GetString("HtmlReportExporter_Export_TotalsRowLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ходовое время.
+        /// </summary>
+        public static string HtmlReportExporter_Export_TravelTimeHeader {
+            get {
+                return ResourceManager.GetString("HtmlReportExporter_Export_TravelTimeHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to KML Keyhole Markup Language.
+        /// </summary>
+        public static string KmlLoaderMiddleware_Description {
+            get {
+                return ResourceManager.GetString("KmlLoaderMiddleware_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Высотный график.
+        /// </summary>
+        public static string MainWindow_HeightmapHeader {
+            get {
+                return ResourceManager.GetString("MainWindow_HeightmapHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Открыть файл с треком.
+        /// </summary>
+        public static string MainWindow_LoadButtonTitle {
+            get {
+                return ResourceManager.GetString("MainWindow_LoadButtonTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Загрузить карты высот.
+        /// </summary>
+        public static string MainWindow_LoadHeightmaps_Label {
+            get {
+                return ResourceManager.GetString("MainWindow_LoadHeightmaps_Label", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Загрузка....
+        /// </summary>
+        public static string MainWindow_LoadingLabel {
+            get {
+                return ResourceManager.GetString("MainWindow_LoadingLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Загрузить трек.
+        /// </summary>
+        public static string MainWindow_LoadTrackLabel {
+            get {
+                return ResourceManager.GetString("MainWindow_LoadTrackLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Набор за день.
+        /// </summary>
+        public static string MainWindow_Route_AscentHeader {
+            get {
+                return ResourceManager.GetString("MainWindow_Route_AscentHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Вес рюкзака, Ж.
+        /// </summary>
+        public static string MainWindow_Route_BackpackWeightFHeader {
+            get {
+                return ResourceManager.GetString("MainWindow_Route_BackpackWeightFHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Вес рюкзака, М.
+        /// </summary>
+        public static string MainWindow_Route_BackpackWeightMHeader {
+            get {
+                return ResourceManager.GetString("MainWindow_Route_BackpackWeightMHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Перепад за день.
+        /// </summary>
+        public static string MainWindow_Route_DeltaHeightHeader {
+            get {
+                return ResourceManager.GetString("MainWindow_Route_DeltaHeightHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Сброс за день.
+        /// </summary>
+        public static string MainWindow_Route_DescentHeader {
+            get {
+                return ResourceManager.GetString("MainWindow_Route_DescentHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Расстояние.
+        /// </summary>
+        public static string MainWindow_Route_DistanceHeader {
+            get {
+                return ResourceManager.GetString("MainWindow_Route_DistanceHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Экспорт.
+        /// </summary>
+        public static string MainWindow_Route_ExportLabel {
+            get {
+                return ResourceManager.GetString("MainWindow_Route_ExportLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Индекс FIETS.
+        /// </summary>
+        public static string MainWindow_Route_FietsHeader {
+            get {
+                return ResourceManager.GetString("MainWindow_Route_FietsHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Высота ночевки.
+        /// </summary>
+        public static string MainWindow_Route_FinHeightHeader {
+            get {
+                return ResourceManager.GetString("MainWindow_Route_FinHeightHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Отсутствуют карты высот.
+        /// </summary>
+        public static string MainWindow_Route_HeightmapsMissingLabel {
+            get {
+                return ResourceManager.GetString("MainWindow_Route_HeightmapsMissingLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Максимальная высота.
+        /// </summary>
+        public static string MainWindow_Route_MaxHeightHeader {
+            get {
+                return ResourceManager.GetString("MainWindow_Route_MaxHeightHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Основные высоты на участке.
+        /// </summary>
+        public static string MainWindow_Route_NotableHeightsHeader {
+            get {
+                return ResourceManager.GetString("MainWindow_Route_NotableHeightsHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Участок.
+        /// </summary>
+        public static string MainWindow_Route_SectionHeader {
+            get {
+                return ResourceManager.GetString("MainWindow_Route_SectionHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to #.
+        /// </summary>
+        public static string MainWindow_Route_SectionNumHeader {
+            get {
+                return ResourceManager.GetString("MainWindow_Route_SectionNumHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ходовое время.
+        /// </summary>
+        public static string MainWindow_Route_TimeHeader {
+            get {
+                return ResourceManager.GetString("MainWindow_Route_TimeHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Маршрут.
+        /// </summary>
+        public static string MainWindow_RouteHeader {
+            get {
+                return ResourceManager.GetString("MainWindow_RouteHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Работа с треком.
+        /// </summary>
+        public static string MainWindow_Title {
+            get {
+                return ResourceManager.GetString("MainWindow_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SRTM.
+        /// </summary>
+        public static string SrtmFileDownloadHeightmapProvider_Description {
+            get {
+                return ResourceManager.GetString("SrtmFileDownloadHeightmapProvider_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0}.hgt, подчистка лакун... .
+        /// </summary>
+        public static string SrtmFileDownloadHeightmapProvider_DownloadHeightmap_CleanupActionFormatted {
+            get {
+                return ResourceManager.GetString("SrtmFileDownloadHeightmapProvider_DownloadHeightmap_CleanupActionFormatted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Загрузка {0}....
+        /// </summary>
+        public static string SrtmFileDownloadHeightmapProvider_DownloadHeightmap_DownloadingFormatted {
+            get {
+                return ResourceManager.GetString("SrtmFileDownloadHeightmapProvider_DownloadHeightmap_DownloadingFormatted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 🔘 SRTM-файлов для этого района нет на севрере.
+        /// </summary>
+        public static string SrtmFileDownloadHeightmapProvider_DownloadHeightmap_E404NoSrtmOnServer {
+            get {
+                return ResourceManager.GetString("SrtmFileDownloadHeightmapProvider_DownloadHeightmap_E404NoSrtmOnServer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 🔘 Неверно прописан адрес сервера в окне загрузчика.
+        /// </summary>
+        public static string SrtmFileDownloadHeightmapProvider_DownloadHeightmap_E404ServerAddrInvalid {
+            get {
+                return ResourceManager.GetString("SrtmFileDownloadHeightmapProvider_DownloadHeightmap_E404ServerAddrInvalid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 🔘 Адрес устарел и нужно искать следующий.
+        /// </summary>
+        public static string SrtmFileDownloadHeightmapProvider_DownloadHeightmap_E404ServerAddrObsolete {
+            get {
+                return ResourceManager.GetString("SrtmFileDownloadHeightmapProvider_DownloadHeightmap_E404ServerAddrObsolete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Удаленный сервер вернул 404 (не найден). Причины могут быть следующие:.
+        /// </summary>
+        public static string SrtmFileDownloadHeightmapProvider_DownloadHeightmap_Error404Reasons {
+            get {
+                return ResourceManager.GetString("SrtmFileDownloadHeightmapProvider_DownloadHeightmap_Error404Reasons", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} - файл .hgt не найден в архиве, что-то не так.
+        /// </summary>
+        public static string SrtmFileDownloadHeightmapProvider_DownloadHeightmap_ErrorNoHgtFileInArchive {
+            get {
+                return ResourceManager.GetString("SrtmFileDownloadHeightmapProvider_DownloadHeightmap_ErrorNoHgtFileInArchive", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} готов. .
+        /// </summary>
+        public static string SrtmFileDownloadHeightmapProvider_DownloadHeightmap_HeightmapReadyFormatted {
+            get {
+                return ResourceManager.GetString("SrtmFileDownloadHeightmapProvider_DownloadHeightmap_HeightmapReadyFormatted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Загрузка {0:0.0} КБ....
+        /// </summary>
+        public static string SrtmFileDownloadHeightmapProvider_DownloadHeightmap_LoadProgressFormatted {
+            get {
+                return ResourceManager.GetString("SrtmFileDownloadHeightmapProvider_DownloadHeightmap_LoadProgressFormatted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Не найдена програма коррекции высот `{0}`.
+        /// </summary>
+        public static string SrtmFileDownloadHeightmapProvider_DownloadHeightmap_SrtmInterpNotFound {
+            get {
+                return ResourceManager.GetString("SrtmFileDownloadHeightmapProvider_DownloadHeightmap_SrtmInterpNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ошибка при распаковке: `{0}`! Файл {1} загружен, но вам придётся распаковать его вручную. .
+        /// </summary>
+        public static string SrtmFileDownloadHeightmapProvider_DownloadHeightmap_UnpackingErrorFormatted_ManualActionRequired {
+            get {
+                return ResourceManager.GetString("SrtmFileDownloadHeightmapProvider_DownloadHeightmap_UnpackingErrorFormatted_Manua" +
+                        "lActionRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Распаковка {0}.
+        /// </summary>
+        public static string SrtmFileDownloadHeightmapProvider_DownloadHeightmap_UnpackingFormatted {
+            get {
+                return ResourceManager.GetString("SrtmFileDownloadHeightmapProvider_DownloadHeightmap_UnpackingFormatted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ошибка: .
+        /// </summary>
+        public static string SrtmFileDownloadHeightmapProvider_ExecuteCommandAsync_ErrorGeneral {
+            get {
+                return ResourceManager.GetString("SrtmFileDownloadHeightmapProvider_ExecuteCommandAsync_ErrorGeneral", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Finish {0:0.} Км.
+        /// </summary>
+        public static string TrackChartVm_GetSectionLabel_FinishFormatted {
+            get {
+                return ResourceManager.GetString("TrackChartVm_GetSectionLabel_FinishFormatted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Высота.
+        /// </summary>
+        public static string TrackChartVm_TrackChartVm_HeightSeriesTitle {
+            get {
+                return ResourceManager.GetString("TrackChartVm_TrackChartVm_HeightSeriesTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Участок.
+        /// </summary>
+        public static string TrackChartVm_TrackChartVm_SectionSeriesTitle {
+            get {
+                return ResourceManager.GetString("TrackChartVm_TrackChartVm_SectionSeriesTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0:0.} Км.
+        /// </summary>
+        public static string TrackChartVm_XFormatter_ChartSubscriptLengthFormatted {
+            get {
+                return ResourceManager.GetString("TrackChartVm_XFormatter_ChartSubscriptLengthFormatted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0:0.} м.
+        /// </summary>
+        public static string TrackChartVm_YFormatter_ChartSubscriptHeightFormatted {
+            get {
+                return ResourceManager.GetString("TrackChartVm_YFormatter_ChartSubscriptHeightFormatted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No loader middleware!.
+        /// </summary>
+        public static string TrackManagerVm_LoadTrackFromFileAsync_No_loader_middleware {
+            get {
+                return ResourceManager.GetString("TrackManagerVm_LoadTrackFromFileAsync_No_loader_middleware", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to завозим заброску до начала маршрута.
+        /// </summary>
+        public static string TrackReportItemVm_Comment_DropBeforeStart {
+            get {
+                return ResourceManager.GetString("TrackReportItemVm_Comment_DropBeforeStart", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to оставляем заброску.
+        /// </summary>
+        public static string TrackReportItemVm_Comment_LeavingDrop {
+            get {
+                return ResourceManager.GetString("TrackReportItemVm_Comment_LeavingDrop", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to забираем заброску.
+        /// </summary>
+        public static string TrackReportItemVm_Comment_PickingDrop {
+            get {
+                return ResourceManager.GetString("TrackReportItemVm_Comment_PickingDrop", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to F.
+        /// </summary>
+        public static string TrackReportItemVm_NextSectionName_StubFinishName {
+            get {
+                return ResourceManager.GetString("TrackReportItemVm_NextSectionName_StubFinishName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to S.
+        /// </summary>
+        public static string TrackReportItemVm_SectionStartName_StubStartName {
+            get {
+                return ResourceManager.GetString("TrackReportItemVm_SectionStartName_StubStartName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Расчет перепадов.
+        /// </summary>
+        public static string TrackReportVm_CreateReportAsync_DeltaCalculation {
+            get {
+                return ResourceManager.GetString("TrackReportVm_CreateReportAsync_DeltaCalculation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to В файле высот &lt;{0}&gt; обнаружены неверные значения.
+        ///Запустите из командной строки
+        ///
+        ///srtm_interp {1}
+        ///
+        ///иначе все расчеты, зависящие от высоты, будут совершенно бредовыми!.
+        /// </summary>
+        public static string TrackReportVm_CreateReportAsync_ErrHeightmapInvalid {
+            get {
+                return ResourceManager.GetString("TrackReportVm_CreateReportAsync_ErrHeightmapInvalid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Расчет прекращен из-за отсутствия карты высот.
+        /// </summary>
+        public static string TrackReportVm_CreateReportAsync_ErrNoHeightmap {
+            get {
+                return ResourceManager.GetString("TrackReportVm_CreateReportAsync_ErrNoHeightmap", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Недостаточно точек в треке.
+        /// </summary>
+        public static string TrackReportVm_CreateReportAsync_ErrNoPointsInTrack {
+            get {
+                return ResourceManager.GetString("TrackReportVm_CreateReportAsync_ErrNoPointsInTrack", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Недостаточно точек разбиения на дни.
+        /// </summary>
+        public static string TrackReportVm_CreateReportAsync_ErrNotEnoughPoints {
+            get {
+                return ResourceManager.GetString("TrackReportVm_CreateReportAsync_ErrNotEnoughPoints", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Не загружен трек.
+        /// </summary>
+        public static string TrackReportVm_CreateReportAsync_ErrNoTrack {
+            get {
+                return ResourceManager.GetString("TrackReportVm_CreateReportAsync_ErrNoTrack", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Разбивка пуста! Невозможно распилить трек на дни..
+        /// </summary>
+        public static string TrackReportVm_CreateReportAsync_ErrSplitEmptyCantContinue {
+            get {
+                return ResourceManager.GetString("TrackReportVm_CreateReportAsync_ErrSplitEmptyCantContinue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Уточнение разбивки.
+        /// </summary>
+        public static string TrackReportVm_CreateReportAsync_RefiningSplit {
+            get {
+                return ResourceManager.GetString("TrackReportVm_CreateReportAsync_RefiningSplit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Разбиение трека на дни.
+        /// </summary>
+        public static string TrackReportVm_CreateReportAsync_SplittingTrack {
+            get {
+                return ResourceManager.GetString("TrackReportVm_CreateReportAsync_SplittingTrack", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Report exporter with ID {0} unknown.
+        /// </summary>
+        public static string TrackReportVm_ExportReportAsync_Err_Report_exporter_with_ID__0__unknown {
+            get {
+                return ResourceManager.GetString("TrackReportVm_ExportReportAsync_Err_Report_exporter_with_ID__0__unknown", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Все SRTM файлы загружены успешно!.
+        /// </summary>
+        public static string TrackVm_LoadTracksFromFile_AllHeightmapsLoadedOk {
+            get {
+                return ResourceManager.GetString("TrackVm_LoadTracksFromFile_AllHeightmapsLoadedOk", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Их необходимо загрузить с сервера NASA или иного источника.
+        /// </summary>
+        public static string TrackVm_LoadTracksFromFile_ErrHeightmapDownloadRequired {
+            get {
+                return ResourceManager.GetString("TrackVm_LoadTracksFromFile_ErrHeightmapDownloadRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to На этапе загрузки SRTM не найдены следующие карты высот:.
+        /// </summary>
+        public static string TrackVm_LoadTracksFromFile_ErrHeightmapsMissing {
+            get {
+                return ResourceManager.GetString("TrackVm_LoadTracksFromFile_ErrHeightmapsMissing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ошибка при загрузке файла!.
+        /// </summary>
+        public static string TrackVm_LoadTracksFromFile_GeneralErrDuringFileLoad {
+            get {
+                return ResourceManager.GetString("TrackVm_LoadTracksFromFile_GeneralErrDuringFileLoad", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Для трека 1 необходимы файлы .
+        /// </summary>
+        public static string TrackVm_LoadTracksFromFile_HeightmapsRequired {
+            get {
+                return ResourceManager.GetString("TrackVm_LoadTracksFromFile_HeightmapsRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Загрузка данных высот (SRTM).
+        /// </summary>
+        public static string TrackVm_LoadTracksFromFile_LoadingHeightmap {
+            get {
+                return ResourceManager.GetString("TrackVm_LoadTracksFromFile_LoadingHeightmap", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Загрузка файлов....
+        /// </summary>
+        public static string TrackVm_LoadTracksFromFile_LoadingHeightmaps {
+            get {
+                return ResourceManager.GetString("TrackVm_LoadTracksFromFile_LoadingHeightmaps", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Склеиваю {0} треков.
+        /// </summary>
+        public static string TrackVm_LoadTracksFromFile_MergingTracksFormatted {
+            get {
+                return ResourceManager.GetString("TrackVm_LoadTracksFromFile_MergingTracksFormatted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Загружен 1 трек.
+        /// </summary>
+        public static string TrackVm_LoadTracksFromFile_SingleTrackLoaded {
+            get {
+                return ResourceManager.GetString("TrackVm_LoadTracksFromFile_SingleTrackLoaded", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Загрузка трека завершена успено.
+        /// </summary>
+        public static string TrackVm_LoadTracksFromFile_TrackLoadedOk {
+            get {
+                return ResourceManager.GetString("TrackVm_LoadTracksFromFile_TrackLoadedOk", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Нет трека в файле!.
+        /// </summary>
+        public static string TrackVm_LoadTracksFromFile_TrackNotFound {
+            get {
+                return ResourceManager.GetString("TrackVm_LoadTracksFromFile_TrackNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Загружено {0} точек.
+        /// </summary>
+        public static string TrackVm_ValidateSlicepoints_FoundNSlicepointsFormatted {
+            get {
+                return ResourceManager.GetString("TrackVm_ValidateSlicepoints_FoundNSlicepointsFormatted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to В выбранном файле недостаточно точек для разбиения трека по дням! Теперь точки нужно загрузить отдельно, либо пересохранить выбранный .gpx файл уже с точками..
+        /// </summary>
+        public static string TrackVm_ValidateSlicepoints_NotEnoughSlicepoints {
+            get {
+                return ResourceManager.GetString("TrackVm_ValidateSlicepoints_NotEnoughSlicepoints", resourceCulture);
             }
         }
     }

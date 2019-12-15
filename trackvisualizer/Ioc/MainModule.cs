@@ -31,7 +31,7 @@ namespace trackvisualizer.Ioc
                 var vmCtor = constructorBindings.Where(binding=>binding.CanInstantiate).OrderByDescending(binding => binding.TargetConstructor.GetParameters().Length).FirstOrDefault();
 
                 if(null == vmCtor || vmCtor.TargetConstructor.GetParameters().Length == 0)
-                    throw new InvalidOperationException("Only default ctor for VM available");
+                    throw new InvalidOperationException(@"Only default ctor for VM available");
 
                 return vmCtor;
             }

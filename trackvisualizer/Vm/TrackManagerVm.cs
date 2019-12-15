@@ -12,6 +12,7 @@ using System.Windows.Input;
 using Microsoft.Win32;
 using trackvisualizer.Annotations;
 using trackvisualizer.Config;
+using trackvisualizer.Properties;
 using trackvisualizer.Service;
 
 namespace trackvisualizer.Vm
@@ -102,18 +103,18 @@ namespace trackvisualizer.Vm
 
             if (availableFormats.Length == 0)
             {
-                Logging.LogError("No loader middleware!");
+                Logging.LogError(Resources.TrackManagerVm_LoadTrackFromFileAsync_No_loader_middleware);
                 return;
             }
 
             var openFileDialog = new OpenFileDialog
             {
-                DefaultExt = "."+availableFormats.FirstOrDefault()?.Item2.FirstOrDefault(),
-                Filter =string.Join("|",
+                DefaultExt = @"."+availableFormats.FirstOrDefault()?.Item2.FirstOrDefault(),
+                Filter =string.Join(@"|",
                     availableFormats.Select(
                         tuple => 
-                            tuple.Item1+"|"+string.Join(";",
-                                tuple.Item2.Select(i2=>"*."+i2))))
+                            tuple.Item1+@"|"+string.Join(@";",
+                                tuple.Item2.Select(i2=>@"*."+i2))))
             };
 
             if (openFileDialog.ShowDialog() != true)

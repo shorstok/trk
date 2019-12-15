@@ -11,6 +11,7 @@ using LiveCharts;
 using LiveCharts.Defaults;
 using LiveCharts.Wpf;
 using trackvisualizer.Annotations;
+using trackvisualizer.Properties;
 
 namespace trackvisualizer.Vm
 {
@@ -37,8 +38,8 @@ namespace trackvisualizer.Vm
 
         private SolidColorBrush GraphBrushAlternate = new SolidColorBrush(Color.FromArgb(255, 255, 235, 0));
 
-        public Func<double, string> YFormatter { get; } = value => $"{value:0.} м";
-        public Func<double, string> XFormatter { get; } = value => $"{value:0.} Км";
+        public Func<double, string> YFormatter { get; } = value => string.Format(Resources.TrackChartVm_YFormatter_ChartSubscriptHeightFormatted, value);
+        public Func<double, string> XFormatter { get; } = value => string.Format(Resources.TrackChartVm_XFormatter_ChartSubscriptLengthFormatted, value);
 
         public TrackChartVm(TrackReportVm source)
         {
@@ -54,7 +55,7 @@ namespace trackvisualizer.Vm
             {
                 new LineSeries
                 {
-                    Title = "Высота",
+                    Title = Resources.TrackChartVm_TrackChartVm_HeightSeriesTitle,
                     Values = HeightPoints,
                     PointGeometry = null,                                    
                     Stroke = GraphBrush,
@@ -62,7 +63,7 @@ namespace trackvisualizer.Vm
                 },
                 new ScatterSeries
                 {
-                    Title = "Участок",
+                    Title = Resources.TrackChartVm_TrackChartVm_SectionSeriesTitle,
                     Values = SectionPoints,
                     LabelPoint = GetSectionLabel,
                     Stroke = GraphBrush,                                        
@@ -83,7 +84,7 @@ namespace trackvisualizer.Vm
             return _sectionNamesLookup.TryGetValue(chartPoint.Key,
                 out var label)
                 ? label
-                : $"Finish {chartPoint.X:0.} Км";
+                : string.Format(Resources.TrackChartVm_GetSectionLabel_FinishFormatted, chartPoint.X);
         }
 
         private void OnSourceUpdate(object sender, PropertyChangedEventArgs propertyChangedEventArgs)

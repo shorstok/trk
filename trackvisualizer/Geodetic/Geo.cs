@@ -9,8 +9,8 @@ namespace trackvisualizer.Geodetic
 {
     public static class Geo
     {
-        private static readonly string DecimalSeparator = ".";
-        private static readonly string NotDecimalSeparator = ",";
+        private static readonly string DecimalSeparator = @".";
+        private static readonly string NotDecimalSeparator = @",";
 
         // from http://en.wikipedia.org/wiki/Earth_radius [16/12/2009 LysakA]
         // it seems like Ozi is using the same values
@@ -24,7 +24,7 @@ namespace trackvisualizer.Geodetic
         static Geo()
         {
             DecimalSeparator = CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator;
-            NotDecimalSeparator = CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator == "," ? "." : ",";
+            NotDecimalSeparator = CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator == "," ? @"." : @",";
         }
 
         /// <summary>

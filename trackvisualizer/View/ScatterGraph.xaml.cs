@@ -173,7 +173,7 @@ namespace trackvisualizer.View
                 var tb = new TextBlock
                 {
                     Margin = new Thickness(x - matchWidth / 2, 3, 3, 0),
-                    Text = (kmCounter / 1e3).ToString("0."),
+                    Text = (kmCounter / 1e3).ToString(@"0."),
                     Width = matchWidth,
                     TextAlignment = TextAlignment.Center,
                     HorizontalAlignment = HorizontalAlignment.Left,
@@ -221,7 +221,7 @@ namespace trackvisualizer.View
                 var tb = new TextBlock
                 {
                     Margin = new Thickness(0, y - kernH / 2, 3, 0),
-                    Text = startH.ToString("0."),
+                    Text = startH.ToString(@"0."),
                     HorizontalAlignment = HorizontalAlignment.Right,
                     Foreground = isMajorHeight ? Brushes.Black : Brushes.DarkGray,
                     FontSize = kernH

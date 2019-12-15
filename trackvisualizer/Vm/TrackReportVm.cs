@@ -13,6 +13,7 @@ using LiveCharts.Wpf.Charts.Base;
 using trackvisualizer.Annotations;
 using trackvisualizer.Config;
 using trackvisualizer.Geodetic;
+using trackvisualizer.Properties;
 using trackvisualizer.Service;
 using trackvisualizer.Service.ReportExporters;
 using Point = trackvisualizer.Geodetic.Point;
@@ -109,7 +110,7 @@ namespace trackvisualizer.Vm
 
             if (null == exporter)
             {
-                await _uiService.NofityError($"Report exporter with ID {exporterId} unknown");
+                await _uiService.NofityError(string.Format(Resources.TrackReportVm_ExportReportAsync_Err_Report_exporter_with_ID__0__unknown, exporterId));
                 return;
             }
 
@@ -117,6 +118,7 @@ namespace trackvisualizer.Vm
         }
 
 
+        [Localizable(false)]
         private List<Point> FilterSlicepts()
         {
             var filteredSlicepoints = (from Point pt in Source.SourceSlicepoints
@@ -156,19 +158,19 @@ namespace trackvisualizer.Vm
 
             if (Source.AreHeightmapsMissing)
             {
-                Source.RegisterError("Расчет прекращен из-за отсутствия карты высот");
+                Source.RegisterError(Resources.TrackReportVm_CreateReportAsync_ErrNoHeightmap);
                 return false;
             }
 
             if (activeSegPts == null)
             {
-                Source.RegisterError("Не загружен трек");
+                Source.RegisterError(Resources.TrackReportVm_CreateReportAsync_ErrNoTrack);
                 return false;
             }
             
             if (activeSegPts.Count < 2)
             {
-                Source.RegisterError("Недостаточно точек в треке");
+                Source.RegisterError(Resources.TrackReportVm_CreateReportAsync_ErrNoPointsInTrack);
                 return false;
             }
 
@@ -176,14 +178,14 @@ namespace trackvisualizer.Vm
 
             if (points.Count < 2)
             {
-                Source.RegisterError("Недостаточно точек разбиения на дни");
+                Source.RegisterError(Resources.TrackReportVm_CreateReportAsync_ErrNotEnoughPoints);
                 return false;
             }
 
             // everything is ok, can calculate [17/12/2009 LysakA]
             _slicesCalc = new List<TrackSeg.Slice>();
 
-            _loggingService.Log("Разбиение трека на дни");
+            _loggingService.Log(Resources.TrackReportVm_CreateReportAsync_SplittingTrack);
            
             foreach (var pt in points)
             {
@@ -208,11 +210,11 @@ namespace trackvisualizer.Vm
 
             if (!_slicesCalc.Any())
             {
-                _loggingService.LogError("Разбивка пуста! Невозможно распилить трек на дни.");
+                _loggingService.LogError(Resources.TrackReportVm_CreateReportAsync_ErrSplitEmptyCantContinue);
                 return false;
             }
 
-            _loggingService.Log("Уточнение разбивки");
+            _loggingService.Log(Resources.TrackReportVm_CreateReportAsync_RefiningSplit);
             // shift start & end to track start & end [18/12/2009 LysakA]
             if (Geo.DistanceExactMeters(_slicesCalc.First().SlicePoint, activeSegPts.First()) <
                 StartEndCapDistance)
@@ -231,7 +233,7 @@ namespace trackvisualizer.Vm
                 }); //Last -- Finish
 
 
-            _loggingService.Log("Расчет перепадов");
+            _loggingService.Log(Resources.TrackReportVm_CreateReportAsync_DeltaCalculation);
 
             for (var npoint = 0; npoint != _slicesCalc.Count - 1; ++npoint)
             {
@@ -249,10 +251,8 @@ namespace trackvisualizer.Vm
             // check for bad heights; [22/12/2009 LysakA]
             foreach (var s in _srtmRepository.LoadedSrtms)
                 if (s.BadValuesDetected)
-                    _loggingService.LogError("В файле высот <" + s.Loadname +
-                                     "> обнаружены неверные значения.\nЗапустите из командной строки\n\nsrtm_interp " +
-                                     s.Loadname +
-                                     "\n\nиначе все расчеты, зависящие от высоты, будут совершенно бредовыми!");
+                    _loggingService.LogError(
+                        string.Format(Resources.TrackReportVm_CreateReportAsync_ErrHeightmapInvalid, s.Loadname, s.Loadname));
 
             Totals.Recalculate();
 
