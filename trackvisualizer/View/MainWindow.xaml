@@ -6,6 +6,7 @@
         xmlns:vm="clr-namespace:trackvisualizer.Vm"
         xmlns:view="clr-namespace:trackvisualizer.View"
         xmlns:system="clr-namespace:System;assembly=mscorlib"
+        xmlns:wpf="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
         mc:Ignorable="d"
         d:DataContext="{d:DesignInstance vm:TrackManagerVm}"
         FontSize="17"
@@ -257,6 +258,16 @@
 
                     </Grid>
 
+                </TabItem>
+                <TabItem Header="Высотный график">
+                    <wpf:CartesianChart Series="{Binding ActiveTrack.Report.Chart.Series}" LegendLocation="Right" >
+                        <wpf:CartesianChart.AxisY>
+                            <wpf:Axis LabelFormatter="{Binding ActiveTrack.Report.Chart.YFormatter}"></wpf:Axis>
+                        </wpf:CartesianChart.AxisY>
+                        <wpf:CartesianChart.AxisX>
+                            <wpf:Axis LabelFormatter="{Binding ActiveTrack.Report.Chart.XFormatter}"></wpf:Axis>
+                        </wpf:CartesianChart.AxisX>
+                    </wpf:CartesianChart>
                 </TabItem>
             </TabControl.Items>
 

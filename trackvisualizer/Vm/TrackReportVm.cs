@@ -9,6 +9,7 @@ using System.Windows;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using LiveCharts.Wpf.Charts.Base;
 using trackvisualizer.Annotations;
 using trackvisualizer.Config;
 using trackvisualizer.Geodetic;
@@ -18,11 +19,34 @@ using Point = trackvisualizer.Geodetic.Point;
 
 namespace trackvisualizer.Vm
 {
-    public class TagGraphData
+    public class TagGraphData : INotifyPropertyChanged
     {
-        public List<KeyValuePair<double, double>> Profile;
-        public List<double> DaySections;
-        public List<KeyValuePair<double, double>> Extremities;
+        public List<KeyValuePair<double, double>> Profile { get; set; } = new List<KeyValuePair<double, double>>();
+        public List<KeyValuePair<double, double>> SectionLabels{ get; set; } = new List<KeyValuePair<double, double>>();
+
+        /// <summary>
+        /// Should be called explicitly to minimize overdraw
+        /// </summary>
+        public void NotifyOnDataUpdateFinished()
+        {
+            OnPropertyChanged(nameof(Profile));
+        }
+        
+        public void Clear()
+        {
+            Profile.Clear();
+            SectionLabels.Clear();
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        [NotifyPropertyChangedInvocator]
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        
     }
 
     public class TrackReportVm : INotifyPropertyChanged
@@ -45,7 +69,9 @@ namespace trackvisualizer.Vm
 
         public TrackReportTotalsVm Totals { get; }
 
-        public TagGraphData GraphData { get; set; }
+        public TagGraphData GraphData { get; } = new TagGraphData();
+
+        public TrackChartVm Chart { get; }
 
         public ICommand ExportCommand { get; }
 
@@ -66,6 +92,7 @@ namespace trackvisualizer.Vm
             
             Source = source;
             Totals = new TrackReportTotalsVm(this);
+            Chart = new TrackChartVm(this);
 
             ExportCommand = new DelegateCommand(o=>Results.Any(), ExportReportAsync);
         }
@@ -157,9 +184,7 @@ namespace trackvisualizer.Vm
             _slicesCalc = new List<TrackSeg.Slice>();
 
             _loggingService.Log("Разбиение трека на дни");
-
-            GraphData = new TagGraphData();
-            
+           
             foreach (var pt in points)
             {
                 var slice = Geo.SliceTrackSegmentWithPoint(pt, activeSegPts, _configuration.ReportGeneratorOptions.SliceptKickOutRadiusMeters);
@@ -238,70 +263,42 @@ namespace trackvisualizer.Vm
         private void GenGraphData(List<Point> activeSegPts)
         {
             double disM = 0, prevHgt = 0;
+            double prevDis = 0;
 
-            GraphData = new TagGraphData
-            {
-                Profile = new List<KeyValuePair<double, double>>(),
-                DaySections = new List<double>(),
-                Extremities = new List<KeyValuePair<double, double>>()
-            };
-
-            GraphData.Profile.Clear();
+            GraphData.Clear();
 
             const double peakTolerance = 100;
+            const double distanceTolerance = 400;
 
             for (var c = 0; c != _slicesCalc.Count - 1; ++c)
             {
-                var first = true;
-
-                var peakH = double.MinValue;
-                double peakKm = 0;
-                var peakNpoint = 0;
-
                 for (var i = _slicesCalc[c].NPoint; i < _slicesCalc[c + 1].NPoint; ++i)
                 {
-                    if (first)
-                        GraphData.DaySections.Add(disM);
-                    
                     disM += Geo.DistanceExactMeters(activeSegPts[i], activeSegPts[i + 1]);
                     var hgt = _srtmRepository.GetHeightForPoint(activeSegPts[i + 1]);
 
-                    GraphData.Profile.Add(new KeyValuePair<double, double>(disM, hgt ?? prevHgt));
+                    if(!hgt.HasValue)
+                        continue;
 
-                    if (hgt.HasValue)
+                    if(i== _slicesCalc[c + 1].NPoint-1 || (c ==0 && i ==  _slicesCalc[c].NPoint))
+                        GraphData.SectionLabels.Add(new KeyValuePair<double, double>(disM, hgt.Value));
+
+                    if (i ==  _slicesCalc[c].NPoint || Math.Abs(prevHgt - hgt.Value) > peakTolerance || Math.Abs(prevDis - disM) > distanceTolerance)
                     {
-                        if (hgt.Value > peakH)
-                        {
-                            peakNpoint = i;
-                            peakH = hgt ?? 0;
-                            peakKm = disM;
-                        }
-
-                        prevHgt = hgt ?? 0;
+                        GraphData.Profile.Add(new KeyValuePair<double, double>(disM, hgt.Value));
+                        prevDis = disM;
+                        prevHgt = hgt.Value;
                     }
-
-                    first = false;
                 }
-
-                if (peakNpoint != _slicesCalc[c].NPoint &&
-                    peakNpoint != _slicesCalc[c + 1].NPoint - 1 &&
-                    Math.Abs(
-                        (_srtmRepository.GetHeightForPoint(activeSegPts[peakNpoint + 1]) ?? 0) -
-                        (_srtmRepository.GetHeightForPoint(activeSegPts[_slicesCalc[c].NPoint + 1]) ?? 0)
-                    ) > peakTolerance &&
-                    Math.Abs(
-                        (_srtmRepository.GetHeightForPoint(activeSegPts[peakNpoint + 1]) ?? 0) -
-                        (_srtmRepository.GetHeightForPoint(activeSegPts[_slicesCalc[c + 1].NPoint]) ?? 0)
-                    ) > peakTolerance
-                )
-                    GraphData.Extremities.Add(new KeyValuePair<double, double>(peakKm, peakH));
             }
+
+            GraphData.NotifyOnDataUpdateFinished();
         }
 
                 
         private void GenBackpackWeightColumn()
         {
-            if (Source.Settings.BackpackWeightSettings == null) 
+            if (Source.Settings.BackpackWeightSettings == null)
                 return;
 
             var presets = Source.Settings.BackpackWeightSettings;
