@@ -1,0 +1,73 @@
+﻿<Window x:Class="trackvisualizer.View.ProgramSettingsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:localization="clr-namespace:trackvisualizer.Properties"
+        xmlns:local="clr-namespace:trackvisualizer.View"
+        xmlns:vm="clr-namespace:trackvisualizer.Vm"
+        mc:Ignorable="d"
+        FontSize="17"
+        FontWeight="Medium"
+        d:DataContext="{d:DesignInstance vm:ProgramSettingsVm}"       
+        WindowStartupLocation="CenterScreen"
+        Title="{x:Static localization:Resources.SettingsWindow_Title}" Height="Auto" SizeToContent="Height" Width="400">
+    <Grid Margin="{StaticResource ControlMargin}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition />
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+        
+        <TextBlock Text="{x:Static localization:Resources.SettingsWindow_Language}" Style="{StaticResource BasicTextBlockStyle}"/>
+
+        <ComboBox Grid.Row="0" Grid.Column="1" ItemsSource="{Binding Localizations}" 
+                  Style="{StaticResource BasicComboBoxStyle}"
+                  SelectedItem="{Binding ActiveLocalization, Mode=TwoWay}" IsSynchronizedWithCurrentItem="True">
+            <ComboBox.ItemTemplate>
+                <DataTemplate DataType="{x:Type vm:ProgramSettingsVm+LocalizationVm}">
+                    <TextBlock Text="{Binding Name}"/>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+
+        </ComboBox>
+
+        <!-- buttons -->
+        <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" HorizontalAlignment="Right">
+
+            <Button Style="{StaticResource BasicButtonStyle}"
+                    Click="ButtonBase_OnClick"
+                    Command="{Binding SaveChangesCommand}">
+                <Button.Content>
+                    <StackPanel Orientation="Horizontal">
+                        <Rectangle Fill="{StaticResource AccentColor}" Width="24" Height="24"  Margin="5" VerticalAlignment="Center">
+                            <Rectangle.OpacityMask>
+                                <VisualBrush Visual="{StaticResource AppbarDisk}" Stretch="Uniform"/>
+                            </Rectangle.OpacityMask>
+                        </Rectangle>
+                        <TextBlock Text="{x:Static localization:Resources.SettingsWindow_Save}" VerticalAlignment="Center"/>
+                    </StackPanel>
+                </Button.Content>
+            </Button>
+                                  
+            <Button Style="{StaticResource BasicButtonStyle}"
+                    Click="ButtonBase_OnClick">
+                <Button.Content>
+                    <StackPanel Orientation="Horizontal">
+                        <Rectangle Fill="{StaticResource AccentColor}" Width="24" Height="24"  Margin="5" VerticalAlignment="Center">
+                            <Rectangle.OpacityMask>
+                                <VisualBrush Visual="{StaticResource AppbarCancel}" Stretch="Uniform"/>
+                            </Rectangle.OpacityMask>
+                        </Rectangle>
+                        <TextBlock Text="{x:Static localization:Resources.SettingsWindow_Cancel}" VerticalAlignment="Center"/>
+                    </StackPanel>
+                </Button.Content>
+            </Button>
+        </StackPanel>
+    </Grid>
+</Window>

@@ -131,6 +131,9 @@
     <Compile Include="View\HeightmapDownloaderWindow.xaml.cs">
       <DependentUpon>HeightmapDownloaderWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\ProgramSettingsWindow.xaml.cs">
+      <DependentUpon>ProgramSettingsWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\TrackSettings.cs" />
     <Compile Include="View\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
@@ -139,6 +142,7 @@
     <Compile Include="View\VisibilityAux.cs" />
     <Compile Include="Vm\DownloadProgressItemVm.cs" />
     <Compile Include="Vm\HeightmapManagerVm.cs" />
+    <Compile Include="Vm\ProgramSettingsVm.cs" />
     <Compile Include="Vm\TrackChartVm.cs" />
     <Compile Include="Vm\TrackManagerVm.cs" />
     <Compile Include="Vm\TrackReportItemVm.cs" />
@@ -183,6 +187,10 @@
       <Generator>MSBuild:Compile</Generator>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\ProgramSettingsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\ScatterGraph.xaml">
       <SubType>Designer</SubType>

@@ -15,10 +15,10 @@ namespace trackvisualizer.Service
         private readonly TrekplannerConfiguration _configuration;
         private readonly IUiService _uiService;
 
-        private readonly Tuple<string,string>[] _availableLocalizations = new Tuple<string, string>[]
+        public Tuple<string, string>[] AvailableLocalizations { get; } =
         {
-            Tuple.Create(@"en",@"English"), 
-            Tuple.Create(@"uk",@"Українська"), 
+            Tuple.Create(@"en", @"English"),
+            Tuple.Create(@"uk", @"Українська"),
         };
 
         public LocalizationManager(TrekplannerConfiguration configuration, IUiService uiService)
@@ -31,16 +31,17 @@ namespace trackvisualizer.Service
         {
             if (string.IsNullOrWhiteSpace(_configuration.CurrentLanguage))
             {
-                _configuration.CurrentLanguage = _availableLocalizations.First().Item1;
+                _configuration.CurrentLanguage = AvailableLocalizations.First().Item1;
                 _configuration.Save();
             }
-            
+
             CultureInfo.DefaultThreadCurrentUICulture = new CultureInfo(_configuration.CurrentLanguage);
         }
-        
+
         public async Task ChooseLocalizationAsync()
         {
-            var loc = await _uiService.ChooseAsync(_availableLocalizations,@"Select language") ?? _availableLocalizations.First().Item1;
+            var loc = await _uiService.ChooseAsync(AvailableLocalizations, @"Select language") ??
+                      AvailableLocalizations.First().Item1;
 
             _configuration.CurrentLanguage = loc;
             _configuration.Save();

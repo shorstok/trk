@@ -11,6 +11,7 @@
         mc:Ignorable="d"
         d:DataContext="{d:DesignInstance vm:TrackManagerVm}"
         FontSize="17"
+        FontWeight="Medium"
         WindowState="Maximized"
         Title="{x:Static localization:Resources.MainWindow_Title}" Height="550" Width="900">
     <Grid Margin="{StaticResource ControlMargin}">
@@ -74,29 +75,57 @@
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
             <Button Grid.Row="2" Command="{Binding HeightmapManager.DownloadMissingHeightmapsCommand}"
-                    Content="{x:Static localization:Resources.MainWindow_LoadHeightmaps_Label}" Margin="{StaticResource ControlMargin}" />
+                    Style="{StaticResource BasicButtonStyle}">
+                <Button.Content>
+                    <StackPanel Orientation="Horizontal">
+                        <Rectangle Fill="{StaticResource AccentColor}" Width="24" Height="24"  Margin="5" VerticalAlignment="Center">
+                            <Rectangle.OpacityMask>
+                                <VisualBrush Visual="{StaticResource AppbarDownload}" Stretch="Uniform"/>
+                            </Rectangle.OpacityMask>
+                        </Rectangle>
+                        <TextBlock Text="{x:Static localization:Resources.MainWindow_LoadHeightmaps_Label}" VerticalAlignment="Center"/>
+                    </StackPanel>
+                </Button.Content>
+            </Button>
         </Grid>
 
         <!-- Source track selector -->
         <Grid Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="2">
             <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="*" />
+                <ColumnDefinition />
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
 
-            <TextBlock Margin="{StaticResource ControlMargin}" Grid.Column="0" Text="{x:Static localization:Resources.MainWindow_LoadTrackLabel}"
+            <!-- settings -->
+            <Button Style="{StaticResource BasicButtonStyle}" Grid.Column="0" Click="SettingsButton_Click">
+                <Button.Content>
+                    <StackPanel Orientation="Horizontal">
+                        <Rectangle Fill="{StaticResource AccentColor}" Width="20" Height="20"  Margin="5">
+                            <Rectangle.OpacityMask>
+                                <VisualBrush Visual="{StaticResource AppbarSettings}" Stretch="Uniform"/>
+                            </Rectangle.OpacityMask>
+                        </Rectangle>
+                    </StackPanel>
+                </Button.Content>
+            </Button>
+
+            <TextBlock Margin="{StaticResource ControlMargin}" Grid.Column="1" Text="{x:Static localization:Resources.MainWindow_LoadTrackLabel}"
                        VerticalAlignment="Center" />
 
             <!-- load from file -->
-            <TextBlock Margin="{StaticResource ControlMargin}" Grid.Column="1" Text="{x:Static localization:Resources.MainWindow_LoadingLabel}"
-                       Background="{StaticResource AccentColor}"
-                       Foreground="{StaticResource BackgroundColor}"
-                       view:VisibilityAux.IsVisible="{Binding IsLoading}" VerticalAlignment="Center" />
+            <Rectangle Grid.Column="2" Width="24" Height="24" Fill="{StaticResource AccentColor}" 
+                       view:VisibilityAux.IsVisible="{Binding IsLoading}"
+                       VerticalAlignment="Center">
+                <Rectangle.OpacityMask>
+                    <VisualBrush Visual="{StaticResource AppbarRefresh}" Stretch="Uniform"/>
+                </Rectangle.OpacityMask>
+            </Rectangle>
 
             <!-- recently used tracks selector -->
-            <ComboBox Grid.Column="2" Style="{StaticResource BasicComboBoxStyle}"
+            <ComboBox Grid.Column="3" Style="{StaticResource BasicComboBoxStyle}"
                       ItemsSource="{Binding AvailableTracks}"
                       SelectedItem="{Binding ActiveTrack}" IsSynchronizedWithCurrentItem="True">
                 <ComboBox.ItemTemplate>
@@ -107,8 +136,20 @@
             </ComboBox>
 
             <!-- load from file -->
-            <Button Style="{StaticResource BasicButtonStyle}" Grid.Column="3" Content="{x:Static localization:Resources.MainWindow_LoadButtonTitle}"
-                    Command="{Binding LoadFromFileCommand}" />
+            <Button Style="{StaticResource BasicButtonStyle}" Grid.Column="4"
+                    Command="{Binding LoadFromFileCommand}">
+                <Button.Content>
+                    <StackPanel Orientation="Horizontal">
+                        <Rectangle Fill="{StaticResource AccentColor}" Width="20" Height="20"  Margin="5">
+                            <Rectangle.OpacityMask>
+                                <VisualBrush Visual="{StaticResource FolderOpen}" Stretch="Uniform"/>
+                            </Rectangle.OpacityMask>
+                        </Rectangle>
+                        <TextBlock Text="{x:Static localization:Resources.MainWindow_LoadButtonTitle}" VerticalAlignment="Center"/>
+                    </StackPanel>
+
+                </Button.Content>
+            </Button>
 
         </Grid>
 
@@ -254,8 +295,19 @@
 
                         <!-- export button -->
                         <StackPanel Grid.Row="1" Orientation="Horizontal">
-                            <Button Style="{StaticResource BasicButtonStyle}" Content="{x:Static localization:Resources.MainWindow_Route_ExportLabel}" 
-                                    Command="{Binding ActiveTrack.Report.ExportCommand}"/>
+                            <Button Style="{StaticResource BasicButtonStyle}"
+                                    Command="{Binding ActiveTrack.Report.ExportCommand}">
+                                <Button.Content>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Rectangle Fill="{StaticResource AccentColor}" Width="24" Height="24"  Margin="5" VerticalAlignment="Center">
+                                            <Rectangle.OpacityMask>
+                                                <VisualBrush Visual="{StaticResource AppbarDisk}" Stretch="Uniform"/>
+                                            </Rectangle.OpacityMask>
+                                        </Rectangle>
+                                        <TextBlock Text="{x:Static localization:Resources.MainWindow_Route_ExportLabel}" VerticalAlignment="Center"/>
+                                    </StackPanel>
+                                </Button.Content>
+                            </Button>
                         </StackPanel>
 
                     </Grid>

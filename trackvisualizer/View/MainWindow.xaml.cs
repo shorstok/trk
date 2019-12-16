@@ -22,11 +22,13 @@ namespace trackvisualizer.View
     public partial class MainWindow : Window
     {
         private readonly Func<TrackManagerVm> _trackManagerGenerator;
+        private readonly Func<ProgramSettingsWindow> _programSettingsGenFunc;
 
-        public MainWindow(Func<TrackManagerVm> trackManagerGenerator)
+        public MainWindow(Func<TrackManagerVm> trackManagerGenerator, Func<ProgramSettingsWindow> programSettingsGenFunc)
         {
             _trackManagerGenerator = trackManagerGenerator;
-            
+            _programSettingsGenFunc = programSettingsGenFunc;
+
             InitializeComponent();
             Loaded += TrackView_Loaded;
         }
@@ -36,6 +38,13 @@ namespace trackvisualizer.View
             DataContext = _trackManagerGenerator();
 
             await ((TrackManagerVm) DataContext).Initialize();
+        }
+
+        private void SettingsButton_Click(object sender, RoutedEventArgs e)
+        {
+            var psw = _programSettingsGenFunc();
+
+            psw.ShowDialog();
         }
     }
 }

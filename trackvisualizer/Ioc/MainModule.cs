@@ -64,16 +64,20 @@ namespace trackvisualizer.Ioc
             builder.RegisterType<HeightmapDownloaderWindow>().AsSelf().InstancePerDependency();            
             builder.RegisterType<MainWindow>().AsSelf().SingleInstance();
             
+            builder.RegisterType<ProgramSettingsWindow>().AsSelf().InstancePerDependency();
+            builder.RegisterType<ProgramSettingsVm>().AsSelf().InstancePerDependency().
+                UsingConstructor(new NotXamlConstructorSelector());     
+            
+            //Vms
             builder.RegisterType<TrackVm>().AsSelf().InstancePerDependency();
             builder.RegisterType<TrackReportVm>().AsSelf().InstancePerDependency();
             builder.RegisterType<TrackReportItemVm>().AsSelf().InstancePerDependency();
             
             builder.RegisterType<TrackManagerVm>().AsSelf().SingleInstance();
-
-            //VMs
+            
             builder.RegisterType<HeightmapDownloaderVm>().AsSelf().
-                InstancePerDependency()
-                .UsingConstructor(new NotXamlConstructorSelector());     
+                InstancePerDependency().
+                UsingConstructor(new NotXamlConstructorSelector());     
             
             builder.RegisterType<MainSettingsVm>().AsSelf().
                 InstancePerDependency()

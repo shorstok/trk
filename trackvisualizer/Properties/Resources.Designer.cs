@@ -169,7 +169,7 @@ namespace trackvisualizer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Maximum height.
+        ///   Looks up a localized string similar to Maximum height, m.
         /// </summary>
         public static string HtmlReportExporter_Export_MaxHeightHeader {
             get {
@@ -214,7 +214,7 @@ namespace trackvisualizer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Travel time.
+        ///   Looks up a localized string similar to Travel time, h.
         /// </summary>
         public static string HtmlReportExporter_Export_TravelTimeHeader {
             get {
@@ -250,7 +250,7 @@ namespace trackvisualizer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Load heightmaps.
+        ///   Looks up a localized string similar to Download heightmaps.
         /// </summary>
         public static string MainWindow_LoadHeightmaps_Label {
             get {
@@ -426,6 +426,42 @@ namespace trackvisualizer.Properties {
         public static string MainWindow_Title {
             get {
                 return ResourceManager.GetString("MainWindow_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cancel.
+        /// </summary>
+        public static string SettingsWindow_Cancel {
+            get {
+                return ResourceManager.GetString("SettingsWindow_Cancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Language.
+        /// </summary>
+        public static string SettingsWindow_Language {
+            get {
+                return ResourceManager.GetString("SettingsWindow_Language", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save.
+        /// </summary>
+        public static string SettingsWindow_Save {
+            get {
+                return ResourceManager.GetString("SettingsWindow_Save", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Program settings.
+        /// </summary>
+        public static string SettingsWindow_Title {
+            get {
+                return ResourceManager.GetString("SettingsWindow_Title", resourceCulture);
             }
         }
         

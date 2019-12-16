@@ -193,7 +193,7 @@
     <value>Відстань, км</value>
   </data>
   <data name="HtmlReportExporter_Export_TravelTimeHeader" xml:space="preserve">
-    <value>Ходовий час</value>
+    <value>Ходовий час, год</value>
   </data>
   <data name="HtmlReportExporter_Export_AscentHeader" xml:space="preserve">
     <value>Набір висоти, м</value>
@@ -202,7 +202,7 @@
     <value>Скидання висоти, м</value>
   </data>
   <data name="HtmlReportExporter_Export_MaxHeightHeader" xml:space="preserve">
-    <value>Максимальна висота</value>
+    <value>Максимальна висота, м</value>
   </data>
   <data name="HtmlReportExporter_Export_TotalsRowLabel" xml:space="preserve">
     <value>Всього за похід</value>
@@ -387,9 +387,21 @@ srtm_interp {1}
     <value>#</value>
   </data>
   <data name="MainWindow_Route_TimeHeader" xml:space="preserve">
-    <value>Ходовий час, h</value>
+    <value>Ходовий час, год</value>
   </data>
   <data name="TrackReportVm_ExportReportAsync_Select_report_format" xml:space="preserve">
     <value>Оберіть формат експорту</value>
+  </data>
+  <data name="SettingsWindow_Title" xml:space="preserve">
+    <value>Налаштування програми</value>
+  </data>
+  <data name="SettingsWindow_Cancel" xml:space="preserve">
+    <value>Скасувати</value>
+  </data>
+  <data name="SettingsWindow_Save" xml:space="preserve">
+    <value>Зберегти</value>
+  </data>
+  <data name="SettingsWindow_Language" xml:space="preserve">
+    <value>Мова</value>
   </data>
 </root>

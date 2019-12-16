@@ -193,7 +193,7 @@
     <value>Distance, km</value>
   </data>
   <data name="HtmlReportExporter_Export_TravelTimeHeader" xml:space="preserve">
-    <value>Travel time</value>
+    <value>Travel time, h</value>
   </data>
   <data name="HtmlReportExporter_Export_AscentHeader" xml:space="preserve">
     <value>Elevation gain, m</value>
@@ -202,7 +202,7 @@
     <value>Elevation loss, m</value>
   </data>
   <data name="HtmlReportExporter_Export_MaxHeightHeader" xml:space="preserve">
-    <value>Maximum height</value>
+    <value>Maximum height, m</value>
   </data>
   <data name="HtmlReportExporter_Export_TotalsRowLabel" xml:space="preserve">
     <value>Travel totals</value>
@@ -344,7 +344,7 @@ Otherwise, you'll get completely invalid height calculations!</value>
     <value>Heightmaps missing</value>
   </data>
   <data name="MainWindow_LoadHeightmaps_Label" xml:space="preserve">
-    <value>Load heightmaps</value>
+    <value>Download heightmaps</value>
   </data>
   <data name="MainWindow_Title" xml:space="preserve">
     <value>Travel planning</value>
@@ -390,5 +390,17 @@ Otherwise, you'll get completely invalid height calculations!</value>
   </data>
   <data name="TrackReportVm_ExportReportAsync_Select_report_format" xml:space="preserve">
     <value>Select report format</value>
+  </data>
+  <data name="SettingsWindow_Title" xml:space="preserve">
+    <value>Program settings</value>
+  </data>
+  <data name="SettingsWindow_Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="SettingsWindow_Save" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="SettingsWindow_Language" xml:space="preserve">
+    <value>Language</value>
   </data>
 </root>

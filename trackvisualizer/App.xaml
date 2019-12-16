@@ -9,33 +9,35 @@
             </ResourceDictionary.MergedDictionaries>
 
             <Thickness x:Key="ControlMargin"  Bottom="6" Left="6" Right="6" Top="6"/>
+            
             <view:DimensionConverter x:Key="DimensionConverter"/>
+            
             <SolidColorBrush x:Key="ValidationBadColor" Color="#6F1010"/>
             <SolidColorBrush x:Key="ValidationBadColorInverse" Color="White"/>
+            
+            <SolidColorBrush x:Key="BackgroundAccentColor" Color="#D7E5F0"/>
+            <SolidColorBrush x:Key="BackgroundAccentColor2" Color="#F7F7F7"/>
+
+            <SolidColorBrush x:Key="BackgroundColor" Color="White"/>
+
+            <SolidColorBrush x:Key="AccentColor" Color="SteelBlue"/>
         
             <Style TargetType="ButtonBase" x:Key="BasicButtonStyle">
                 <Setter Property="Margin" Value="{StaticResource ControlMargin}"/>
                 <Setter Property="Padding" Value="{StaticResource ControlMargin}"/>
                 <Setter Property="VerticalAlignment" Value="Center"/>
+                <Setter Property="FontWeight" Value="Medium"/>
             </Style>
             <Style x:Key="BasicComboBoxStyle" TargetType="ComboBox">
                 <Setter Property="Margin" Value="{StaticResource ControlMargin}"/>
                 <Setter Property="Padding" Value="{StaticResource ControlMargin}"/>
-                <Setter Property="VerticalAlignment" Value="Center"/>
+                <Setter Property="VerticalAlignment" Value="Center"/>                
             </Style>
         
             <Style x:Key="BasicTextBlockStyle" TargetType="TextBlock">
                 <Setter Property="Margin" Value="{StaticResource ControlMargin}"/>
                 <Setter Property="VerticalAlignment" Value="Center"/>
             </Style>
-
-            <SolidColorBrush x:Key="AccentColor" Color="SteelBlue"/>
-            <SolidColorBrush x:Key="BackgroundAccentColor" Color="#D7E5F0"/>
-            <SolidColorBrush x:Key="BackgroundAccentColor2" Color="#F7F7F7"/>
-
-            <SolidColorBrush x:Key="BackgroundColor" Color="White"/>
-
-        
 
         </ResourceDictionary>
     </Application.Resources>
