@@ -40,11 +40,13 @@ namespace trackvisualizer.View
 
         public Choice[] Options { get; }
 
-        public ChoiceWindow(IEnumerable<Tuple<string, string>> options)
+        public ChoiceWindow(IEnumerable<Tuple<string, string>> options, string title)
         {
             Options = options.Select(t => new Choice(t.Item1, t.Item2)).ToArray();
 
             ChoseItemCommand = new DelegateCommand(t=>true, ChooseItem);
+
+            ChoiceTitle.Text = title;
 
             InitializeComponent();
         }

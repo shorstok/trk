@@ -33,7 +33,7 @@
                 </Grid.RowDefinitions>
                 
                 <!-- title -->
-                <TextBlock Grid.Row="0" Style="{StaticResource BasicTextBlockStyle}" Text="Доступные варианты" TextWrapping="Wrap" FontWeight="Bold"/>
+                <TextBlock Grid.Row="0" Style="{StaticResource BasicTextBlockStyle}" Name="ChoiceTitle" Text="Доступные варианты" TextWrapping="Wrap" FontWeight="Bold"/>
                 
                 <!-- choices -->
                 <ListView Grid.Row="1" ItemsSource="{Binding Options}" Margin="{StaticResource ControlMargin}">

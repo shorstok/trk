@@ -53,6 +53,7 @@ namespace trackvisualizer.Ioc
             builder.RegisterType<SrtmRepository>().AsSelf().SingleInstance();
             builder.RegisterType<GeoLoaderService>().AsSelf().SingleInstance();
             builder.RegisterType<HeightmapManagerVm>().AsSelf().SingleInstance();
+            builder.RegisterType<LocalizationManager>().AsSelf().SingleInstance();
             builder.RegisterType<UiLoggingVm>().As<IUiLoggingService>().AsSelf().SingleInstance();
             
             //Heightmap providers

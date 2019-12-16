@@ -3,35 +3,40 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:view="clr-namespace:trackvisualizer.View">
     <Application.Resources>
-        <Thickness x:Key="ControlMargin"  Bottom="6" Left="6" Right="6" Top="6"/>
-        <view:DimensionConverter x:Key="DimensionConverter"/>
-        <SolidColorBrush x:Key="ValidationBadColor" Color="#6F1010"/>
-        <SolidColorBrush x:Key="ValidationBadColorInverse" Color="White"/>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="View/Icons.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+
+            <Thickness x:Key="ControlMargin"  Bottom="6" Left="6" Right="6" Top="6"/>
+            <view:DimensionConverter x:Key="DimensionConverter"/>
+            <SolidColorBrush x:Key="ValidationBadColor" Color="#6F1010"/>
+            <SolidColorBrush x:Key="ValidationBadColorInverse" Color="White"/>
         
-        <Style TargetType="ButtonBase" x:Key="BasicButtonStyle">
-            <Setter Property="Margin" Value="{StaticResource ControlMargin}"/>
-            <Setter Property="Padding" Value="{StaticResource ControlMargin}"/>
-            <Setter Property="VerticalAlignment" Value="Center"/>
-        </Style>
-        <Style x:Key="BasicComboBoxStyle" TargetType="ComboBox">
-            <Setter Property="Margin" Value="{StaticResource ControlMargin}"/>
-            <Setter Property="Padding" Value="{StaticResource ControlMargin}"/>
-            <Setter Property="VerticalAlignment" Value="Center"/>
-        </Style>
+            <Style TargetType="ButtonBase" x:Key="BasicButtonStyle">
+                <Setter Property="Margin" Value="{StaticResource ControlMargin}"/>
+                <Setter Property="Padding" Value="{StaticResource ControlMargin}"/>
+                <Setter Property="VerticalAlignment" Value="Center"/>
+            </Style>
+            <Style x:Key="BasicComboBoxStyle" TargetType="ComboBox">
+                <Setter Property="Margin" Value="{StaticResource ControlMargin}"/>
+                <Setter Property="Padding" Value="{StaticResource ControlMargin}"/>
+                <Setter Property="VerticalAlignment" Value="Center"/>
+            </Style>
         
-        <Style x:Key="BasicTextBlockStyle" TargetType="TextBlock">
-            <Setter Property="Margin" Value="{StaticResource ControlMargin}"/>
-            <Setter Property="VerticalAlignment" Value="Center"/>
-        </Style>
+            <Style x:Key="BasicTextBlockStyle" TargetType="TextBlock">
+                <Setter Property="Margin" Value="{StaticResource ControlMargin}"/>
+                <Setter Property="VerticalAlignment" Value="Center"/>
+            </Style>
 
-        <SolidColorBrush x:Key="AccentColor" Color="SteelBlue"/>
-        <SolidColorBrush x:Key="BackgroundAccentColor" Color="#D7E5F0"/>
-        <SolidColorBrush x:Key="BackgroundAccentColor2" Color="#F7F7F7"/>
+            <SolidColorBrush x:Key="AccentColor" Color="SteelBlue"/>
+            <SolidColorBrush x:Key="BackgroundAccentColor" Color="#D7E5F0"/>
+            <SolidColorBrush x:Key="BackgroundAccentColor2" Color="#F7F7F7"/>
 
-        <SolidColorBrush x:Key="BackgroundColor" Color="White"/>
+            <SolidColorBrush x:Key="BackgroundColor" Color="White"/>
 
         
 
-
+        </ResourceDictionary>
     </Application.Resources>
 </Application>

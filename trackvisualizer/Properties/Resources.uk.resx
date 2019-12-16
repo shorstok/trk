@@ -118,6 +118,278 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AsterTileLocal_DownloadAndUnpack_ConnectingToAsterServer" xml:space="preserve">
-    <value>З´єднання з сервером ASTER({0})...</value>
+    <value>З´єднання з сервером ASTER ({0})...</value>
+  </data>
+  <data name="SrtmFileDownloadHeightmapProvider_DownloadHeightmap_SrtmInterpNotFound" xml:space="preserve">
+    <value>Не знайдена програма корекції висоти `{0}`</value>
+  </data>
+  <data name="AsterTileLocal_DownloadAndUnpack_UsingExistingGeotiffFormatted" xml:space="preserve">
+    <value>Знайдений файл {0}, використовую як вже завантажений GEOTIFF</value>
+  </data>
+  <data name="AsterTileLocal_DownloadAndUnpack_LoadingTileFormatted" xml:space="preserve">
+    <value>Завантаження тайлу {0} кБ / {1} кБ</value>
+  </data>
+  <data name="AsterTileLocal_DownloadAndUnpack_UnpackingFormatted" xml:space="preserve">
+    <value>Розпаковка...</value>
+  </data>
+  <data name="AsterTileLocal_DownloadAndUnpack_Ready" xml:space="preserve">
+    <value>Готово</value>
+  </data>
+  <data name="SrtmFileDownloadHeightmapProvider_Description" xml:space="preserve">
+    <value>SRTM</value>
+  </data>
+  <data name="SrtmFileDownloadHeightmapProvider_DownloadHeightmap_DownloadingFormatted" xml:space="preserve">
+    <value>Завантаження {0}...</value>
+  </data>
+  <data name="SrtmFileDownloadHeightmapProvider_DownloadHeightmap_LoadProgressFormatted" xml:space="preserve">
+    <value>Завантаження {0:0.0} КБ...</value>
+  </data>
+  <data name="SrtmFileDownloadHeightmapProvider_DownloadHeightmap_Error404Reasons" xml:space="preserve">
+    <value>Віддалений сервер повернув 404 (не знайдений). Причини можуть бути наступні:</value>
+  </data>
+  <data name="SrtmFileDownloadHeightmapProvider_DownloadHeightmap_E404NoSrtmOnServer" xml:space="preserve">
+    <value>🔘 SRTM-файлів для цього району немає на сервері</value>
+  </data>
+  <data name="SrtmFileDownloadHeightmapProvider_DownloadHeightmap_E404ServerAddrObsolete" xml:space="preserve">
+    <value>🔘 Адрес застарів і необхідно шукати наступний</value>
+  </data>
+  <data name="SrtmFileDownloadHeightmapProvider_DownloadHeightmap_E404ServerAddrInvalid" xml:space="preserve">
+    <value>🔘 Невірно прописана адреса серверу в вікні завантажувача</value>
+  </data>
+  <data name="SrtmFileDownloadHeightmapProvider_DownloadHeightmap_UnpackingFormatted" xml:space="preserve">
+    <value>Розпаковка {0}</value>
+  </data>
+  <data name="SrtmFileDownloadHeightmapProvider_DownloadHeightmap_ErrorNoHgtFileInArchive" xml:space="preserve">
+    <value>{0} - файл .hgt не знайдений в архіві, щось пішло не так</value>
+  </data>
+  <data name="SrtmFileDownloadHeightmapProvider_DownloadHeightmap_CleanupActionFormatted" xml:space="preserve">
+    <value>{0}.hgt, чистка лакун... </value>
+  </data>
+  <data name="SrtmFileDownloadHeightmapProvider_DownloadHeightmap_UnpackingErrorFormatted_ManualActionRequired" xml:space="preserve">
+    <value>Помилка при розпакуванні: `{0}`! Файл {1} завантажений, але вам необхідно розпакувати його вручну</value>
+  </data>
+  <data name="SrtmFileDownloadHeightmapProvider_ExecuteCommandAsync_ErrorGeneral" xml:space="preserve">
+    <value>Помилка: </value>
+  </data>
+  <data name="SrtmFileDownloadHeightmapProvider_DownloadHeightmap_HeightmapReadyFormatted" xml:space="preserve">
+    <value>{0} готовий. </value>
+  </data>
+  <data name="GpxLoaderMiddleware_Description" xml:space="preserve">
+    <value>GPX Gps Exchange format</value>
+  </data>
+  <data name="KmlLoaderMiddleware_Description" xml:space="preserve">
+    <value>KML Keyhole Markup Language</value>
+  </data>
+  <data name="HtmlReportExporter_Description" xml:space="preserve">
+    <value>HTML</value>
+  </data>
+  <data name="HtmlReportExporter_Export_SectionNumHeader" xml:space="preserve">
+    <value>#</value>
+  </data>
+  <data name="HtmlReportExporter_Export_SectionNameHeader" xml:space="preserve">
+    <value>Ділянка</value>
+  </data>
+  <data name="HtmlReportExporter_Export_SectionDistanceHeader" xml:space="preserve">
+    <value>Відстань, км</value>
+  </data>
+  <data name="HtmlReportExporter_Export_TravelTimeHeader" xml:space="preserve">
+    <value>Ходовий час</value>
+  </data>
+  <data name="HtmlReportExporter_Export_AscentHeader" xml:space="preserve">
+    <value>Набір висоти, м</value>
+  </data>
+  <data name="HtmlReportExporter_Export_DescentHeader" xml:space="preserve">
+    <value>Скидання висоти, м</value>
+  </data>
+  <data name="HtmlReportExporter_Export_MaxHeightHeader" xml:space="preserve">
+    <value>Максимальна висота</value>
+  </data>
+  <data name="HtmlReportExporter_Export_TotalsRowLabel" xml:space="preserve">
+    <value>Всього за похід</value>
+  </data>
+  <data name="HtmlReportExporter_BuildHtml_ReportTitleTemplateFormatted" xml:space="preserve">
+    <value>Звіт на базі треку {0}</value>
+  </data>
+  <data name="HeightmapDownloaderVm_StartDownloadAsync_SelectSource" xml:space="preserve">
+    <value>Виберіть джерело для завантаження</value>
+  </data>
+  <data name="HeightmapDownloaderVm_Initialize_ErrorNoSourcesFound" xml:space="preserve">
+    <value>Відсутні джерела для завантаження карт висоти</value>
+  </data>
+  <data name="TrackChartVm_YFormatter_ChartSubscriptHeightFormatted" xml:space="preserve">
+    <value>{0:0.} м</value>
+  </data>
+  <data name="TrackChartVm_XFormatter_ChartSubscriptLengthFormatted" xml:space="preserve">
+    <value>{0:0.} км</value>
+  </data>
+  <data name="TrackChartVm_TrackChartVm_HeightSeriesTitle" xml:space="preserve">
+    <value>Висота</value>
+  </data>
+  <data name="TrackChartVm_TrackChartVm_SectionSeriesTitle" xml:space="preserve">
+    <value>Ділянка</value>
+  </data>
+  <data name="TrackChartVm_GetSectionLabel_FinishFormatted" xml:space="preserve">
+    <value>Фініш {0:0.} км</value>
+  </data>
+  <data name="TrackManagerVm_LoadTrackFromFileAsync_No_loader_middleware" xml:space="preserve">
+    <value>No loader middleware!</value>
+  </data>
+  <data name="TrackReportItemVm_NextSectionName_StubFinishName" xml:space="preserve">
+    <value>F</value>
+  </data>
+  <data name="TrackReportItemVm_SectionStartName_StubStartName" xml:space="preserve">
+    <value>S</value>
+  </data>
+  <data name="TrackReportItemVm_Comment_LeavingDrop" xml:space="preserve">
+    <value>залишаємо закидку</value>
+  </data>
+  <data name="TrackReportItemVm_Comment_DropBeforeStart" xml:space="preserve">
+    <value>завозимо закидку на початок маршруту</value>
+  </data>
+  <data name="TrackReportItemVm_Comment_PickingDrop" xml:space="preserve">
+    <value>забираємо закидку</value>
+  </data>
+  <data name="TrackReportVm_ExportReportAsync_Err_Report_exporter_with_ID__0__unknown" xml:space="preserve">
+    <value>Report exporter with ID {0} unknown</value>
+  </data>
+  <data name="TrackReportVm_CreateReportAsync_ErrNoHeightmap" xml:space="preserve">
+    <value>Розрахунок завершений в зв'язку з відсутністю карт висоти</value>
+  </data>
+  <data name="TrackReportVm_CreateReportAsync_ErrNoTrack" xml:space="preserve">
+    <value>Не завантажений трек</value>
+  </data>
+  <data name="TrackReportVm_CreateReportAsync_ErrNoPointsInTrack" xml:space="preserve">
+    <value>Недостатньо точок на треці</value>
+  </data>
+  <data name="TrackReportVm_CreateReportAsync_ErrNotEnoughPoints" xml:space="preserve">
+    <value>Недостатньо точок розбивки на дні</value>
+  </data>
+  <data name="TrackReportVm_CreateReportAsync_SplittingTrack" xml:space="preserve">
+    <value>Розбивка трека на дні</value>
+  </data>
+  <data name="TrackReportVm_CreateReportAsync_ErrSplitEmptyCantContinue" xml:space="preserve">
+    <value>Розбивка пуста! Неможливо розбити трек на дні</value>
+  </data>
+  <data name="TrackReportVm_CreateReportAsync_RefiningSplit" xml:space="preserve">
+    <value>Уточнення розбивки</value>
+  </data>
+  <data name="TrackReportVm_CreateReportAsync_DeltaCalculation" xml:space="preserve">
+    <value>Разрахунок перепадів висоти</value>
+  </data>
+  <data name="TrackReportVm_CreateReportAsync_ErrHeightmapInvalid" xml:space="preserve">
+    <value>В файлі висоти &lt;{0}&gt; знайдені невірні значення.
+Запусть з командного рядку
+
+srtm_interp {1}
+
+в іншому випадку всі розрахунки, які залежать від висоти будуть абсолютно бредовими!</value>
+  </data>
+  <data name="TrackVm_LoadTracksFromFile_GeneralErrDuringFileLoad" xml:space="preserve">
+    <value>Помилка при завантаженні файлу!</value>
+  </data>
+  <data name="TrackVm_LoadTracksFromFile_TrackNotFound" xml:space="preserve">
+    <value>Немає трека в файлі!</value>
+  </data>
+  <data name="TrackVm_LoadTracksFromFile_MergingTracksFormatted" xml:space="preserve">
+    <value>Зклеюю {0} треки</value>
+  </data>
+  <data name="TrackVm_LoadTracksFromFile_SingleTrackLoaded" xml:space="preserve">
+    <value>Завантажен 1 трек</value>
+  </data>
+  <data name="TrackVm_LoadTracksFromFile_LoadingHeightmap" xml:space="preserve">
+    <value>Завантаження даних висоти (SRTM)</value>
+  </data>
+  <data name="TrackVm_LoadTracksFromFile_HeightmapsRequired" xml:space="preserve">
+    <value>Для треку необхідні файли </value>
+  </data>
+  <data name="TrackVm_LoadTracksFromFile_LoadingHeightmaps" xml:space="preserve">
+    <value>Завантаження файлів...</value>
+  </data>
+  <data name="TrackVm_LoadTracksFromFile_ErrHeightmapsMissing" xml:space="preserve">
+    <value>На етапі завантаження SRTM не знайдені наступні карти висот:</value>
+  </data>
+  <data name="TrackVm_LoadTracksFromFile_ErrHeightmapDownloadRequired" xml:space="preserve">
+    <value>Їх необхідно завантажити з серверу NASA або іншого джерела</value>
+  </data>
+  <data name="TrackVm_LoadTracksFromFile_AllHeightmapsLoadedOk" xml:space="preserve">
+    <value>Всі SRTM файли завантажені вдало!</value>
+  </data>
+  <data name="TrackVm_LoadTracksFromFile_TrackLoadedOk" xml:space="preserve">
+    <value>Завантаження треку завершено вдло</value>
+  </data>
+  <data name="TrackVm_ValidateSlicepoints_NotEnoughSlicepoints" xml:space="preserve">
+    <value>В вибраному файлі недостатньо точок розбивки по дням! Тепер точки можна завантажити окремо, або зберегти заново вибраний .gpx файл вже з точками.</value>
+  </data>
+  <data name="TrackVm_ValidateSlicepoints_FoundNSlicepointsFormatted" xml:space="preserve">
+    <value>Завантаження {0} точок</value>
+  </data>
+  <data name="MainWindow_HeightmapHeader" xml:space="preserve">
+    <value>Висотний графік</value>
+  </data>
+  <data name="MainWindow_LoadButtonTitle" xml:space="preserve">
+    <value>Відкрити файл з треком</value>
+  </data>
+  <data name="MainWindow_LoadingLabel" xml:space="preserve">
+    <value>Завантаження...</value>
+  </data>
+  <data name="MainWindow_LoadTrackLabel" xml:space="preserve">
+    <value>Завантажити трек</value>
+  </data>
+  <data name="MainWindow_RouteHeader" xml:space="preserve">
+    <value>Маршрут</value>
+  </data>
+  <data name="MainWindow_Route_ExportLabel" xml:space="preserve">
+    <value>Експорт</value>
+  </data>
+  <data name="MainWindow_Route_HeightmapsMissingLabel" xml:space="preserve">
+    <value>Відсутні карти висот</value>
+  </data>
+  <data name="MainWindow_LoadHeightmaps_Label" xml:space="preserve">
+    <value>Завантажити карти висот</value>
+  </data>
+  <data name="MainWindow_Title" xml:space="preserve">
+    <value>Плаунвання подорожі</value>
+  </data>
+  <data name="MainWindow_Route_AscentHeader" xml:space="preserve">
+    <value>Набір за день, м</value>
+  </data>
+  <data name="MainWindow_Route_BackpackWeightFHeader" xml:space="preserve">
+    <value>Вага рюкзака, Ж</value>
+  </data>
+  <data name="MainWindow_Route_BackpackWeightMHeader" xml:space="preserve">
+    <value>Вага рюкзака, М</value>
+  </data>
+  <data name="MainWindow_Route_DeltaHeightHeader" xml:space="preserve">
+    <value>Перепад за день, м</value>
+  </data>
+  <data name="MainWindow_Route_DescentHeader" xml:space="preserve">
+    <value>Зкидання за день, м</value>
+  </data>
+  <data name="MainWindow_Route_DistanceHeader" xml:space="preserve">
+    <value>Відстань, км</value>
+  </data>
+  <data name="MainWindow_Route_FietsHeader" xml:space="preserve">
+    <value>Індекс FIETS</value>
+  </data>
+  <data name="MainWindow_Route_FinHeightHeader" xml:space="preserve">
+    <value>Висота ночівлі, м</value>
+  </data>
+  <data name="MainWindow_Route_MaxHeightHeader" xml:space="preserve">
+    <value>Максимальна висота, м</value>
+  </data>
+  <data name="MainWindow_Route_NotableHeightsHeader" xml:space="preserve">
+    <value>Основні висоти на ділянці, м</value>
+  </data>
+  <data name="MainWindow_Route_SectionHeader" xml:space="preserve">
+    <value>Ділянка</value>
+  </data>
+  <data name="MainWindow_Route_SectionNumHeader" xml:space="preserve">
+    <value>#</value>
+  </data>
+  <data name="MainWindow_Route_TimeHeader" xml:space="preserve">
+    <value>Ходовий час, h</value>
+  </data>
+  <data name="TrackReportVm_ExportReportAsync_Select_report_format" xml:space="preserve">
+    <value>Оберіть формат експорту</value>
   </data>
 </root>

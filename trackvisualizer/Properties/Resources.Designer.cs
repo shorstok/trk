@@ -61,7 +61,7 @@ namespace trackvisualizer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Соединение с сервером ASTER ({0})....
+        ///   Looks up a localized string similar to Connecting to ASTER ({0})....
         /// </summary>
         public static string AsterTileLocal_DownloadAndUnpack_ConnectingToAsterServer {
             get {
@@ -70,7 +70,7 @@ namespace trackvisualizer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Загрузка тайла {0} кБ / {1} кБ.
+        ///   Looks up a localized string similar to Loading tile {0} Kb / {1} kB.
         /// </summary>
         public static string AsterTileLocal_DownloadAndUnpack_LoadingTileFormatted {
             get {
@@ -79,7 +79,7 @@ namespace trackvisualizer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Готово.
+        ///   Looks up a localized string similar to Ready.
         /// </summary>
         public static string AsterTileLocal_DownloadAndUnpack_Ready {
             get {
@@ -88,7 +88,7 @@ namespace trackvisualizer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Распаковка....
+        ///   Looks up a localized string similar to Unpacking....
         /// </summary>
         public static string AsterTileLocal_DownloadAndUnpack_UnpackingFormatted {
             get {
@@ -97,7 +97,7 @@ namespace trackvisualizer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Найден файл {0}, использую как уже загруженный GEOTIFF.
+        ///   Looks up a localized string similar to Found file{0}, using as preloaded GEOTIFF.
         /// </summary>
         public static string AsterTileLocal_DownloadAndUnpack_UsingExistingGeotiffFormatted {
             get {
@@ -115,7 +115,7 @@ namespace trackvisualizer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Отсутствуют источники для загрузки карт высоты.
+        ///   Looks up a localized string similar to Missing sources for heightmaps download.
         /// </summary>
         public static string HeightmapDownloaderVm_Initialize_ErrorNoSourcesFound {
             get {
@@ -124,7 +124,7 @@ namespace trackvisualizer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Выберите источник для загрузки.
+        ///   Looks up a localized string similar to Select download source.
         /// </summary>
         public static string HeightmapDownloaderVm_StartDownloadAsync_SelectSource {
             get {
@@ -133,7 +133,7 @@ namespace trackvisualizer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Отчет на базе трека {0}.
+        ///   Looks up a localized string similar to Report based on track {0}.
         /// </summary>
         public static string HtmlReportExporter_BuildHtml_ReportTitleTemplateFormatted {
             get {
@@ -151,7 +151,7 @@ namespace trackvisualizer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Набор, м.
+        ///   Looks up a localized string similar to Elevation gain, m.
         /// </summary>
         public static string HtmlReportExporter_Export_AscentHeader {
             get {
@@ -160,7 +160,7 @@ namespace trackvisualizer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Сброс, м.
+        ///   Looks up a localized string similar to Elevation loss, m.
         /// </summary>
         public static string HtmlReportExporter_Export_DescentHeader {
             get {
@@ -169,7 +169,7 @@ namespace trackvisualizer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Максимальная высота.
+        ///   Looks up a localized string similar to Maximum height.
         /// </summary>
         public static string HtmlReportExporter_Export_MaxHeightHeader {
             get {
@@ -178,7 +178,7 @@ namespace trackvisualizer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Расстояние, км.
+        ///   Looks up a localized string similar to Distance, km.
         /// </summary>
         public static string HtmlReportExporter_Export_SectionDistanceHeader {
             get {
@@ -187,7 +187,7 @@ namespace trackvisualizer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Участок.
+        ///   Looks up a localized string similar to Section.
         /// </summary>
         public static string HtmlReportExporter_Export_SectionNameHeader {
             get {
@@ -205,7 +205,7 @@ namespace trackvisualizer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Всего за поход.
+        ///   Looks up a localized string similar to Travel totals.
         /// </summary>
         public static string HtmlReportExporter_Export_TotalsRowLabel {
             get {
@@ -214,7 +214,7 @@ namespace trackvisualizer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Ходовое время.
+        ///   Looks up a localized string similar to Travel time.
         /// </summary>
         public static string HtmlReportExporter_Export_TravelTimeHeader {
             get {
@@ -232,7 +232,7 @@ namespace trackvisualizer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Высотный график.
+        ///   Looks up a localized string similar to Elevation profile.
         /// </summary>
         public static string MainWindow_HeightmapHeader {
             get {
@@ -241,7 +241,7 @@ namespace trackvisualizer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Открыть файл с треком.
+        ///   Looks up a localized string similar to Open track file.
         /// </summary>
         public static string MainWindow_LoadButtonTitle {
             get {
@@ -250,7 +250,7 @@ namespace trackvisualizer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Загрузить карты высот.
+        ///   Looks up a localized string similar to Load heightmaps.
         /// </summary>
         public static string MainWindow_LoadHeightmaps_Label {
             get {
@@ -259,7 +259,7 @@ namespace trackvisualizer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Загрузка....
+        ///   Looks up a localized string similar to Loading....
         /// </summary>
         public static string MainWindow_LoadingLabel {
             get {
@@ -268,7 +268,7 @@ namespace trackvisualizer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Загрузить трек.
+        ///   Looks up a localized string similar to Load track.
         /// </summary>
         public static string MainWindow_LoadTrackLabel {
             get {
@@ -277,7 +277,7 @@ namespace trackvisualizer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Набор за день.
+        ///   Looks up a localized string similar to Gain per day, m.
         /// </summary>
         public static string MainWindow_Route_AscentHeader {
             get {
@@ -286,7 +286,7 @@ namespace trackvisualizer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Вес рюкзака, Ж.
+        ///   Looks up a localized string similar to Backpack weight F, kg.
         /// </summary>
         public static string MainWindow_Route_BackpackWeightFHeader {
             get {
@@ -295,7 +295,7 @@ namespace trackvisualizer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Вес рюкзака, М.
+        ///   Looks up a localized string similar to Backpack weight M, kg.
         /// </summary>
         public static string MainWindow_Route_BackpackWeightMHeader {
             get {
@@ -304,7 +304,7 @@ namespace trackvisualizer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Перепад за день.
+        ///   Looks up a localized string similar to Elevation delta sum, m.
         /// </summary>
         public static string MainWindow_Route_DeltaHeightHeader {
             get {
@@ -313,7 +313,7 @@ namespace trackvisualizer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Сброс за день.
+        ///   Looks up a localized string similar to Elevation loss, m.
         /// </summary>
         public static string MainWindow_Route_DescentHeader {
             get {
@@ -322,7 +322,7 @@ namespace trackvisualizer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Расстояние.
+        ///   Looks up a localized string similar to Distance, km.
         /// </summary>
         public static string MainWindow_Route_DistanceHeader {
             get {
@@ -331,7 +331,7 @@ namespace trackvisualizer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Экспорт.
+        ///   Looks up a localized string similar to Export.
         /// </summary>
         public static string MainWindow_Route_ExportLabel {
             get {
@@ -340,7 +340,7 @@ namespace trackvisualizer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Индекс FIETS.
+        ///   Looks up a localized string similar to FIETS Index.
         /// </summary>
         public static string MainWindow_Route_FietsHeader {
             get {
@@ -349,7 +349,7 @@ namespace trackvisualizer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Высота ночевки.
+        ///   Looks up a localized string similar to Sleep height, m.
         /// </summary>
         public static string MainWindow_Route_FinHeightHeader {
             get {
@@ -358,7 +358,7 @@ namespace trackvisualizer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Отсутствуют карты высот.
+        ///   Looks up a localized string similar to Heightmaps missing.
         /// </summary>
         public static string MainWindow_Route_HeightmapsMissingLabel {
             get {
@@ -367,7 +367,7 @@ namespace trackvisualizer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Максимальная высота.
+        ///   Looks up a localized string similar to Maximum height, m.
         /// </summary>
         public static string MainWindow_Route_MaxHeightHeader {
             get {
@@ -376,7 +376,7 @@ namespace trackvisualizer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Основные высоты на участке.
+        ///   Looks up a localized string similar to Main heights, m.
         /// </summary>
         public static string MainWindow_Route_NotableHeightsHeader {
             get {
@@ -385,7 +385,7 @@ namespace trackvisualizer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Участок.
+        ///   Looks up a localized string similar to Section.
         /// </summary>
         public static string MainWindow_Route_SectionHeader {
             get {
@@ -403,7 +403,7 @@ namespace trackvisualizer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Ходовое время.
+        ///   Looks up a localized string similar to Travel time, h.
         /// </summary>
         public static string MainWindow_Route_TimeHeader {
             get {
@@ -412,7 +412,7 @@ namespace trackvisualizer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Маршрут.
+        ///   Looks up a localized string similar to Route.
         /// </summary>
         public static string MainWindow_RouteHeader {
             get {
@@ -421,7 +421,7 @@ namespace trackvisualizer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Работа с треком.
+        ///   Looks up a localized string similar to Travel planning.
         /// </summary>
         public static string MainWindow_Title {
             get {
@@ -439,7 +439,7 @@ namespace trackvisualizer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0}.hgt, подчистка лакун... .
+        ///   Looks up a localized string similar to {0}.hgt, cleaning up voids... .
         /// </summary>
         public static string SrtmFileDownloadHeightmapProvider_DownloadHeightmap_CleanupActionFormatted {
             get {
@@ -448,7 +448,7 @@ namespace trackvisualizer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Загрузка {0}....
+        ///   Looks up a localized string similar to Loading {0}....
         /// </summary>
         public static string SrtmFileDownloadHeightmapProvider_DownloadHeightmap_DownloadingFormatted {
             get {
@@ -457,7 +457,7 @@ namespace trackvisualizer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 🔘 SRTM-файлов для этого района нет на севрере.
+        ///   Looks up a localized string similar to 🔘 Server doesn&apos;t have SRTMs for this region.
         /// </summary>
         public static string SrtmFileDownloadHeightmapProvider_DownloadHeightmap_E404NoSrtmOnServer {
             get {
@@ -466,7 +466,7 @@ namespace trackvisualizer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 🔘 Неверно прописан адрес сервера в окне загрузчика.
+        ///   Looks up a localized string similar to 🔘 Invalid server address in loader window.
         /// </summary>
         public static string SrtmFileDownloadHeightmapProvider_DownloadHeightmap_E404ServerAddrInvalid {
             get {
@@ -475,7 +475,7 @@ namespace trackvisualizer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 🔘 Адрес устарел и нужно искать следующий.
+        ///   Looks up a localized string similar to 🔘 Server address obsolete, you have to look for fresh one.
         /// </summary>
         public static string SrtmFileDownloadHeightmapProvider_DownloadHeightmap_E404ServerAddrObsolete {
             get {
@@ -484,7 +484,7 @@ namespace trackvisualizer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Удаленный сервер вернул 404 (не найден). Причины могут быть следующие:.
+        ///   Looks up a localized string similar to Remote server responded with 404 (not found). Cause could be:.
         /// </summary>
         public static string SrtmFileDownloadHeightmapProvider_DownloadHeightmap_Error404Reasons {
             get {
@@ -493,7 +493,7 @@ namespace trackvisualizer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0} - файл .hgt не найден в архиве, что-то не так.
+        ///   Looks up a localized string similar to {0} - .hgt file missing in archive, something is wrong.
         /// </summary>
         public static string SrtmFileDownloadHeightmapProvider_DownloadHeightmap_ErrorNoHgtFileInArchive {
             get {
@@ -502,7 +502,7 @@ namespace trackvisualizer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0} готов. .
+        ///   Looks up a localized string similar to {0} ready. .
         /// </summary>
         public static string SrtmFileDownloadHeightmapProvider_DownloadHeightmap_HeightmapReadyFormatted {
             get {
@@ -511,7 +511,7 @@ namespace trackvisualizer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Загрузка {0:0.0} КБ....
+        ///   Looks up a localized string similar to Loading {0:0.0} Kb....
         /// </summary>
         public static string SrtmFileDownloadHeightmapProvider_DownloadHeightmap_LoadProgressFormatted {
             get {
@@ -520,7 +520,7 @@ namespace trackvisualizer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Не найдена програма коррекции высот `{0}`.
+        ///   Looks up a localized string similar to Missing height-correction utility `{0}`.
         /// </summary>
         public static string SrtmFileDownloadHeightmapProvider_DownloadHeightmap_SrtmInterpNotFound {
             get {
@@ -529,7 +529,7 @@ namespace trackvisualizer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Ошибка при распаковке: `{0}`! Файл {1} загружен, но вам придётся распаковать его вручную. .
+        ///   Looks up a localized string similar to Error unpacking: `{0}`! File {1} loaded, but you have to unpack it manually.
         /// </summary>
         public static string SrtmFileDownloadHeightmapProvider_DownloadHeightmap_UnpackingErrorFormatted_ManualActionRequired {
             get {
@@ -539,7 +539,7 @@ namespace trackvisualizer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Распаковка {0}.
+        ///   Looks up a localized string similar to Unpacking {0}.
         /// </summary>
         public static string SrtmFileDownloadHeightmapProvider_DownloadHeightmap_UnpackingFormatted {
             get {
@@ -548,7 +548,7 @@ namespace trackvisualizer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Ошибка: .
+        ///   Looks up a localized string similar to Errror: .
         /// </summary>
         public static string SrtmFileDownloadHeightmapProvider_ExecuteCommandAsync_ErrorGeneral {
             get {
@@ -557,7 +557,7 @@ namespace trackvisualizer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Finish {0:0.} Км.
+        ///   Looks up a localized string similar to Finish {0:0.} Km.
         /// </summary>
         public static string TrackChartVm_GetSectionLabel_FinishFormatted {
             get {
@@ -566,7 +566,7 @@ namespace trackvisualizer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Высота.
+        ///   Looks up a localized string similar to Height.
         /// </summary>
         public static string TrackChartVm_TrackChartVm_HeightSeriesTitle {
             get {
@@ -575,7 +575,7 @@ namespace trackvisualizer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Участок.
+        ///   Looks up a localized string similar to Section.
         /// </summary>
         public static string TrackChartVm_TrackChartVm_SectionSeriesTitle {
             get {
@@ -584,7 +584,7 @@ namespace trackvisualizer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0:0.} Км.
+        ///   Looks up a localized string similar to {0:0.} Km.
         /// </summary>
         public static string TrackChartVm_XFormatter_ChartSubscriptLengthFormatted {
             get {
@@ -593,7 +593,7 @@ namespace trackvisualizer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0:0.} м.
+        ///   Looks up a localized string similar to {0:0.} m.
         /// </summary>
         public static string TrackChartVm_YFormatter_ChartSubscriptHeightFormatted {
             get {
@@ -611,7 +611,7 @@ namespace trackvisualizer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to завозим заброску до начала маршрута.
+        ///   Looks up a localized string similar to supply stash is placed before route start.
         /// </summary>
         public static string TrackReportItemVm_Comment_DropBeforeStart {
             get {
@@ -620,7 +620,7 @@ namespace trackvisualizer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to оставляем заброску.
+        ///   Looks up a localized string similar to leaving supply stash.
         /// </summary>
         public static string TrackReportItemVm_Comment_LeavingDrop {
             get {
@@ -629,7 +629,7 @@ namespace trackvisualizer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to забираем заброску.
+        ///   Looks up a localized string similar to picking supply stash.
         /// </summary>
         public static string TrackReportItemVm_Comment_PickingDrop {
             get {
@@ -656,7 +656,7 @@ namespace trackvisualizer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Расчет перепадов.
+        ///   Looks up a localized string similar to Calculating elevation delta.
         /// </summary>
         public static string TrackReportVm_CreateReportAsync_DeltaCalculation {
             get {
@@ -665,12 +665,11 @@ namespace trackvisualizer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to В файле высот &lt;{0}&gt; обнаружены неверные значения.
-        ///Запустите из командной строки
-        ///
+        ///   Looks up a localized string similar to Heightmap &lt;{0}&gt; has invalid values.
+        ///Run
         ///srtm_interp {1}
-        ///
-        ///иначе все расчеты, зависящие от высоты, будут совершенно бредовыми!.
+        ///using command line.
+        ///Otherwise, you&apos;ll get completely invalid height calculations!.
         /// </summary>
         public static string TrackReportVm_CreateReportAsync_ErrHeightmapInvalid {
             get {
@@ -679,7 +678,7 @@ namespace trackvisualizer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Расчет прекращен из-за отсутствия карты высот.
+        ///   Looks up a localized string similar to Calculation stopped due to missing heightmaps.
         /// </summary>
         public static string TrackReportVm_CreateReportAsync_ErrNoHeightmap {
             get {
@@ -688,7 +687,7 @@ namespace trackvisualizer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Недостаточно точек в треке.
+        ///   Looks up a localized string similar to Not enough points in track.
         /// </summary>
         public static string TrackReportVm_CreateReportAsync_ErrNoPointsInTrack {
             get {
@@ -697,7 +696,7 @@ namespace trackvisualizer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Недостаточно точек разбиения на дни.
+        ///   Looks up a localized string similar to Not enough waypoints to split track.
         /// </summary>
         public static string TrackReportVm_CreateReportAsync_ErrNotEnoughPoints {
             get {
@@ -706,7 +705,7 @@ namespace trackvisualizer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Не загружен трек.
+        ///   Looks up a localized string similar to Track not loaded.
         /// </summary>
         public static string TrackReportVm_CreateReportAsync_ErrNoTrack {
             get {
@@ -715,7 +714,7 @@ namespace trackvisualizer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Разбивка пуста! Невозможно распилить трек на дни..
+        ///   Looks up a localized string similar to Empy track split! Couldnt split track to day sections.
         /// </summary>
         public static string TrackReportVm_CreateReportAsync_ErrSplitEmptyCantContinue {
             get {
@@ -724,7 +723,7 @@ namespace trackvisualizer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Уточнение разбивки.
+        ///   Looks up a localized string similar to Refining track split.
         /// </summary>
         public static string TrackReportVm_CreateReportAsync_RefiningSplit {
             get {
@@ -733,7 +732,7 @@ namespace trackvisualizer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Разбиение трека на дни.
+        ///   Looks up a localized string similar to Splitting track to day sections.
         /// </summary>
         public static string TrackReportVm_CreateReportAsync_SplittingTrack {
             get {
@@ -751,7 +750,16 @@ namespace trackvisualizer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Все SRTM файлы загружены успешно!.
+        ///   Looks up a localized string similar to Select report format.
+        /// </summary>
+        public static string TrackReportVm_ExportReportAsync_Select_report_format {
+            get {
+                return ResourceManager.GetString("TrackReportVm_ExportReportAsync_Select_report_format", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to All SRTM files loaded OK!.
         /// </summary>
         public static string TrackVm_LoadTracksFromFile_AllHeightmapsLoadedOk {
             get {
@@ -760,7 +768,7 @@ namespace trackvisualizer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Их необходимо загрузить с сервера NASA или иного источника.
+        ///   Looks up a localized string similar to They have to be loaded from NASA server or similiar source.
         /// </summary>
         public static string TrackVm_LoadTracksFromFile_ErrHeightmapDownloadRequired {
             get {
@@ -769,7 +777,7 @@ namespace trackvisualizer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to На этапе загрузки SRTM не найдены следующие карты высот:.
+        ///   Looks up a localized string similar to Following SRTMs are found missing during load:.
         /// </summary>
         public static string TrackVm_LoadTracksFromFile_ErrHeightmapsMissing {
             get {
@@ -778,7 +786,7 @@ namespace trackvisualizer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Ошибка при загрузке файла!.
+        ///   Looks up a localized string similar to Error while loading file!.
         /// </summary>
         public static string TrackVm_LoadTracksFromFile_GeneralErrDuringFileLoad {
             get {
@@ -787,7 +795,7 @@ namespace trackvisualizer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Для трека 1 необходимы файлы .
+        ///   Looks up a localized string similar to Track requires heightmaps .
         /// </summary>
         public static string TrackVm_LoadTracksFromFile_HeightmapsRequired {
             get {
@@ -796,7 +804,7 @@ namespace trackvisualizer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Загрузка данных высот (SRTM).
+        ///   Looks up a localized string similar to Loading heightmaps (SRTM).
         /// </summary>
         public static string TrackVm_LoadTracksFromFile_LoadingHeightmap {
             get {
@@ -805,7 +813,7 @@ namespace trackvisualizer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Загрузка файлов....
+        ///   Looks up a localized string similar to Loading files....
         /// </summary>
         public static string TrackVm_LoadTracksFromFile_LoadingHeightmaps {
             get {
@@ -814,7 +822,7 @@ namespace trackvisualizer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Склеиваю {0} треков.
+        ///   Looks up a localized string similar to Glueing {0} tracks.
         /// </summary>
         public static string TrackVm_LoadTracksFromFile_MergingTracksFormatted {
             get {
@@ -823,7 +831,7 @@ namespace trackvisualizer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Загружен 1 трек.
+        ///   Looks up a localized string similar to One track loaded.
         /// </summary>
         public static string TrackVm_LoadTracksFromFile_SingleTrackLoaded {
             get {
@@ -832,7 +840,7 @@ namespace trackvisualizer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Загрузка трека завершена успено.
+        ///   Looks up a localized string similar to Track loaded successfully.
         /// </summary>
         public static string TrackVm_LoadTracksFromFile_TrackLoadedOk {
             get {
@@ -841,7 +849,7 @@ namespace trackvisualizer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Нет трека в файле!.
+        ///   Looks up a localized string similar to No track in file!.
         /// </summary>
         public static string TrackVm_LoadTracksFromFile_TrackNotFound {
             get {
@@ -850,7 +858,7 @@ namespace trackvisualizer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Загружено {0} точек.
+        ///   Looks up a localized string similar to Loaded {0} waypoints.
         /// </summary>
         public static string TrackVm_ValidateSlicepoints_FoundNSlicepointsFormatted {
             get {
@@ -859,7 +867,7 @@ namespace trackvisualizer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to В выбранном файле недостаточно точек для разбиения трека по дням! Теперь точки нужно загрузить отдельно, либо пересохранить выбранный .gpx файл уже с точками..
+        ///   Looks up a localized string similar to Selected track doesnt have enough waypoints to split by day sections! You have to specify waypoint source additionally, or resave selected track file with waypoints included..
         /// </summary>
         public static string TrackVm_ValidateSlicepoints_NotEnoughSlicepoints {
             get {

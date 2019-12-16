@@ -33,6 +33,9 @@ namespace trackvisualizer.Config
         [JsonProperty("last_track")] 
         public string LastLoadedTrackFilename { get; set; } 
 
+        [JsonProperty("language")] 
+        public string CurrentLanguage { get; set; } 
+
         public static TrekplannerConfiguration LoadOrCreate(bool saveIfNew = false)
         {
             lock (ConfigReaderWriterLock)

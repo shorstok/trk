@@ -114,6 +114,7 @@
     <Compile Include="Config\TrackReportGeneratorOptions.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Service\GeoLoaderService.cs" />
+    <Compile Include="Service\LocalizationManager.cs" />
     <Compile Include="Service\Middleware\GpxLoaderMiddleware.cs" />
     <Compile Include="Service\IGeoLoaderMiddleware.cs" />
     <Compile Include="Service\HeightmapProviders\IHeightmapProvider.cs" />
@@ -170,6 +171,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\HeightmapDownloaderWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Icons.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

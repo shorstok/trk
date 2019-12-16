@@ -101,7 +101,7 @@ namespace trackvisualizer.Vm
         private async void ExportReportAsync(object obj)
         {
             var exporterId =
-                await _uiService.ChooseAsync(_reportExporters.Select(e => Tuple.Create(e.Id, e.Description)));
+                await _uiService.ChooseAsync(_reportExporters.Select(e => Tuple.Create(e.Id, e.Description)), Resources.TrackReportVm_ExportReportAsync_Select_report_format);
 
             if(null == exporterId)
                 return;

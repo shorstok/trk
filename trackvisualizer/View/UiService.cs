@@ -59,7 +59,7 @@ namespace trackvisualizer.View
             }
         }
 
-        public async Task<string> ChooseAsync(IEnumerable<Tuple<string, string>> choices)
+        public async Task<string> ChooseAsync(IEnumerable<Tuple<string, string>> choices, string title)
         {
             var options = choices as Tuple<string, string>[] ?? choices.ToArray();
             
@@ -71,7 +71,7 @@ namespace trackvisualizer.View
 
             try
             {
-                var inputbox = new ChoiceWindow(options);
+                var inputbox = new ChoiceWindow(options,title);
 
                 var taskCompletionSource = new TaskCompletionSource<bool>();
 

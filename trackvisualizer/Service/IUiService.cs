@@ -8,6 +8,6 @@ namespace trackvisualizer.Service
     {
         Task NofityError(string text);
         Task<string> Ask(string what, string initialValue);
-        Task<string> ChooseAsync(IEnumerable<Tuple<string, string>> choices);
+        Task<string> ChooseAsync(IEnumerable<Tuple<string, string>> choices, string title);
     }
 }

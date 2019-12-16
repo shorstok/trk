@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Globalization;
 using System.Windows;
 using System.Windows.Threading;
 using Autofac;
 using Autofac.Builder;
 using trackvisualizer.Ioc;
+using trackvisualizer.Service;
 using trackvisualizer.View;
 
 namespace trackvisualizer
@@ -17,7 +19,6 @@ namespace trackvisualizer
 
         private App()
         {
-            Startup += App_Startup;
             DispatcherUnhandledException += App_DispatcherUnhandledException;
         }
 
@@ -26,12 +27,13 @@ namespace trackvisualizer
             MessageBox.Show(@"Unhandled exception: " + e.Exception);
         }
 
-
-        private void App_Startup(object sender, StartupEventArgs e)
+        protected override void OnStartup(StartupEventArgs e)
         {
             MaybeSetTheme();
             BuildContainer();
 
+            _container.Resolve<LocalizationManager>().InitLocalization();   
+            
             var window = _container.Resolve<MainWindow>();
             
             MainWindow = window;
