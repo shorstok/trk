@@ -88,12 +88,6 @@ namespace trackvisualizer.Service.HeightmapProviders
 
             var srtmFilePacked = missingSrtmName + @".hgt.zip";
 
-            if (!File.Exists(srtmCleanerPath))
-            {
-                await _uiService.NofityError(string.Format(Resources.SrtmFileDownloadHeightmapProvider_DownloadHeightmap_SrtmInterpNotFound, srtmCleanerPath));
-                return false;
-            }
-
             try
             {
 
