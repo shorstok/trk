@@ -11,6 +11,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using trackvisualizer.Annotations;
 using trackvisualizer.Config;
+using trackvisualizer.Geodetic;
 using trackvisualizer.Properties;
 
 namespace trackvisualizer.Service.HeightmapProviders
@@ -169,8 +170,13 @@ namespace trackvisualizer.Service.HeightmapProviders
 
                 reportProgressAsync(0.9, string.Format(Resources.SrtmFileDownloadHeightmapProvider_DownloadHeightmap_CleanupActionFormatted, missingSrtmName));
 
-                if (!await ExecuteCommandAsync(srtmCleanerPath, srtmFileUnpackedName))
-                    return false;
+                var tempSrtm = await Srtm.FromFileAsync(srtmFileUnpackedName, false);
+
+                if (tempSrtm.HasVoids)
+                {
+                    if (await tempSrtm.CleanupSrtmVoidsAsync())
+                        await tempSrtm.SaveSrtmAsync();
+                }
 
                 reportProgressAsync(1, string.Format(Resources.SrtmFileDownloadHeightmapProvider_DownloadHeightmap_HeightmapReadyFormatted, srtmFilePacked));
 

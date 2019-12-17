@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Collections.Concurrent;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace trackvisualizer.Geodetic
@@ -30,14 +33,12 @@ namespace trackvisualizer.Geodetic
         private const short OutOfRange = -32767;
         private const short SrtmUndef = -32768;
 
-        public bool BadValuesDetected;
-
         /// <summary>
         ///     true if voids detected during load process
         /// </summary>
         public bool HasVoids;
 
-        public string Loadname;
+        public string OriginalFilename;
         public Point PtNortheast;
 
         /// <summary>
@@ -80,11 +81,201 @@ namespace trackvisualizer.Geodetic
             return ns + Math.Abs(latSw).ToString(@"00.") + ew + Math.Abs(lonSw).ToString(@"000.");
         }
 
+        private struct SrtmPoint
+        {
+            public int X;
+            public int Y;
+            public int Value;
+
+            public SrtmPoint(int x, int y, int value)
+            {
+                X = x;
+                Y = y;
+                Value = value;
+            }
+
+            public override string ToString()
+            {
+                return $@"{X}, {Y} : {Value}";
+            }
+        }
+
+        private class SrtmVoid
+        {
+            public HashSet<SrtmPoint> Voids;
+            public List<SrtmPoint> BorderPoints;
+
+            public SrtmVoid(HashSet<SrtmPoint> voids, List<SrtmPoint> borderPoints)
+            {
+                Voids = voids;
+                BorderPoints = borderPoints;
+            }
+
+            public short Interpolate(int x, int y)
+            {
+                double sumInvDistance = 0;
+                double result = 0;
+
+                foreach (var borderPoint in BorderPoints)
+                {
+                    var distanceSq = ((double) borderPoint.X - x) * ((double) borderPoint.X - x);
+                    distanceSq+= ((double) borderPoint.Y - y) * ((double) borderPoint.Y - y);
+
+                    var invDistSq = 1/(1+distanceSq);
+
+                    sumInvDistance += invDistSq;
+
+                    result += invDistSq * borderPoint.Value;
+                }
+
+                result /= sumInvDistance;
+
+                return (short) result;
+            }
+        }
+
+        private void GetVoidWithNeigborsRecursive(int x, int y, HashSet<SrtmPoint> result,
+            HashSet<SrtmPoint> borders)
+        {
+            var queue = new Queue<SrtmPoint>();
+
+            queue.Enqueue(new SrtmPoint(x,y,SrtmPoints[x, y]));
+
+            do
+            {
+                var pt = queue.Dequeue();
+
+                if (pt.Value < SrtmMin)
+                {
+                    if (!result.Add(pt))
+                        continue;
+                }
+                else
+                {
+                    borders.Add(pt);
+                    continue;
+                }
+
+                x = pt.X;
+                y = pt.Y;
+                
+                if(x > 0)
+                    queue.Enqueue(new SrtmPoint(x-1,y,SrtmPoints[x-1, y]));
+                if(y > 0)
+                    queue.Enqueue(new SrtmPoint(x,y-1,SrtmPoints[x, y-1]));
+                if(x < SrtmPoints.GetLength(0)-1)
+                    queue.Enqueue(new SrtmPoint(x+1,y,SrtmPoints[x+1, y]));
+                if(y < SrtmPoints.GetLength(1)-1)
+                    queue.Enqueue(new SrtmPoint(x,y+1,SrtmPoints[x, y+1]));
+
+            } while (queue.Any());                       
+        }
+
+        public async Task<bool> CleanupSrtmVoidsAsync()
+        {
+            var result = (short[,])SrtmPoints.Clone();
+
+            bool somethingChanged = false;
+            
+            void fixSrtmChunk(int xs, int xe)
+            {
+                var span = SrtmPoints.GetLength(0);
+
+                var voidRegister = new List<SrtmVoid>();
+                var visitedPoints = new HashSet<int>();
+
+                for (int y = 0; y < SrtmPoints.GetLength(1); y++)
+                {
+                   
+                    for (int x = xs; x < xe; x++)
+                    {
+                        if (SrtmPoints[x, y] < SrtmMin)
+                        {
+                            if(visitedPoints.Contains(x + y * span))
+                                continue;                            
+
+                            var voids = new HashSet<SrtmPoint>();
+                            var borders = new HashSet<SrtmPoint>();
+
+                            GetVoidWithNeigborsRecursive(x, y, voids, borders);
+
+                            var srtmvoid = new SrtmVoid(voids,borders.ToList());
+
+                            voidRegister.Add(srtmvoid);
+
+                            foreach (var srtmPoint in voids)
+                                visitedPoints.Add(srtmPoint.X + srtmPoint.Y * span);
+                        }
+                    }
+                }
+
+                if(!voidRegister.Any())
+                    return;
+
+                somethingChanged = true;
+
+                for (var i = 0; i < voidRegister.Count; i++)
+                {
+                    var srtmVoid = voidRegister[i];
+                    foreach (var point in srtmVoid.Voids)
+                        result[point.X, point.Y] = srtmVoid.Interpolate(point.X, point.Y);
+                }
+            }
+            
+            var tasks = new List<Task>();
+
+            var step = SrtmPoints.GetLength(0) / Environment.ProcessorCount;
+
+            for (int nthread = 0; nthread < Environment.ProcessorCount; nthread++)
+            {
+                var xs = nthread * step;
+                var xe = (nthread+1) * step;
+
+                tasks.Add(Task.Run(() => fixSrtmChunk(xs,xe)));
+            }
+
+            await Task.WhenAll(tasks);
+
+            SrtmPoints = result;
+            HasVoids = false;
+
+            return somethingChanged;
+        }
+
+
+        public async Task SaveSrtmAsync()
+        {
+            if(string.IsNullOrWhiteSpace(OriginalFilename))
+                return;
+
+            var buffer = new byte[2];
+
+            using (var fileStream = File.Create(OriginalFilename))            
+            {
+                for (int yc = 0; yc < SrtmPoints.GetLength(1); yc++)
+                {
+                    for (int xc = 0; xc < SrtmPoints.GetLength(0); xc++)
+                    {
+                        ushort height = (ushort)SrtmPoints[xc, yc];
+
+                        buffer[0] = (byte) (height >> 8);
+                        buffer[1] = (byte) (height & 0xff);
+
+                        if(yc% 100 != 0)
+                            fileStream.Write(buffer,0,2);
+                        else
+                            await fileStream.WriteAsync(buffer,0,2);
+                    }
+                }
+            }
+        }
+
+
         /// <summary>
         /// </summary>
         /// <param name="filename"></param>
         /// <returns></returns>
-        public static async Task<Srtm> FromFileAsync(string filename)
+        public static async Task<Srtm> FromFileAsync(string filename, bool autoCleanVoids = true)
         {
             try
             {
@@ -141,10 +332,16 @@ namespace trackvisualizer.Geodetic
                     result.PtSouthwest = (Point) Point.Parse(latDeg, lonDeg);
                     result.PtNortheast = new Point(result.PtSouthwest.Lat + 1, result.PtSouthwest.Lon + 1);
 
-                    result.Loadname = filename;
-
-                    return result;
+                    result.OriginalFilename = filename;
                 }
+
+                if (result.HasVoids && autoCleanVoids)
+                {
+                    if (await result.CleanupSrtmVoidsAsync())
+                        await result.SaveSrtmAsync();
+                }
+
+                return result;
             }
             catch (Exception)
             {
@@ -196,9 +393,6 @@ namespace trackvisualizer.Geodetic
                 rt += SrtmPoints[ix + 1, iy] * ktX * (1 - ktY);
                 rt += SrtmPoints[ix, iy + 1] * (1 - ktX) * ktY;
                 rt += SrtmPoints[ix + 1, iy + 1] * ktX * ktY;
-
-                if (rt <= SrtmMin)
-                    BadValuesDetected = true;
 
                 return rt;
             }

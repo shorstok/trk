@@ -250,9 +250,9 @@ namespace trackvisualizer.Vm
 
             // check for bad heights; [22/12/2009 LysakA]
             foreach (var s in _srtmRepository.LoadedSrtms)
-                if (s.BadValuesDetected)
+                if (s.HasVoids)
                     _loggingService.LogError(
-                        string.Format(Resources.TrackReportVm_CreateReportAsync_ErrHeightmapInvalid, s.Loadname, s.Loadname));
+                        string.Format(Resources.TrackReportVm_CreateReportAsync_ErrHeightmapInvalid, s.OriginalFilename, s.OriginalFilename));
 
             Totals.Recalculate();
 

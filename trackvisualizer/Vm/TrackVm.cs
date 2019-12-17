@@ -208,7 +208,7 @@ namespace trackvisualizer.Vm
             var requiredSrtms = SrtmRepository.GuessAllFilenames(ptsKey);
 
             var loadedSrtmNames =
-                _srtmRepository.LoadedSrtms.Select(srt => srt.Loadname.Replace(@".hgt", "")).ToList();
+                _srtmRepository.LoadedSrtms.Select(srt => srt.OriginalFilename.Replace(@".hgt", "")).ToList();
 
             //////////////////////////////////////////////////////////////////////////
             if (requiredSrtms.Except(loadedSrtmNames).Any())

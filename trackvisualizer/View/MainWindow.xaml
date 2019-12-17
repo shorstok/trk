@@ -115,13 +115,28 @@
             <TextBlock Margin="{StaticResource ControlMargin}" Grid.Column="1" Text="{x:Static localization:Resources.MainWindow_LoadTrackLabel}"
                        VerticalAlignment="Center" />
 
-            <!-- load from file -->
+            <!-- loading sign -->
             <Rectangle Grid.Column="2" Width="24" Height="24" Fill="{StaticResource AccentColor}" 
+                       RenderTransformOrigin="0.5,0.5"
                        view:VisibilityAux.IsVisible="{Binding IsLoading}"
                        VerticalAlignment="Center">
+                <Rectangle.Resources>
+                    <Storyboard x:Key="RotationSb" TargetName="LoaderRt" TargetProperty="Angle">
+                        <DoubleAnimation From="0" To="360" Duration="0:0:0.5" RepeatBehavior="Forever"/>
+                    </Storyboard>
+                </Rectangle.Resources>
+                <Rectangle.RenderTransform>
+                    <RotateTransform x:Name="LoaderRt"/>
+                </Rectangle.RenderTransform>
                 <Rectangle.OpacityMask>
                     <VisualBrush Visual="{StaticResource AppbarRefresh}" Stretch="Uniform"/>
                 </Rectangle.OpacityMask>
+
+                <Rectangle.Triggers>
+                    <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                        <BeginStoryboard Storyboard="{StaticResource RotationSb}"></BeginStoryboard>
+                    </EventTrigger>
+                </Rectangle.Triggers>
             </Rectangle>
 
             <!-- recently used tracks selector -->
