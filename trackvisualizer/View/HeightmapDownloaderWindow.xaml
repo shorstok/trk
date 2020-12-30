@@ -12,7 +12,7 @@
         d:DataContext="{d:DesignInstance vm:HeightmapDownloaderVm}"
         FontSize="17"
         WindowStartupLocation="CenterScreen"
-        Title="{x:Static localization:Resources.HeightmapDownloaderWindow_WindowTitle}" Height="450" Width="800">
+        Title="{x:Static localization:Resources.HeightmapDownloaderWindow_WindowTitle}" Height="450" Width="990">
     <Grid Margin="{StaticResource ControlMargin}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
