@@ -308,7 +308,7 @@
           ]]></Code>
     </Task>
   </UsingTask>
-  <Target Name="AfterBuild">
+  <Target Name="AfterBuild" Condition="$(Configuration)==Release">
     <GetAssemblyIdentity AssemblyFiles="$(TargetPath)">
       <Output TaskParameter="Assemblies" ItemName="MyAssemblyIdentities" />
     </GetAssemblyIdentity>
