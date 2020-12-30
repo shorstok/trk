@@ -60,10 +60,10 @@
 
             <TextBlock Text="{x:Static localization:Resources.MainWindow_Route_HeightmapsMissingLabel}" FontWeight="Bold"
                        Foreground="{StaticResource ValidationBadColor}" Margin="{StaticResource ControlMargin}" />
-            <ItemsControl Grid.Row="1" ItemsSource="{Binding HeightmapManager.MissingHeightmapNames}">
+            <ItemsControl Grid.Row="1" ItemsSource="{Binding HeightmapManager.MissingHeightmapNames}" HorizontalAlignment="Left">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
-                        <WrapPanel />
+                        <WrapPanel MaxWidth="270"/>
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
                 <ItemsControl.ItemTemplate>
