@@ -7,11 +7,12 @@
         xmlns:vm="clr-namespace:trackvisualizer.Vm"
         xmlns:service="clr-namespace:trackvisualizer.Service"
         xmlns:heightmapProviders="clr-namespace:trackvisualizer.Service.HeightmapProviders"
+        xmlns:localization="clr-namespace:trackvisualizer.Properties"
         mc:Ignorable="d"
         d:DataContext="{d:DesignInstance vm:HeightmapDownloaderVm}"
         FontSize="17"
         WindowStartupLocation="CenterScreen"
-        Title="Загрузка карты высот" Height="450" Width="800">
+        Title="{x:Static localization:Resources.HeightmapDownloaderWindow_WindowTitle}" Height="450" Width="800">
     <Grid Margin="{StaticResource ControlMargin}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
@@ -25,7 +26,7 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <TextBlock Text="Провайдер карт высот" Grid.Column="0" Grid.Row="0" Margin="{StaticResource ControlMargin}" VerticalAlignment="Center"/>
+        <TextBlock Text="{x:Static localization:Resources.HeightmapDownloaderWindow_HeightmapProvider}" Grid.Column="0" Grid.Row="0" Margin="{StaticResource ControlMargin}" VerticalAlignment="Center"/>
         <ComboBox Grid.Column="1" Grid.Row="0" ItemsSource="{Binding HeightmapProviders}" SelectedItem="{Binding ActiveHeightmapProvider}" IsSynchronizedWithCurrentItem="True" Style="{StaticResource BasicComboBoxStyle}">
             <ComboBox.ItemTemplate>
                 <DataTemplate DataType="{x:Type heightmapProviders:IHeightmapProvider}">
@@ -34,8 +35,8 @@
             </ComboBox.ItemTemplate>
         </ComboBox>
 
-        <Button Grid.Column="2" Grid.Row="0" Content="Загрузить" Command="{Binding StartDownloadCommand}" Style="{StaticResource BasicButtonStyle}"/>
-        <Button Grid.Column="3" Grid.Row="0" Content="Отмена" Command="{Binding AbortDownloadCommand}"  Style="{StaticResource BasicButtonStyle}"/>
+        <Button Grid.Column="2" Grid.Row="0" Content="{x:Static localization:Resources.HeightmapDownloaderWindow_Load}" Command="{Binding StartDownloadCommand}" Style="{StaticResource BasicButtonStyle}"/>
+        <Button Grid.Column="3" Grid.Row="0" Content="{x:Static localization:Resources.HeightmapDownloaderWindow_Cancel}" Command="{Binding AbortDownloadCommand}"  Style="{StaticResource BasicButtonStyle}"/>
 
         <!-- tweakable provider-dependent settings -->
 
@@ -47,7 +48,7 @@
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
-                        <TextBlock Text="Шаблон адреса загрузки файла SRTM" Margin="{StaticResource ControlMargin}" Grid.Column="0"/>
+                        <TextBlock Text="{x:Static localization:Resources.HeightmapDownloaderWindow_SrtmTemplate}" Margin="{StaticResource ControlMargin}" Grid.Column="0"/>
                         <TextBox Text="{Binding SrtmBasePathTemplate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="{StaticResource ControlMargin}" Grid.Column="1"/>
                     </Grid>
                 </DataTemplate>

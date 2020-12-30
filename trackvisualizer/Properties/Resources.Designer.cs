@@ -19,7 +19,7 @@ namespace trackvisualizer.Properties {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class Resources {
@@ -129,6 +129,51 @@ namespace trackvisualizer.Properties {
         public static string HeightmapDownloaderVm_StartDownloadAsync_SelectSource {
             get {
                 return ResourceManager.GetString("HeightmapDownloaderVm_StartDownloadAsync_SelectSource", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cancel.
+        /// </summary>
+        public static string HeightmapDownloaderWindow_Cancel {
+            get {
+                return ResourceManager.GetString("HeightmapDownloaderWindow_Cancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Heightmap provider.
+        /// </summary>
+        public static string HeightmapDownloaderWindow_HeightmapProvider {
+            get {
+                return ResourceManager.GetString("HeightmapDownloaderWindow_HeightmapProvider", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Load.
+        /// </summary>
+        public static string HeightmapDownloaderWindow_Load {
+            get {
+                return ResourceManager.GetString("HeightmapDownloaderWindow_Load", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SRTM source URL template.
+        /// </summary>
+        public static string HeightmapDownloaderWindow_SrtmTemplate {
+            get {
+                return ResourceManager.GetString("HeightmapDownloaderWindow_SrtmTemplate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Heightmap download.
+        /// </summary>
+        public static string HeightmapDownloaderWindow_WindowTitle {
+            get {
+                return ResourceManager.GetString("HeightmapDownloaderWindow_WindowTitle", resourceCulture);
             }
         }
         

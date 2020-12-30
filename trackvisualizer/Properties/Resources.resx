@@ -403,4 +403,19 @@ Otherwise, you'll get completely invalid height calculations!</value>
   <data name="SettingsWindow_Language" xml:space="preserve">
     <value>Language</value>
   </data>
+  <data name="HeightmapDownloaderWindow_Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="HeightmapDownloaderWindow_HeightmapProvider" xml:space="preserve">
+    <value>Heightmap provider</value>
+  </data>
+  <data name="HeightmapDownloaderWindow_Load" xml:space="preserve">
+    <value>Load</value>
+  </data>
+  <data name="HeightmapDownloaderWindow_SrtmTemplate" xml:space="preserve">
+    <value>SRTM source URL template</value>
+  </data>
+  <data name="HeightmapDownloaderWindow_WindowTitle" xml:space="preserve">
+    <value>Heightmap download</value>
+  </data>
 </root>
