@@ -170,10 +170,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\GraphWnd.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="View\HeightmapDownloaderWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -192,12 +188,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\ScatterGraph.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -213,9 +203,6 @@
     <Compile Include="Service\PathService.cs" />
     <Compile Include="View\BackpackWeightWnd.xaml.cs">
       <DependentUpon>BackpackWeightWnd.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\GraphWnd.xaml.cs">
-      <DependentUpon>GraphWnd.xaml</DependentUpon>
     </Compile>
     <Page Include="View\MainWindow.xaml">
       <SubType>Designer</SubType>
@@ -243,9 +230,6 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
-    </Compile>
-    <Compile Include="View\ScatterGraph.xaml.cs">
-      <DependentUpon>ScatterGraph.xaml</DependentUpon>
     </Compile>
     <Compile Include="Geodetic\Srtm.cs" />
     <Compile Include="Service\SrtmRepository.cs" />
