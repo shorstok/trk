@@ -1,7 +1,8 @@
 ﻿<Window x:Class="trackvisualizer.View.Error"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Ошибка" Height="Auto" Width="Auto" 
+        xmlns:localization="clr-namespace:trackvisualizer.Properties"
+        Title="{x:Static localization:Resources.ErrorWindow_Error}" Height="Auto" Width="Auto" 
         AllowsTransparency="True" Background="#90000000" WindowStyle="None"
         WindowState="Maximized"
         FontSize="19" Topmost="True">
@@ -15,7 +16,7 @@
             </Grid.RowDefinitions>
             
             <TextBlock Grid.Row="0" Margin="{StaticResource ControlMargin}" VerticalAlignment="Top"
-                       HorizontalAlignment="Center" Text="Ошибка" FontWeight="Bold"
+                       HorizontalAlignment="Center" Text="{x:Static localization:Resources.ErrorWindow_Error}" FontWeight="Bold"
                        Foreground="{StaticResource ValidationBadColor}" />
 
             <ScrollViewer Grid.Row="1" Margin="{StaticResource ControlMargin}" VerticalScrollBarVisibility="Auto"

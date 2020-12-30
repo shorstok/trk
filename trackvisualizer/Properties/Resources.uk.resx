@@ -419,4 +419,7 @@ srtm_interp {1}
   <data name="HeightmapDownloaderWindow_WindowTitle" xml:space="preserve">
     <value>Завантаження карти висот</value>
   </data>
+  <data name="ErrorWindow_Error" xml:space="preserve">
+    <value>Помилка</value>
+  </data>
 </root>

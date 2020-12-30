@@ -106,6 +106,15 @@ namespace trackvisualizer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Error.
+        /// </summary>
+        public static string ErrorWindow_Error {
+            get {
+                return ResourceManager.GetString("ErrorWindow_Error", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to GPX Gps Exchange format.
         /// </summary>
         public static string GpxLoaderMiddleware_Description {
