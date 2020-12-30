@@ -48,15 +48,32 @@ namespace trackvisualizer.Vm
                 if (Equals(value, _activeTrack)) return;
                 _activeTrack = value;
                 OnPropertyChanged();
+                
+                MaybeLoadActiveTrack();
+            }
+        }
 
-                //Load track on activation
-                if (_activeTrack?.IsLoaded == false && 
-                    _activeTrack?.IsOkToLoad != false)
+        private async void MaybeLoadActiveTrack()
+        {
+            //Load track on activation
+            if (_activeTrack?.IsLoaded != false || _activeTrack?.IsOkToLoad == false) 
+                return;
+
+            IsLoading = true;
+
+            try
+            {
+                Logging.ResetLog();
+
+                if (await _activeTrack.LoadAsync())
                 {
-                    IsLoading = true;
-                    Logging.ResetLog();
-                    _activeTrack.LoadAsync().ContinueWith(t => { IsLoading = false; });
+                    _configuration.LastLoadedTrackFilename = _activeTrack.SourceTrackFileName;
+                    _configuration.Save();
                 }
+            }
+            finally
+            {
+                IsLoading = false;
             }
         }
 
