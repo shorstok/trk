@@ -315,6 +315,6 @@
     <ReplaceFileText InputFilename="..\docs\index-template.md" OutputFilename="..\docs\index.md" MatchExpression="\$version\$" ReplacementText="%(MyAssemblyIdentities.Version)" />
   </Target>
   <PropertyGroup>
-    <PostBuildEvent>if $(ConfigurationName) == Release (powershell Compress-Archive -Path '$(TargetDir)*.dll',  '$(TargetDir)*.config' -DestinationPath '$(SolutionDir)docs\trk-release.zip' -Force)</PostBuildEvent>
+    <PostBuildEvent>if $(ConfigurationName) == Release (powershell Compress-Archive -Path '$(TargetDir)*.dll', '$(TargetDir)*.exe',  '$(TargetDir)*.config' -DestinationPath '$(SolutionDir)docs\trk-release.zip' -Force)</PostBuildEvent>
   </PropertyGroup>
 </Project>
